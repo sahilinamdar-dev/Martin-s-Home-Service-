@@ -1,0 +1,10 @@
+{
+  "name": "Martin's Home Service",
+  "short_name": "Martin's",
+  "description": "Home, flat and office cleaning services. Making every corner shine.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#fbf8f1",
+  "theme_color": "#0f2a4a",
+  "icons": [{ "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml" }]
+}
