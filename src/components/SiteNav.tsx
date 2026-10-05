@@ -37,7 +37,7 @@ export function SiteNav() {
           </a>
           <a href={WA_DEFAULT} target="_blank" rel="noopener" className="hidden items-center gap-2 rounded-full bg-leaf-700 px-5 py-2.5 text-sm font-bold text-white hover:bg-leaf-800 md:inline-flex">
             <WhatsAppIcon className="h-4 w-4" />
-            Free quote
+            Book on WhatsApp
           </a>
           <button
             type="button"

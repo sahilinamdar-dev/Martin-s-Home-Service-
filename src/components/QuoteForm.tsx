@@ -30,8 +30,8 @@ export function QuoteForm({ defaultService = '', idPrefix = 'quote' }: { default
 
   return (
     <form onSubmit={handleSubmit} className="rounded-3xl bg-white p-5 shadow-xl shadow-navy-900/10 ring-1 ring-navy-900/5 sm:p-7">
-      <p className="text-xl font-extrabold text-navy-900">Get your free quote</p>
-      <p className="mt-1 text-sm text-navy-600">Fill this in and it opens WhatsApp with your details ready to send.</p>
+      <p className="text-xl font-extrabold text-navy-900">Book your cleaning</p>
+      <p className="mt-1 text-sm text-navy-600">Fill this in — it opens WhatsApp with your message ready to send.</p>
 
       <div className="mt-5 grid gap-4 sm:grid-cols-2">
         <div className="sm:col-span-2">
@@ -98,7 +98,7 @@ export function QuoteForm({ defaultService = '', idPrefix = 'quote' }: { default
         <WhatsAppIcon className="h-5 w-5" />
         Send on WhatsApp
       </button>
-      <p className="mt-3 text-center text-xs text-navy-600">Free quote. No obligation to book.</p>
+      <p className="mt-3 text-center text-xs text-navy-600">We reply on WhatsApp with timing and charges.</p>
     </form>
   )
 }

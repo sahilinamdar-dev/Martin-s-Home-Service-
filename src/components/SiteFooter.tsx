@@ -8,7 +8,7 @@ import { WhatsAppIcon } from './WhatsAppIcon'
 export function SiteFooter() {
   return (
     // Bottom padding on small screens keeps the last line clear of the sticky call bar.
-    <footer className="bg-navy-950 pb-24 pt-14 text-white/80 md:pb-10">
+    <footer className="bg-navy-950 pb-32 pt-14 text-white/80 md:pb-10">
       <div className="container-page grid gap-10 md:grid-cols-[1.3fr_1fr_1fr]">
         <div>
           <Logo onDark />

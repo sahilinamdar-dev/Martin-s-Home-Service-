@@ -106,6 +106,15 @@ section[id] {
 .twinkle {
   animation: twinkle 2.6s ease-in-out infinite;
   transform-origin: center;
+  transform-box: fill-box;
+}
+
+/* Horizontal chip rows scroll by touch; the bar itself is noise. */
+.no-scrollbar {
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -5,6 +5,10 @@ export type Faq = { q: string; a: string }
 export type Service = {
   slug: string
   name: string
+  /** Short label for chips and tabs. */
+  chip: string
+  /** Pastel background of this service's cards. */
+  tint: string
   /** One line for cards. */
   short: string
   /** Opening paragraph of the service page. */
@@ -18,6 +22,8 @@ export type Service = {
 export const SERVICES: Service[] = [
   {
     slug: 'home-flat-office-cleaning',
+    chip: 'Home & office',
+    tint: '#ead9fb',
     name: 'Home, Flat & Office Cleaning',
     short: 'All rooms and areas of your home, flat or office cleaned top to bottom.',
     intro:
@@ -44,6 +50,8 @@ export const SERVICES: Service[] = [
   },
   {
     slug: 'bathroom-deep-cleaning',
+    chip: 'Bathroom',
+    tint: '#cfeedd',
     name: 'Bathroom Deep Cleaning',
     short: 'Tiles, fittings and floor scrubbed until the whole bathroom sparkles.',
     intro:
@@ -70,6 +78,8 @@ export const SERVICES: Service[] = [
   },
   {
     slug: 'kitchen-deep-cleaning',
+    chip: 'Kitchen',
+    tint: '#ffe7a8',
     name: 'Kitchen Deep Cleaning',
     short: 'Deep, hygienic cleaning of the stove, chimney, sink, cabinets and tiles.',
     intro:
@@ -96,6 +106,8 @@ export const SERVICES: Service[] = [
   },
   {
     slug: 'sofa-cleaning',
+    chip: 'Sofa',
+    tint: '#cfe6fb',
     name: 'Sofa Cleaning',
     short: 'Dust, dirt and stains lifted from your sofa so it looks and feels fresh.',
     intro:
@@ -115,6 +127,8 @@ export const SERVICES: Service[] = [
   },
   {
     slug: 'floor-cleaning',
+    chip: 'Floor',
+    tint: '#ffd9c9',
     name: 'Floor Cleaning',
     short: 'Floors and tiles cleaned of dirt, marks and dullness across the home.',
     intro:
@@ -130,6 +144,8 @@ export const SERVICES: Service[] = [
   },
   {
     slug: 'dust-dirt-removal',
+    chip: 'Dust removal',
+    tint: '#fbd3e3',
     name: 'Dust & Dirt Removal',
     short: 'Dusting and wiping of surfaces, furniture, corners and hard-to-reach spots.',
     intro:
@@ -145,6 +161,8 @@ export const SERVICES: Service[] = [
   },
   {
     slug: 'complete-deep-cleaning',
+    chip: 'Full deep clean',
+    tint: '#c9f0ee',
     name: 'Complete Deep Cleaning',
     short: 'Every room, bathroom, the kitchen, sofa and floors — the whole home, deep cleaned.',
     intro:
@@ -157,7 +175,7 @@ export const SERVICES: Service[] = [
       'Window and glass cleaning',
       'Every corner covered',
     ],
-    goodFor: ['Moving into a new home', 'Moving out of a rented flat', 'Before festivals, weddings and functions', 'A once-in-a-while reset of the whole home'],
+    goodFor: ['Moving into a new home', 'Moving out of a rented flat', 'Before Diwali, weddings and functions', 'A once-in-a-while reset of the whole home'],
     faqs: [
       {
         q: 'What does complete deep cleaning include?',
@@ -182,8 +200,8 @@ export function servicePath(s: Service): string {
 /** Questions every service page shares, after its own. */
 export const COMMON_FAQS: Faq[] = [
   {
-    q: 'How much does it cost?',
-    a: 'The price depends on the work — the size of the place, its condition and which services you need. Send us the details or a few photos on WhatsApp and we will give you a free quote.',
+    q: 'What are the charges?',
+    a: 'Charges depend on the work — the size of the place, its condition and which services you need. Send us the details or a few photos on WhatsApp and we will tell you there. Asking is free.',
   },
   {
     q: 'How do I book?',
