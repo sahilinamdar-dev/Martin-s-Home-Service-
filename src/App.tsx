@@ -4,10 +4,12 @@ import { SiteFooter } from './components/SiteFooter'
 import { SiteNav } from './components/SiteNav'
 import { StickyCta } from './components/StickyCta'
 import About from './pages/About'
+import AreaPage from './pages/AreaPage'
 import Contact from './pages/Contact'
 import Home from './pages/Home'
 import NotFound from './pages/NotFound'
 import Privacy from './pages/Privacy'
+import ServiceAreas from './pages/ServiceAreas'
 import ServicePage from './pages/ServicePage'
 
 /** New page → top of the page; link with a #hash → that section. */
@@ -35,6 +37,8 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/services/:slug" element={<ServicePage />} />
+          <Route path="/cleaning-services/:slug" element={<AreaPage />} />
+          <Route path="/service-areas" element={<ServiceAreas />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/privacy" element={<Privacy />} />

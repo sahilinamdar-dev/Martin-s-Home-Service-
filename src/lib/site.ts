@@ -7,10 +7,14 @@ export const SITE = {
   /** 10-digit number used for both calls and WhatsApp. */
   phone: '7875871443',
   countryCode: '91',
-  /** e.g. 'Pune' — unlocks "in Pune" wording and the areaServed markup. */
-  city: '',
-  /** Localities served, e.g. ['Kothrud', 'Baner']. */
-  areas: [] as string[],
+  city: 'Pune',
+  state: 'Maharashtra',
+  /** Locality the business works out of. The served localities are in areas.ts. */
+  base: 'Yerawada',
+  /** How far from the base we travel. */
+  radiusKm: 15,
+  /** Approximate centre of the base locality, for the service-area circle in the schema. */
+  geo: { lat: 18.5529, lng: 73.8796 },
   /** e.g. 'Mo-Su 08:00-20:00' (schema.org openingHours format). */
   openingHours: '',
   /** Human version of the above, e.g. 'Every day, 8 am – 8 pm'. */

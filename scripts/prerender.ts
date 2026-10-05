@@ -13,6 +13,7 @@ const viteServer = await createServer({ root, server: { middlewareMode: true }, 
 const { render } = (await viteServer.ssrLoadModule('/src/entry-server.tsx')) as typeof import('../src/entry-server')
 const { SITE, PHONE_DISPLAY, absoluteUrl } = (await viteServer.ssrLoadModule('/src/lib/site.ts')) as typeof import('../src/lib/site')
 const { SERVICES, HOME_FAQS, servicePath } = (await viteServer.ssrLoadModule('/src/lib/services.ts')) as typeof import('../src/lib/services')
+const { AREAS, areaPath } = (await viteServer.ssrLoadModule('/src/lib/areas.ts')) as typeof import('../src/lib/areas')
 
 let template = readFileSync(join(distDir, 'index.html'), 'utf-8')
 
@@ -65,7 +66,7 @@ function writeSeoFiles(paths: string[]) {
   writeFileSync(join(distDir, 'robots.txt'), `User-agent: *\nAllow: /\n\nSitemap: ${SITE.url}/sitemap.xml\n`)
 
   // llms.txt — a plain-text summary of the business for AI assistants.
-  const where = SITE.city ? `Service area: ${[SITE.city, ...SITE.areas].join(', ')}` : 'Service area: confirmed by phone or WhatsApp'
+  const where = `Based in ${SITE.base}, ${SITE.city}, ${SITE.state}, India. Service area: within about ${SITE.radiusKm} km of ${SITE.base}`
   const llms = [
     `# ${SITE.name}`,
     '',
@@ -73,12 +74,16 @@ function writeSeoFiles(paths: string[]) {
     '',
     `- Phone and WhatsApp: ${PHONE_DISPLAY} (+${SITE.countryCode} ${SITE.phone})`,
     `- ${where}`,
-    '- Pricing: depends on the work; free quote by phone or WhatsApp',
+    '- Charges: depend on the work; told on WhatsApp or by phone before booking',
     ...(SITE.hoursLabel ? [`- Hours: ${SITE.hoursLabel}`] : []),
     '',
     '## Services',
     '',
     ...SERVICES.map((s) => `- [${s.name}](${absoluteUrl(servicePath(s))}): ${s.short}`),
+    '',
+    '## Areas served',
+    '',
+    ...AREAS.map((a) => `- [${a.name}, ${SITE.city}](${absoluteUrl(areaPath(a))}): ${a.note}`),
     '',
     '## Common questions',
     '',
@@ -86,6 +91,7 @@ function writeSeoFiles(paths: string[]) {
     '## Pages',
     '',
     `- [Home](${absoluteUrl('/')})`,
+    `- [Service areas](${absoluteUrl('/service-areas')})`,
     `- [About](${absoluteUrl('/about')})`,
     `- [Contact](${absoluteUrl('/contact')})`,
     '',
@@ -94,7 +100,7 @@ function writeSeoFiles(paths: string[]) {
 }
 
 function main() {
-  const paths = ['/', ...SERVICES.map(servicePath), '/about', '/contact', '/privacy']
+  const paths = ['/', ...SERVICES.map(servicePath), '/service-areas', ...AREAS.map(areaPath), '/about', '/contact', '/privacy']
   for (const path of paths) writeRoute(path)
 
   // Served by the host for any address that has no page.

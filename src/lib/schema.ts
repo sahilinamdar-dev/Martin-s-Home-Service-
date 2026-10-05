@@ -1,4 +1,5 @@
 import { SITE, PHONE_E164, absoluteUrl } from './site'
+import { AREAS, areaPath, type Area } from './areas'
 import { SERVICES, servicePath, type Faq, type Service } from './services'
 
 const BUSINESS_ID = `${SITE.url}/#business`
@@ -16,8 +17,15 @@ export function businessSchema() {
     url: `${SITE.url}/`,
     telephone: PHONE_E164,
     image: `${SITE.url}/og.png`,
-    ...(SITE.city ? { address: { '@type': 'PostalAddress', addressLocality: SITE.city, addressCountry: 'IN' } } : {}),
-    ...(SITE.city ? { areaServed: [SITE.city, ...SITE.areas] } : {}),
+    address: { '@type': 'PostalAddress', addressLocality: SITE.city, addressRegion: SITE.state, addressCountry: 'IN' },
+    areaServed: [
+      {
+        '@type': 'GeoCircle',
+        geoMidpoint: { '@type': 'GeoCoordinates', latitude: SITE.geo.lat, longitude: SITE.geo.lng },
+        geoRadius: SITE.radiusKm * 1000,
+      },
+      ...AREAS.map((a) => ({ '@type': 'Place', name: `${a.name}, ${SITE.city}` })),
+    ],
     ...(SITE.openingHours ? { openingHours: SITE.openingHours } : {}),
     contactPoint: {
       '@type': 'ContactPoint',
@@ -56,7 +64,7 @@ export function serviceSchema(s: Service) {
     description: s.intro,
     url: absoluteUrl(servicePath(s)),
     provider: { '@id': BUSINESS_ID },
-    ...(SITE.city ? { areaServed: SITE.city } : {}),
+    areaServed: { '@type': 'City', name: SITE.city },
   }
 }
 
@@ -70,5 +78,19 @@ export function breadcrumbSchema(items: { name: string; path: string }[]) {
       name: item.name,
       item: absoluteUrl(item.path),
     })),
+  }
+}
+
+/** All services, as offered in one locality. */
+export function areaServiceSchema(area: Area) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: `Cleaning services in ${area.name}, ${SITE.city}`,
+    serviceType: 'House cleaning',
+    description: `Home, flat and office cleaning in ${area.name}, ${SITE.city}. ${area.note}`,
+    url: absoluteUrl(areaPath(area)),
+    provider: { '@id': BUSINESS_ID },
+    areaServed: { '@type': 'Place', name: `${area.name}, ${SITE.city}, ${SITE.state}` },
   }
 }

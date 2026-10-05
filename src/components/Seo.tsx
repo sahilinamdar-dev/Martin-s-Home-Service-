@@ -30,6 +30,8 @@ export function Seo({ title, description, path, jsonLd = [], noindex = false }: 
       <meta property="og:url" content={url} />
       <meta property="og:image" content={image} />
       <meta name="twitter:card" content="summary_large_image" />
+      <meta name="geo.region" content="IN-MH" />
+      <meta name="geo.placename" content={`${SITE.base}, ${SITE.city}`} />
       {jsonLd.map((block, i) => (
         <script key={i} type="application/ld+json" dangerouslySetInnerHTML={{ __html: toInlineJson(block) }} />
       ))}

@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { Clock, MapPin, Phone } from 'lucide-react'
 import { QuoteForm } from '../components/QuoteForm'
 import { Seo } from '../components/Seo'
@@ -6,7 +7,7 @@ import { breadcrumbSchema, businessSchema } from '../lib/schema'
 import { IN_CITY, PHONE_DISPLAY, SITE, TEL_LINK, WA_DEFAULT } from '../lib/site'
 
 export default function Contact() {
-  const serviceArea = SITE.city ? [SITE.city, ...SITE.areas].join(', ') : 'Message us your location and we will confirm right away.'
+  const serviceArea = `${SITE.base}, ${SITE.city} and areas within about ${SITE.radiusKm} km`
 
   return (
     <>
@@ -58,6 +59,9 @@ export default function Contact() {
                 <span>
                   <span className="block text-sm font-semibold text-navy-600">Service area</span>
                   <span className="block font-bold text-navy-900">{serviceArea}</span>
+                  <Link to="/service-areas" className="mt-1 inline-block text-sm font-bold text-leaf-700 underline">
+                    See all areas
+                  </Link>
                 </span>
               </div>
 

@@ -8,11 +8,11 @@ const PLACE_SIZES = ['1 RK', '1 BHK', '2 BHK', '3 BHK', '4 BHK or bigger', 'Offi
 /** Collects the job details and opens WhatsApp with them typed out.
  *  Nothing is sent to or stored on a server — the customer presses send in
  *  their own WhatsApp. */
-export function QuoteForm({ defaultService = '', idPrefix = 'quote' }: { defaultService?: string; idPrefix?: string }) {
+export function QuoteForm({ defaultService = '', defaultArea = '', idPrefix = 'quote' }: { defaultService?: string; defaultArea?: string; idPrefix?: string }) {
   const [name, setName] = useState('')
   const [service, setService] = useState(defaultService)
   const [size, setSize] = useState('')
-  const [area, setArea] = useState('')
+  const [area, setArea] = useState(defaultArea)
   const [date, setDate] = useState('')
   const [notes, setNotes] = useState('')
 

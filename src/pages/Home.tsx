@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { BadgeCheck, CalendarCheck, Camera, Check, Clock, HandCoins, MessageCircle, Phone, ShieldCheck, Smile, Sparkles } from 'lucide-react'
+import { ArrowRight, BadgeCheck, CalendarCheck, Camera, Check, Clock, HandCoins, MapPin, MessageCircle, Phone, ShieldCheck, Smile, Sparkles } from 'lucide-react'
 import { FaqList } from '../components/FaqList'
 import { Illustration } from '../components/Illustration'
 import { QuoteForm } from '../components/QuoteForm'
@@ -8,6 +8,7 @@ import { Seo } from '../components/Seo'
 import { ServiceCard } from '../components/ServiceCard'
 import { ServiceIcon } from '../components/ServiceIcon'
 import { WhatsAppIcon } from '../components/WhatsAppIcon'
+import { AREAS, TOP_AREAS, areaPath } from '../lib/areas'
 import { businessSchema, faqSchema } from '../lib/schema'
 import { HOME_FAQS, SERVICES, servicePath } from '../lib/services'
 import { IN_CITY, PHONE_DISPLAY, SITE, TEL_LINK, WA_DEFAULT, waServiceLink } from '../lib/site'
@@ -33,8 +34,8 @@ export default function Home() {
   return (
     <>
       <Seo
-        title={`${SITE.name} — Home, Flat & Office Cleaning${IN_CITY}`}
-        description={`Home, flat and office cleaning${IN_CITY}: bathroom and kitchen deep cleaning, sofa and floor cleaning, complete deep cleaning. Book on WhatsApp — ${SITE.phone}.`}
+        title={`Home Cleaning Services in ${SITE.base}, ${SITE.city} — ${SITE.name}`}
+        description={`Home, flat and office cleaning in ${SITE.base}, ${SITE.city} and ${SITE.radiusKm} km around: bathroom, kitchen, sofa, floor and complete deep cleaning. Book on WhatsApp — ${SITE.phone}.`}
         path="/"
         jsonLd={[businessSchema(), faqSchema(HOME_FAQS)]}
       />
@@ -53,7 +54,7 @@ export default function Home() {
               </span>
             </h1>
 
-            <p className="mt-4 max-w-xl text-lg leading-relaxed text-navy-700">Deep cleaning for your home, flat or office. Just WhatsApp us — we reply with everything you need to know.</p>
+            <p className="mt-4 max-w-xl text-lg leading-relaxed text-navy-700">Deep cleaning for homes, flats and offices in {SITE.base} and nearby {SITE.city}. Just WhatsApp us — we reply with everything you need to know.</p>
 
             {/* Service chips — swipe sideways on a phone */}
             <div className="no-scrollbar -mx-4 mt-6 flex snap-x gap-2.5 overflow-x-auto px-4 pb-1 sm:mx-0 sm:flex-wrap sm:px-0">
@@ -232,6 +233,41 @@ export default function Home() {
                 WhatsApp karein
               </a>
               <Illustration slug="complete-deep-cleaning" className="pointer-events-none absolute -bottom-3 -right-5 h-44 w-44 sm:h-56 sm:w-56" />
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* Areas */}
+      <section id="areas" className="pb-14 sm:pb-20">
+        <div className="container-page">
+          <Reveal>
+            <div className="rounded-[2rem] bg-[#cfeedd] p-6 sm:p-10">
+              <p className="inline-flex items-center gap-1.5 text-sm font-bold uppercase tracking-[0.14em] text-leaf-800">
+                <MapPin className="h-4 w-4" aria-hidden="true" />
+                Where we work
+              </p>
+              <h2 className="mt-3 text-3xl font-extrabold tracking-tight text-navy-950 sm:text-4xl">
+                Cleaning services in {SITE.base} &amp; <em className="font-bold text-leaf-800">{SITE.radiusKm} km around</em>
+              </h2>
+              <p className="mt-3 max-w-2xl text-lg text-navy-800">
+                We are based in {SITE.base}, {SITE.city} and come to {AREAS.length} localities nearby. Tap your area.
+              </p>
+              <ul className="mt-6 flex flex-wrap gap-2.5">
+                {TOP_AREAS.map((a) => (
+                  <li key={a.slug}>
+                    <Link to={areaPath(a)} className="inline-flex items-center rounded-full bg-white px-4 py-2.5 text-sm font-bold text-navy-900 hover:bg-navy-950 hover:text-white active:scale-95">
+                      {a.name}
+                    </Link>
+                  </li>
+                ))}
+                <li>
+                  <Link to="/service-areas" className="inline-flex items-center gap-1.5 rounded-full bg-navy-950 px-4 py-2.5 text-sm font-bold text-white active:scale-95">
+                    All {AREAS.length} areas
+                    <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                  </Link>
+                </li>
+              </ul>
             </div>
           </Reveal>
         </div>

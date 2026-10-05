@@ -1,4 +1,4 @@
-import { IN_CITY, SITE } from './site'
+import { SITE } from './site'
 
 export type Faq = { q: string; a: string }
 
@@ -217,7 +217,7 @@ export const HOME_FAQS: Faq[] = [
   ...COMMON_FAQS,
   {
     q: 'Which areas do you serve?',
-    a: `Message us your location on WhatsApp and we will confirm right away whether we can come to you${IN_CITY}.`,
+    a: `We are based in ${SITE.base}, ${SITE.city} and cover areas within about ${SITE.radiusKm} km — Kalyani Nagar, Viman Nagar, Koregaon Park, Kharadi, Wadgaon Sheri, Vishrantwadi, Dhanori, Hadapsar, Camp, Shivajinagar, Aundh and more. Not sure about your area? WhatsApp us your location.`,
   },
   {
     q: 'Can I choose the day and time?',

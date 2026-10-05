@@ -8,6 +8,7 @@ import { WhatsAppIcon } from './WhatsAppIcon'
 const LINKS = [
   { to: '/#services', label: 'Services' },
   { to: '/#how-it-works', label: 'How it works' },
+  { to: '/service-areas', label: 'Areas' },
   { to: '/#faq', label: 'FAQ' },
   { to: '/about', label: 'About' },
   { to: '/contact', label: 'Contact' },

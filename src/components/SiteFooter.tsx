@@ -13,7 +13,7 @@ export function SiteFooter() {
         <div>
           <Logo onDark />
           <p className="mt-4 max-w-xs leading-relaxed">
-            Home, flat and office cleaning. {SITE.tagline}.
+            Home, flat and office cleaning in {SITE.base}, {SITE.city} and {SITE.radiusKm} km around. {SITE.tagline}.
           </p>
           <p className="mt-4 font-hand text-2xl text-sun-400">Clean Home, Happy You!</p>
         </div>
@@ -49,6 +49,11 @@ export function SiteFooter() {
             {SITE.hoursLabel && <li>{SITE.hoursLabel}</li>}
           </ul>
           <ul className="mt-6 flex flex-wrap gap-x-5 gap-y-2 text-sm">
+            <li>
+              <Link to="/service-areas" className="hover:text-white">
+                Service areas
+              </Link>
+            </li>
             <li>
               <Link to="/about" className="hover:text-white">
                 About
