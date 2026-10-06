@@ -4,7 +4,7 @@ import { QuoteForm } from '../components/QuoteForm'
 import { Seo } from '../components/Seo'
 import { WhatsAppIcon } from '../components/WhatsAppIcon'
 import { breadcrumbSchema, businessSchema } from '../lib/schema'
-import { IN_CITY, PHONE_DISPLAY, SITE, TEL_LINK, WA_DEFAULT } from '../lib/site'
+import { IN_CITY, PHONE_DISPLAY, REACH_US, SITE, TEL_LINK, WA_DEFAULT } from '../lib/site'
 
 export default function Contact() {
   const serviceArea = `${SITE.base}, ${SITE.city} and areas within about ${SITE.radiusKm} km`
@@ -12,8 +12,8 @@ export default function Contact() {
   return (
     <>
       <Seo
-        title={`Contact ${SITE.name} — Call or WhatsApp ${SITE.phone}`}
-        description={`Book home, flat or office cleaning${IN_CITY}. Call or WhatsApp ${SITE.phone} for a free quote.`}
+        title={`Contact ${SITE.name} — ${REACH_US}`}
+        description={`Book home, flat or office cleaning${IN_CITY}. ${REACH_US} for a free quote.`}
         path="/contact"
         jsonLd={[
           businessSchema(),

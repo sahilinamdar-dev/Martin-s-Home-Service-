@@ -1,5 +1,5 @@
 import type { Faq } from './services'
-import { SITE, waLink } from './site'
+import { REACH_US, SITE, waLink } from './site'
 
 export type FestivalOffer = {
   id: string
@@ -114,7 +114,7 @@ export const WA_FESTIVAL = waLink(`Hi ${SITE.name}, I want to book ${FESTIVAL.na
 export const FESTIVAL_FAQS: Faq[] = [
   {
     q: `Is there a Diwali cleaning offer in ${SITE.city} in ${FESTIVAL.year}?`,
-    a: `Yes. ${SITE.name} has ${FESTIVAL.name} offers for bookings made until ${OFFER_ENDS_LABEL}: ${OFFER_SUMMARY}. WhatsApp or call ${SITE.phone} to claim one.`,
+    a: `Yes. ${SITE.name} has ${FESTIVAL.name} offers for bookings made until ${OFFER_ENDS_LABEL}: ${OFFER_SUMMARY}. ${REACH_US} to claim one.`,
   },
   {
     q: 'When should I book Diwali cleaning?',
@@ -146,6 +146,6 @@ export const FESTIVAL_FAQS: Faq[] = [
 export function festivalAreaFaq(areaName: string): Faq {
   return {
     q: `Do you do Diwali cleaning in ${areaName}?`,
-    a: `Yes. ${SITE.name} does Diwali and Dussehra deep cleaning for homes, flats and offices in ${areaName}, ${SITE.city}. Festival offers until ${OFFER_ENDS_LABEL}: ${OFFER_SUMMARY}. WhatsApp or call ${SITE.phone} to book your day.`,
+    a: `Yes. ${SITE.name} does Diwali and Dussehra deep cleaning for homes, flats and offices in ${areaName}, ${SITE.city}. Festival offers until ${OFFER_ENDS_LABEL}: ${OFFER_SUMMARY}. ${REACH_US} to book your day.`,
   }
 }

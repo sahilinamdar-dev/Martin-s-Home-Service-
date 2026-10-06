@@ -9,7 +9,7 @@ import { ServiceCard } from '../components/ServiceCard'
 import { WhatsAppIcon } from '../components/WhatsAppIcon'
 import { breadcrumbSchema, faqSchema, serviceSchema } from '../lib/schema'
 import { COMMON_FAQS, SERVICES, getService, servicePath } from '../lib/services'
-import { IN_CITY, PHONE_DISPLAY, SITE, TEL_LINK, waServiceLink } from '../lib/site'
+import { IN_CITY, PHONE_DISPLAY, REACH_US, SITE, TEL_LINK, waServiceLink } from '../lib/site'
 import NotFound from './NotFound'
 
 export default function ServicePage() {
@@ -25,7 +25,7 @@ export default function ServicePage() {
     <>
       <Seo
         title={`${service.name}${IN_CITY} — ${SITE.name}`}
-        description={`${service.short} Book on WhatsApp or call ${SITE.phone}.`}
+        description={`${service.short} ${REACH_US} to book.`}
         path={path}
         jsonLd={[
           serviceSchema(service),

@@ -42,7 +42,7 @@ export default function FestivalPage() {
     <>
       <Seo
         title={`Diwali Cleaning in ${SITE.city} ${FESTIVAL.year} — Deep Cleaning Offers | ${SITE.name}`}
-        description={`Diwali & Dussehra home deep cleaning in ${SITE.base} and ${SITE.radiusKm} km around ${SITE.city}. Offers till ${OFFER_ENDS_LABEL}: ${FESTIVAL.headline.toLowerCase()}. Book on WhatsApp — ${SITE.phone}.`}
+        description={`Diwali & Dussehra home deep cleaning in ${SITE.base} and ${SITE.radiusKm} km around ${SITE.city}. Offers till ${OFFER_ENDS_LABEL}: ${FESTIVAL.headline.toLowerCase()}. Book on WhatsApp — ${SITE.whatsapp}.`}
         path={FESTIVAL_PATH}
         jsonLd={[
           festivalSchema(),

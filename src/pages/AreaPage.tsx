@@ -11,7 +11,7 @@ import { areaPath, getArea, nearbyAreas, type Area } from '../lib/areas'
 import { FESTIVAL, festivalAreaFaq } from '../lib/festival'
 import { areaServiceSchema, breadcrumbSchema, faqSchema } from '../lib/schema'
 import { SERVICES, type Faq } from '../lib/services'
-import { PHONE_DISPLAY, SITE, TEL_LINK, waLink } from '../lib/site'
+import { PHONE_DISPLAY, REACH_US, SITE, TEL_LINK, waLink } from '../lib/site'
 import NotFound from './NotFound'
 
 function areaFaqs(area: Area): Faq[] {
@@ -21,8 +21,8 @@ function areaFaqs(area: Area): Faq[] {
     {
       q: `Do you provide cleaning services in ${area.name}?`,
       a: isBase
-        ? `Yes. ${SITE.name} is based in ${SITE.base}, ${SITE.city}, and cleans homes, flats and offices all over ${area.name}. WhatsApp or call ${SITE.phone} to book.`
-        : `Yes. ${SITE.name} is based in ${SITE.base}, ${SITE.city}, and covers ${area.name} along with other areas within about ${SITE.radiusKm} km. WhatsApp or call ${SITE.phone} to book.`,
+        ? `Yes. ${SITE.name} is based in ${SITE.base}, ${SITE.city}, and cleans homes, flats and offices all over ${area.name}. ${REACH_US} to book.`
+        : `Yes. ${SITE.name} is based in ${SITE.base}, ${SITE.city}, and covers ${area.name} along with other areas within about ${SITE.radiusKm} km. ${REACH_US} to book.`,
     },
     {
       q: `Which cleaning services can I book in ${area.name}?`,
@@ -34,7 +34,7 @@ function areaFaqs(area: Area): Faq[] {
     },
     {
       q: `How do I book a cleaning in ${area.name}?`,
-      a: `WhatsApp or call ${SITE.phone}. Tell us the service, your society or address in ${area.name} and the day and time you prefer. Our timing is flexible and we confirm the slot on WhatsApp.`,
+      a: `${REACH_US}. Tell us the service, your society or address in ${area.name} and the day and time you prefer. Our timing is flexible and we confirm the slot on WhatsApp.`,
     },
     ...(FESTIVAL.enabled ? [festivalAreaFaq(area.name)] : []),
   ]
@@ -55,7 +55,7 @@ export default function AreaPage() {
     <>
       <Seo
         title={`Cleaning Services in ${place} — Home, Flat & Office Deep Cleaning`}
-        description={`Home, flat and office cleaning in ${place}: bathroom, kitchen, sofa, floor and complete deep cleaning by ${SITE.name}. Book on WhatsApp — ${SITE.phone}.`}
+        description={`Home, flat and office cleaning in ${place}: bathroom, kitchen, sofa, floor and complete deep cleaning by ${SITE.name}. Book on WhatsApp — ${SITE.whatsapp}.`}
         path={path}
         jsonLd={[
           areaServiceSchema(area),

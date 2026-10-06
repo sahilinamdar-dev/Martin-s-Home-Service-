@@ -4,8 +4,10 @@
 export const SITE = {
   name: "Martin's Home Service",
   tagline: 'Making every corner shine',
-  /** 10-digit number used for both calls and WhatsApp. */
-  phone: '7875871443',
+  /** 10-digit number for calls. */
+  phone: '9604557901',
+  /** 10-digit number for WhatsApp. Can be the same as `phone`. */
+  whatsapp: '7875871443',
   countryCode: '91',
   city: 'Pune',
   state: 'Maharashtra',
@@ -29,8 +31,11 @@ export const PHONE_DISPLAY = `${SITE.phone.slice(0, 5)} ${SITE.phone.slice(5)}`
 export const PHONE_E164 = `+${SITE.countryCode}${SITE.phone}`
 export const TEL_LINK = `tel:${PHONE_E164}`
 
+/** "WhatsApp or call 96045 57901" — or both numbers, when they differ. */
+export const REACH_US = SITE.whatsapp === SITE.phone ? `WhatsApp or call ${SITE.phone}` : `WhatsApp ${SITE.whatsapp} or call ${SITE.phone}`
+
 export function waLink(message: string): string {
-  return `https://wa.me/${SITE.countryCode}${SITE.phone}?text=${encodeURIComponent(message)}`
+  return `https://wa.me/${SITE.countryCode}${SITE.whatsapp}?text=${encodeURIComponent(message)}`
 }
 
 export const WA_DEFAULT = waLink(`Hi ${SITE.name}, I would like a quote for cleaning.`)

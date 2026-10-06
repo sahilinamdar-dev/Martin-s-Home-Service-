@@ -1,4 +1,4 @@
-import { SITE } from './site'
+import { REACH_US, SITE } from './site'
 
 export type Faq = { q: string; a: string }
 
@@ -205,7 +205,7 @@ export const COMMON_FAQS: Faq[] = [
   },
   {
     q: 'How do I book?',
-    a: `Call or WhatsApp ${SITE.phone}. Tell us the service, your location and a day that suits you, and we will confirm the booking.`,
+    a: `${REACH_US}. Tell us the service, your location and a day that suits you, and we will confirm the booking.`,
   },
 ]
 
