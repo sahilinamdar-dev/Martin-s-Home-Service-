@@ -1,5 +1,5 @@
 import type { Faq } from './services'
-import { REACH_US, SITE, waLink } from './site'
+import { REACH_US, SITE, absoluteUrl, waLink } from './site'
 
 export type FestivalOffer = {
   id: string
@@ -110,6 +110,11 @@ export function waOfferLink(offer: FestivalOffer, areaName?: string): string {
 }
 
 export const WA_FESTIVAL = waLink(`Hi ${SITE.name}, I want to book ${FESTIVAL.name} cleaning. Please tell me the offer for my home.`)
+
+/** Opens WhatsApp's own "send to" screen, so the visitor can pick their society group. */
+export const WA_SHARE_OFFERS = `https://wa.me/?text=${encodeURIComponent(
+  `${FESTIVAL.name} cleaning offers from ${SITE.name} — ${FESTIVAL.headline.toLowerCase()}. If 3 or more flats in our society book together, every flat gets the group offer. ${absoluteUrl(FESTIVAL_PATH)}`,
+)}`
 
 export const FESTIVAL_FAQS: Faq[] = [
   {

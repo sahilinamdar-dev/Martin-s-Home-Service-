@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { ArrowRight, X } from 'lucide-react'
-import { FESTIVAL, FESTIVAL_PATH, OFFER_ENDS_LABEL, offersForService, waOfferLink } from '../lib/festival'
+import { ArrowRight, Share2, X } from 'lucide-react'
+import { FESTIVAL, FESTIVAL_PATH, OFFER_ENDS_LABEL, WA_SHARE_OFFERS, offersForService, waOfferLink } from '../lib/festival'
 import { daysLeftLabel, useDaysLeft, useFestivalLive } from '../lib/useFestival'
+import { Swiper } from './Swiper'
 import { WhatsAppIcon } from './WhatsAppIcon'
 
 /** A small oil lamp. */
@@ -63,9 +64,10 @@ export function FestivalOffers({ area, showLink = false, headingLevel = 'h2' }: 
         {daysLeft !== null && <p className="rounded-full bg-white/10 px-4 py-2 text-sm font-bold text-sun-400 ring-1 ring-white/15">{daysLeftLabel(daysLeft, 'Diwali')}</p>}
       </div>
 
-      <ul className="relative mt-7 grid gap-4 md:grid-cols-3">
+      {/* Swiped sideways on phones, three across from tablets up. */}
+      <Swiper as="ul" label="Offer" onDark dotsClassName="relative md:hidden" className="no-scrollbar relative -mx-5 mt-7 flex snap-x snap-mandatory scroll-px-5 gap-3 overflow-x-auto px-5 md:mx-0 md:grid md:grid-cols-3 md:gap-4 md:overflow-visible md:px-0">
         {FESTIVAL.offers.map((o) => (
-          <li key={o.id} className="flex flex-col rounded-3xl bg-white p-5 text-navy-900">
+          <li key={o.id} className="flex w-[84%] shrink-0 snap-start flex-col rounded-3xl bg-white p-5 text-navy-900 md:w-auto">
             <span className="self-start rounded-full bg-sun-400 px-3.5 py-1.5 text-sm font-extrabold tracking-wide text-navy-950">{o.badge}</span>
             <p className="mt-3 text-xl font-extrabold leading-tight text-navy-950">{o.title}</p>
             <p className="mt-2 flex-1 leading-relaxed text-navy-700">{o.text}</p>
@@ -75,9 +77,20 @@ export function FestivalOffers({ area, showLink = false, headingLevel = 'h2' }: 
             </a>
           </li>
         ))}
-      </ul>
+      </Swiper>
 
-      <div className="relative mt-6 flex flex-wrap items-center justify-between gap-3 text-sm text-white/75">
+      <a href={WA_SHARE_OFFERS} target="_blank" rel="noopener" className="relative mt-5 flex items-center gap-3 rounded-2xl bg-white/10 p-3.5 ring-1 ring-white/15 hover:bg-white/15 active:scale-[0.99]">
+        <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-sun-400 text-navy-950">
+          <Share2 className="h-5 w-5" aria-hidden="true" />
+        </span>
+        <span className="min-w-0 flex-1">
+          <span className="block font-extrabold">Share in your society WhatsApp group</span>
+          <span className="block text-sm text-white/80">Three flats booking together unlock the group offer.</span>
+        </span>
+        <ArrowRight className="h-5 w-5 shrink-0 text-sun-400" aria-hidden="true" />
+      </a>
+
+      <div className="relative mt-5 flex flex-wrap items-center justify-between gap-3 text-sm text-white/75">
         <p>{FESTIVAL.terms.join(' ')}</p>
         {showLink && (
           <Link to={FESTIVAL_PATH} className="inline-flex items-center gap-1.5 font-bold text-sun-400 hover:underline">

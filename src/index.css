@@ -32,6 +32,21 @@
 html {
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
+  /* Taps answer with the element's own pressed state, not a grey flash. */
+  -webkit-tap-highlight-color: transparent;
+}
+
+::selection {
+  background: var(--color-sun-400);
+  color: var(--color-navy-950);
+}
+
+/* No double-tap zoom delay on anything tappable. */
+a,
+button,
+label,
+summary {
+  touch-action: manipulation;
 }
 
 body {
@@ -67,6 +82,19 @@ section[id] {
   }
   .btn-ghost-light {
     @apply border-2 border-white/40 text-white hover:bg-white hover:text-navy-900;
+  }
+
+  /* A row you swipe on phones (next card peeking in) that becomes a normal grid from `sm` up.
+     Use inside .container-page; the row bleeds to the screen edges. */
+  .swipe-row {
+    @apply -mx-4 flex snap-x snap-mandatory scroll-px-4 gap-3 overflow-x-auto px-4 pb-2 sm:mx-0 sm:grid sm:gap-4 sm:overflow-visible sm:px-0 sm:pb-0;
+    scrollbar-width: none;
+  }
+  .swipe-row::-webkit-scrollbar {
+    display: none;
+  }
+  .swipe-item {
+    @apply w-[82%] shrink-0 snap-start sm:w-auto;
   }
 
   .eyebrow {
@@ -114,6 +142,42 @@ section[id] {
   transform-box: fill-box;
 }
 
+/* A new screen eases in after a tap on a link — see App.tsx */
+@keyframes page-enter {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.page-enter {
+  animation: page-enter 0.28s ease-out both;
+}
+
+@keyframes menu-drop {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.menu-drop {
+  animation: menu-drop 0.2s ease-out both;
+}
+
+/* Installed as an app: no browser bar, so keep clear of the phone's status area. */
+@media (display-mode: standalone) {
+  body {
+    padding-top: env(safe-area-inset-top);
+  }
+}
+
 /* Scroll offer slides up into place — see components/Festival.tsx */
 @keyframes offer-pop {
   from {
@@ -149,7 +213,9 @@ section[id] {
   .twinkle {
     animation: none;
   }
-  .offer-pop {
+  .offer-pop,
+  .page-enter,
+  .menu-drop {
     animation: none;
   }
 }

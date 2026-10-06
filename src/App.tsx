@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { Route, Routes, useLocation } from 'react-router-dom'
+import { Route, Routes, useLocation, useNavigationType } from 'react-router-dom'
 import { FestivalBar, FestivalScrollOffer } from './components/Festival'
 import { SiteFooter } from './components/SiteFooter'
 import { SiteNav } from './components/SiteNav'
@@ -29,6 +29,10 @@ function ScrollManager() {
 }
 
 export default function App() {
+  const { pathname } = useLocation()
+  // Only screens reached by a tap ease in. The first load and the back button
+  // (both 'POP') show at once, so the first paint is never held back.
+  const entering = useNavigationType() !== 'POP'
   return (
     <>
       <ScrollManager />
@@ -37,7 +41,7 @@ export default function App() {
       </a>
       <FestivalBar />
       <SiteNav />
-      <main id="main">
+      <main id="main" key={pathname} className={entering ? 'page-enter' : undefined}>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/services/:slug" element={<ServicePage />} />

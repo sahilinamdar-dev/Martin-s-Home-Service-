@@ -1,10 +1,24 @@
 {
   "name": "Martin's Home Service",
   "short_name": "Martin's",
-  "description": "Home, flat and office cleaning services. Making every corner shine.",
+  "description": "Home, flat and office cleaning services in Yerawada, Pune. Making every corner shine.",
+  "id": "/",
   "start_url": "/",
+  "scope": "/",
+  "lang": "en-IN",
   "display": "standalone",
+  "orientation": "portrait",
   "background_color": "#fbf8f1",
   "theme_color": "#0f2a4a",
-  "icons": [{ "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml" }]
+  "categories": ["lifestyle", "business"],
+  "icons": [
+    { "src": "/icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
+    { "src": "/icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" },
+    { "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml" }
+  ],
+  "shortcuts": [
+    { "name": "Book a cleaning", "short_name": "Book", "url": "/contact", "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192" }] },
+    { "name": "Diwali offers", "short_name": "Offers", "url": "/diwali-cleaning-offers", "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192" }] },
+    { "name": "Service areas", "short_name": "Areas", "url": "/service-areas", "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192" }] }
+  ]
 }

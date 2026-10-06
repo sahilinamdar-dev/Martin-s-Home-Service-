@@ -56,7 +56,7 @@ export function SiteNav() {
       </div>
 
       {open && (
-        <nav id="mobile-menu" className="border-t border-navy-900/5 bg-cream lg:hidden" aria-label="Mobile">
+        <nav id="mobile-menu" className="menu-drop border-t border-navy-900/5 bg-cream lg:hidden" aria-label="Mobile">
           <div className="container-page flex flex-col py-2">
             {LINKS.map((l) => (
               <Link key={l.to} to={l.to} onClick={() => setOpen(false)} className="rounded-xl px-3 py-3 text-base font-semibold text-navy-900 hover:bg-leaf-50">
