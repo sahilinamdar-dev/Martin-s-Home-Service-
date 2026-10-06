@@ -1,5 +1,6 @@
 import { SITE, PHONE_E164, absoluteUrl } from './site'
 import { AREAS, areaPath, type Area } from './areas'
+import { FESTIVAL, FESTIVAL_PATH } from './festival'
 import { SERVICES, servicePath, type Faq, type Service } from './services'
 
 const BUSINESS_ID = `${SITE.url}/#business`
@@ -40,6 +41,47 @@ export function businessSchema() {
         itemOffered: { '@type': 'Service', name: s.name, url: absoluteUrl(servicePath(s)) },
       })),
     },
+  }
+}
+
+export function websiteSchema() {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    '@id': `${SITE.url}/#website`,
+    name: SITE.name,
+    url: `${SITE.url}/`,
+    inLanguage: 'en-IN',
+    publisher: { '@id': BUSINESS_ID },
+  }
+}
+
+/** The festival campaign as a Service with dated Offers. No prices: charges are quoted per home. */
+export function festivalSchema() {
+  const url = absoluteUrl(FESTIVAL_PATH)
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: `${FESTIVAL.name} deep cleaning in ${SITE.city}`,
+    serviceType: 'House cleaning',
+    description: `Diwali and Dussehra deep cleaning for homes, flats and offices in ${SITE.base} and within about ${SITE.radiusKm} km, ${SITE.city}.`,
+    url,
+    provider: { '@id': BUSINESS_ID },
+    areaServed: { '@type': 'City', name: SITE.city },
+    ...(FESTIVAL.enabled
+      ? {
+          offers: FESTIVAL.offers.map((o) => ({
+            '@type': 'Offer',
+            name: o.title,
+            description: `${o.summary}. ${o.text}`,
+            category: `${FESTIVAL.name} festival offer`,
+            validFrom: FESTIVAL.startsOn,
+            validThrough: FESTIVAL.endsOn,
+            url: `${url}#offers`,
+            seller: { '@id': BUSINESS_ID },
+          })),
+        }
+      : {}),
   }
 }
 

@@ -1,11 +1,13 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Menu, Phone, X } from 'lucide-react'
+import { FESTIVAL, FESTIVAL_PATH } from '../lib/festival'
 import { PHONE_DISPLAY, TEL_LINK, WA_DEFAULT } from '../lib/site'
 import { Logo } from './Logo'
 import { WhatsAppIcon } from './WhatsAppIcon'
 
 const LINKS = [
+  ...(FESTIVAL.enabled ? [{ to: FESTIVAL_PATH, label: 'Diwali offers' }] : []),
   { to: '/#services', label: 'Services' },
   { to: '/#how-it-works', label: 'How it works' },
   { to: '/service-areas', label: 'Areas' },

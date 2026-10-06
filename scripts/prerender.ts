@@ -13,6 +13,7 @@ const viteServer = await createServer({ root, server: { middlewareMode: true }, 
 const { render } = (await viteServer.ssrLoadModule('/src/entry-server.tsx')) as typeof import('../src/entry-server')
 const { SITE, PHONE_DISPLAY, absoluteUrl } = (await viteServer.ssrLoadModule('/src/lib/site.ts')) as typeof import('../src/lib/site')
 const { SERVICES, HOME_FAQS, servicePath } = (await viteServer.ssrLoadModule('/src/lib/services.ts')) as typeof import('../src/lib/services')
+const { FESTIVAL, FESTIVAL_PATH, FESTIVAL_FAQS, OFFER_ENDS_LABEL } = (await viteServer.ssrLoadModule('/src/lib/festival.ts')) as typeof import('../src/lib/festival')
 const { AREAS, areaPath } = (await viteServer.ssrLoadModule('/src/lib/areas.ts')) as typeof import('../src/lib/areas')
 
 let template = readFileSync(join(distDir, 'index.html'), 'utf-8')
@@ -63,7 +64,10 @@ function writeSeoFiles(paths: string[]) {
   const urls = paths.map((p) => `  <url><loc>${absoluteUrl(p)}</loc><lastmod>${today}</lastmod></url>`).join('\n')
   writeFileSync(join(distDir, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls}\n</urlset>\n`)
 
-  writeFileSync(join(distDir, 'robots.txt'), `User-agent: *\nAllow: /\n\nSitemap: ${SITE.url}/sitemap.xml\n`)
+  // Everyone is welcome, AI search and answer engines included — named so there is no doubt.
+  const aiBots = ['GPTBot', 'OAI-SearchBot', 'ChatGPT-User', 'ClaudeBot', 'Claude-SearchBot', 'PerplexityBot', 'Google-Extended', 'Applebot-Extended']
+  const robots = ['User-agent: *', 'Allow: /', '', ...aiBots.flatMap((bot) => [`User-agent: ${bot}`, 'Allow: /', '']), `Sitemap: ${SITE.url}/sitemap.xml`, '']
+  writeFileSync(join(distDir, 'robots.txt'), robots.join('\n'))
 
   // llms.txt — a plain-text summary of the business for AI assistants.
   const where = `Based in ${SITE.base}, ${SITE.city}, ${SITE.state}, India. Service area: within about ${SITE.radiusKm} km of ${SITE.base}`
@@ -77,6 +81,18 @@ function writeSeoFiles(paths: string[]) {
     '- Charges: depend on the work; told on WhatsApp or by phone before booking',
     ...(SITE.hoursLabel ? [`- Hours: ${SITE.hoursLabel}`] : []),
     '',
+    ...(FESTIVAL.enabled
+      ? [
+          `## ${FESTIVAL.name} ${FESTIVAL.year} offers`,
+          '',
+          `Valid for bookings until ${OFFER_ENDS_LABEL}. Details: ${absoluteUrl(FESTIVAL_PATH)}`,
+          '',
+          ...FESTIVAL.offers.map((o) => `- ${o.title} (${o.badge}): ${o.summary}. ${o.text}`),
+          ...FESTIVAL.terms.map((t) => `- Terms: ${t}`),
+          '',
+          ...FESTIVAL_FAQS.flatMap((f) => [`### ${f.q}`, f.a, '']),
+        ]
+      : []),
     '## Services',
     '',
     ...SERVICES.map((s) => `- [${s.name}](${absoluteUrl(servicePath(s))}): ${s.short}`),
@@ -91,6 +107,7 @@ function writeSeoFiles(paths: string[]) {
     '## Pages',
     '',
     `- [Home](${absoluteUrl('/')})`,
+    `- [Diwali cleaning offers](${absoluteUrl(FESTIVAL_PATH)})`,
     `- [Service areas](${absoluteUrl('/service-areas')})`,
     `- [About](${absoluteUrl('/about')})`,
     `- [Contact](${absoluteUrl('/contact')})`,
@@ -100,7 +117,7 @@ function writeSeoFiles(paths: string[]) {
 }
 
 function main() {
-  const paths = ['/', ...SERVICES.map(servicePath), '/service-areas', ...AREAS.map(areaPath), '/about', '/contact', '/privacy']
+  const paths = ['/', FESTIVAL_PATH, ...SERVICES.map(servicePath), '/service-areas', ...AREAS.map(areaPath), '/about', '/contact', '/privacy']
   for (const path of paths) writeRoute(path)
 
   // Served by the host for any address that has no page.

@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { Phone } from 'lucide-react'
+import { FESTIVAL, FESTIVAL_PATH } from '../lib/festival'
 import { SERVICES, servicePath } from '../lib/services'
 import { PHONE_DISPLAY, SITE, TEL_LINK, WA_DEFAULT } from '../lib/site'
 import { Logo } from './Logo'
@@ -49,6 +50,13 @@ export function SiteFooter() {
             {SITE.hoursLabel && <li>{SITE.hoursLabel}</li>}
           </ul>
           <ul className="mt-6 flex flex-wrap gap-x-5 gap-y-2 text-sm">
+            {FESTIVAL.enabled && (
+              <li>
+                <Link to={FESTIVAL_PATH} className="font-bold text-sun-400 hover:text-white">
+                  Diwali offers
+                </Link>
+              </li>
+            )}
             <li>
               <Link to="/service-areas" className="hover:text-white">
                 Service areas

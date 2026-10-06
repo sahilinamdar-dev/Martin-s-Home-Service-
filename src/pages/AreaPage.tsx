@@ -1,12 +1,14 @@
 import { Link, useParams } from 'react-router-dom'
 import { ArrowLeft, MapPin, Phone } from 'lucide-react'
 import { FaqList } from '../components/FaqList'
+import { FestivalOffers } from '../components/Festival'
 import { Illustration } from '../components/Illustration'
 import { QuoteForm } from '../components/QuoteForm'
 import { Seo } from '../components/Seo'
 import { ServiceCard } from '../components/ServiceCard'
 import { WhatsAppIcon } from '../components/WhatsAppIcon'
 import { areaPath, getArea, nearbyAreas, type Area } from '../lib/areas'
+import { FESTIVAL, festivalAreaFaq } from '../lib/festival'
 import { areaServiceSchema, breadcrumbSchema, faqSchema } from '../lib/schema'
 import { SERVICES, type Faq } from '../lib/services'
 import { PHONE_DISPLAY, SITE, TEL_LINK, waLink } from '../lib/site'
@@ -34,6 +36,7 @@ function areaFaqs(area: Area): Faq[] {
       q: `How do I book a cleaning in ${area.name}?`,
       a: `WhatsApp or call ${SITE.phone}. Tell us the service, your society or address in ${area.name} and the day and time you prefer. Our timing is flexible and we confirm the slot on WhatsApp.`,
     },
+    ...(FESTIVAL.enabled ? [festivalAreaFaq(area.name)] : []),
   ]
 }
 
@@ -110,6 +113,10 @@ export default function AreaPage() {
             <ServiceCard key={s.slug} service={s} />
           ))}
         </div>
+      </section>
+
+      <section aria-label="Festival offers" className="container-page pb-10 empty:hidden sm:pb-14">
+        <FestivalOffers area={area.name} showLink />
       </section>
 
       <section className="bg-white py-12 sm:py-16">

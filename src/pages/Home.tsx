@@ -1,16 +1,17 @@
 import { Link } from 'react-router-dom'
 import { ArrowRight, BadgeCheck, CalendarCheck, Camera, Check, Clock, HandCoins, MapPin, MessageCircle, Phone, ShieldCheck, Smile, Sparkles } from 'lucide-react'
 import { FaqList } from '../components/FaqList'
+import { FestivalOffers } from '../components/Festival'
 import { Illustration } from '../components/Illustration'
 import { QuoteForm } from '../components/QuoteForm'
 import { Reveal } from '../components/Reveal'
 import { Seo } from '../components/Seo'
 import { ServiceCard } from '../components/ServiceCard'
-import { ServiceIcon } from '../components/ServiceIcon'
 import { WhatsAppIcon } from '../components/WhatsAppIcon'
 import { AREAS, TOP_AREAS, areaPath } from '../lib/areas'
-import { businessSchema, faqSchema } from '../lib/schema'
-import { HOME_FAQS, SERVICES, servicePath } from '../lib/services'
+import { FESTIVAL, FESTIVAL_FAQS } from '../lib/festival'
+import { businessSchema, faqSchema, websiteSchema } from '../lib/schema'
+import { HOME_FAQS, SERVICES } from '../lib/services'
 import { IN_CITY, PHONE_DISPLAY, SITE, TEL_LINK, WA_DEFAULT, waServiceLink } from '../lib/site'
 
 const TRUST = [
@@ -30,48 +31,76 @@ const WHY = ['Reliable & trustworthy', 'Affordable rates', 'Professional & frien
 
 const FEATURED = SERVICES[SERVICES.length - 1]
 
+const FAQS = FESTIVAL.enabled ? [FESTIVAL_FAQS[0], ...HOME_FAQS] : HOME_FAQS
+
 export default function Home() {
   return (
     <>
       <Seo
         title={`Home Cleaning Services in ${SITE.base}, ${SITE.city} — ${SITE.name}`}
-        description={`Home, flat and office cleaning in ${SITE.base}, ${SITE.city} and ${SITE.radiusKm} km around: bathroom, kitchen, sofa, floor and complete deep cleaning. Book on WhatsApp — ${SITE.phone}.`}
+        description={`Home, flat and office cleaning in ${SITE.base}, ${SITE.city} and ${SITE.radiusKm} km around: bathroom, kitchen, sofa, floor and complete deep cleaning.${FESTIVAL.enabled ? ` ${FESTIVAL.name} offers on now.` : ''} Book on WhatsApp — ${SITE.phone}.`}
         path="/"
-        jsonLd={[businessSchema(), faqSchema(HOME_FAQS)]}
+        jsonLd={[businessSchema(), websiteSchema(), faqSchema(FAQS)]}
       />
 
       {/* Hero */}
       <section className="relative overflow-hidden">
-        <div className="container-page grid gap-7 pb-6 pt-6 sm:pt-10 lg:grid-cols-[1.05fr_1fr] lg:items-center lg:gap-14 lg:pb-14 lg:pt-14">
-          <div className="min-w-0">
+        <div className="container-page grid gap-6 pb-6 pt-4 sm:pt-8 lg:grid-cols-[1.05fr_1fr] lg:items-center lg:gap-14 lg:pb-14 lg:pt-12">
+          {/* Photo first on phones, beside the text on desktop */}
+          <div className="relative h-72 overflow-hidden rounded-[2rem] shadow-xl shadow-navy-900/15 sm:h-96 lg:order-2 lg:h-[32rem]">
+            <img
+              src="/hero-living.jpg"
+              alt="A bright, freshly cleaned living room with a spotless sofa"
+              width={800}
+              height={1040}
+              fetchPriority="high"
+              className="h-full w-full object-cover object-[50%_58%]"
+            />
+            <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-navy-950/80 via-navy-950/30 to-transparent" aria-hidden="true" />
+
+            <div className="absolute inset-x-4 top-4 flex items-center justify-between gap-2 sm:inset-x-6 sm:top-6">
+              <span className="inline-flex items-center gap-1.5 rounded-full bg-white/85 px-3 py-2 text-sm font-bold text-navy-900 backdrop-blur">
+                <BadgeCheck className="h-4 w-4 text-leaf-700" aria-hidden="true" />
+                Trusted service
+              </span>
+              <span className="inline-flex items-center gap-1.5 rounded-full bg-white/85 px-3 py-2 text-sm font-bold text-navy-900 backdrop-blur">
+                <Clock className="h-4 w-4 text-leaf-700" aria-hidden="true" />
+                Flexible timing
+              </span>
+            </div>
+
+            <div className="absolute inset-x-4 bottom-4 flex items-end justify-between gap-3 sm:inset-x-6 sm:bottom-6">
+              <p className="font-hand text-3xl leading-none text-white sm:text-4xl">
+                Clean Home,
+                <br />
+                Happy You!
+              </p>
+              <a
+                href={waServiceLink(FEATURED.name)}
+                target="_blank"
+                rel="noopener"
+                className="inline-flex shrink-0 items-center gap-2 rounded-full bg-white py-2 pl-2 pr-5 text-sm font-bold text-navy-950 shadow-lg active:scale-95"
+              >
+                <span className="flex h-9 w-9 items-center justify-center rounded-full bg-leaf-700 text-white">
+                  <WhatsAppIcon className="h-4.5 w-4.5" />
+                </span>
+                Book Now
+              </a>
+            </div>
+          </div>
+
+          <div className="min-w-0 lg:order-1">
             <h1>
               <span className="inline-flex items-center gap-2 rounded-full bg-white px-4 py-1.5 text-sm font-bold text-leaf-700 shadow-sm ring-1 ring-leaf-600/20">
                 <Sparkles className="h-4 w-4" aria-hidden="true" />
                 Home · Flat · Office cleaning{IN_CITY}
               </span>
-              <span className="mt-5 block text-[2.75rem] font-extrabold leading-[1.05] tracking-tight text-navy-950 sm:text-6xl">
+              <span className="mt-4 block text-[2.75rem] font-extrabold leading-[1.05] tracking-tight text-navy-950 sm:text-6xl">
                 Making every corner <em className="font-bold text-leaf-700">shine</em>
               </span>
             </h1>
 
             <p className="mt-4 max-w-xl text-lg leading-relaxed text-navy-700">Deep cleaning for homes, flats and offices in {SITE.base} and nearby {SITE.city}. Just WhatsApp us — we reply with everything you need to know.</p>
-
-            {/* Service chips — swipe sideways on a phone */}
-            <div className="no-scrollbar -mx-4 mt-6 flex snap-x gap-2.5 overflow-x-auto px-4 pb-1 sm:mx-0 sm:flex-wrap sm:px-0">
-              <Link to="/#services" className="snap-start whitespace-nowrap rounded-full bg-navy-950 px-5 py-3 text-sm font-bold text-white active:scale-95">
-                All services
-              </Link>
-              {SERVICES.map((s) => (
-                <Link
-                  key={s.slug}
-                  to={servicePath(s)}
-                  className="inline-flex snap-start items-center gap-2 whitespace-nowrap rounded-full bg-white px-4 py-3 text-sm font-bold text-navy-900 ring-1 ring-navy-900/10 hover:ring-leaf-600 active:scale-95"
-                >
-                  <ServiceIcon slug={s.slug} className="h-4 w-4 text-leaf-700" />
-                  {s.chip}
-                </Link>
-              ))}
-            </div>
 
             <div className="mt-6 hidden gap-3 sm:flex">
               <a href={WA_DEFAULT} target="_blank" rel="noopener" className="btn btn-wa">
@@ -83,43 +112,6 @@ export default function Home() {
                 Call {PHONE_DISPLAY}
               </a>
             </div>
-          </div>
-
-          {/* Featured card */}
-          <div className="relative min-h-[22rem] overflow-hidden rounded-[2rem] bg-gradient-to-br from-[#cfeedd] via-[#d6efe9] to-[#cfe6fb] p-5 sm:min-h-[26rem] sm:p-7">
-            <div className="flex items-center justify-between gap-2">
-              <span className="inline-flex items-center gap-2 rounded-full bg-white/70 px-3.5 py-2 text-sm font-bold text-navy-900 backdrop-blur">
-                <BadgeCheck className="h-4 w-4 text-leaf-700" aria-hidden="true" />
-                Trusted service
-              </span>
-              <span className="inline-flex items-center gap-2 rounded-full bg-white/70 px-3.5 py-2 text-sm font-bold text-navy-900 backdrop-blur">
-                <Clock className="h-4 w-4 text-leaf-700" aria-hidden="true" />
-                Flexible timing
-              </span>
-            </div>
-
-            <div className="relative z-10 mt-8 max-w-[56%] sm:mt-12">
-              <p className="inline-flex items-center gap-1.5 text-sm font-semibold text-navy-800">
-                <Sparkles className="h-4 w-4" aria-hidden="true" />
-                Fresh, thorough cleaning
-              </p>
-              <p className="mt-1.5 text-2xl font-extrabold leading-tight text-navy-950 sm:text-3xl">Complete Home Deep Cleaning</p>
-              <p className="mt-3 font-hand text-2xl leading-tight text-navy-800 sm:text-3xl">Clean Home, Happy You!</p>
-              <a
-                href={waServiceLink(FEATURED.name)}
-                target="_blank"
-                rel="noopener"
-                className="mt-5 inline-flex items-center gap-2 rounded-full bg-navy-950 py-2 pl-2 pr-5 text-sm font-bold text-white shadow-lg active:scale-95"
-              >
-                <span className="flex h-9 w-9 items-center justify-center rounded-full bg-leaf-600">
-                  <WhatsAppIcon className="h-4.5 w-4.5" />
-                </span>
-                Book Now
-              </a>
-            </div>
-
-
-            <Illustration slug="home-flat-office-cleaning" className="pointer-events-none absolute -bottom-4 -right-8 h-52 w-52 sm:-right-6 sm:h-80 sm:w-80" />
           </div>
         </div>
       </section>
@@ -136,6 +128,11 @@ export default function Home() {
             </li>
           ))}
         </ul>
+      </section>
+
+      {/* Festival offers — renders nothing outside the season */}
+      <section id="offers" aria-label="Festival offers" className="container-page pt-10 empty:hidden sm:pt-14">
+        <FestivalOffers showLink />
       </section>
 
       {/* Services */}
@@ -303,7 +300,7 @@ export default function Home() {
             <h2 className="h-section mt-3">Frequently asked questions</h2>
           </Reveal>
           <Reveal className="mt-7">
-            <FaqList faqs={HOME_FAQS} />
+            <FaqList faqs={FAQS} />
           </Reveal>
         </div>
       </section>

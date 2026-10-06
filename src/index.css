@@ -22,6 +22,11 @@
   --color-sun-100: #fff3cf;
 
   --color-cream: #fbf8f1;
+
+  /* Festival campaign — see lib/festival.ts */
+  --color-festive-900: #4d0f2c;
+  --color-festive-800: #6e1640;
+  --color-festive-700: #8f1d52;
 }
 
 html {
@@ -109,6 +114,21 @@ section[id] {
   transform-box: fill-box;
 }
 
+/* Scroll offer slides up into place — see components/Festival.tsx */
+@keyframes offer-pop {
+  from {
+    opacity: 0;
+    transform: translateY(1.5rem);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.offer-pop {
+  animation: offer-pop 0.45s ease-out both;
+}
+
 /* Horizontal chip rows scroll by touch; the bar itself is noise. */
 .no-scrollbar {
   scrollbar-width: none;
@@ -127,6 +147,9 @@ section[id] {
     transition: none;
   }
   .twinkle {
+    animation: none;
+  }
+  .offer-pop {
     animation: none;
   }
 }

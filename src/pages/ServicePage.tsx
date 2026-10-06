@@ -1,6 +1,7 @@
 import { Link, useParams } from 'react-router-dom'
 import { ArrowLeft, Check, Phone } from 'lucide-react'
 import { FaqList } from '../components/FaqList'
+import { FestivalStrip } from '../components/Festival'
 import { Illustration } from '../components/Illustration'
 import { QuoteForm } from '../components/QuoteForm'
 import { Seo } from '../components/Seo'
@@ -68,6 +69,10 @@ export default function ServicePage() {
           </div>
         </div>
       </section>
+
+      <div className="container-page pt-6 empty:hidden">
+        <FestivalStrip serviceSlug={service.slug} />
+      </div>
 
       <section className="container-page grid gap-10 py-10 sm:py-14 lg:grid-cols-[1.1fr_1fr] lg:gap-14">
         <div>
