@@ -28,10 +28,12 @@ export function FestivalBar() {
   if (!live || pathname === FESTIVAL_PATH) return null
   return (
     <Link to={FESTIVAL_PATH} className="block bg-festive-800 text-white hover:bg-festive-900">
-      <span className="container-page flex items-center justify-center gap-2 py-2 text-center text-sm font-bold">
+      <span className="container-page flex items-center justify-center gap-2 py-2 text-center text-[0.8rem] font-bold sm:text-sm">
         <Diya className="h-5 w-5 shrink-0" />
-        <span>
-          {FESTIVAL.name} offer: <span className="text-sun-400">{FESTIVAL.headline}</span>
+        <span className="truncate">
+          <span className="sm:hidden">Festival offer: </span>
+          <span className="hidden sm:inline">{FESTIVAL.name} offer: </span>
+          <span className="text-sun-400">{FESTIVAL.headline}</span>
         </span>
         <ArrowRight className="h-4 w-4 shrink-0" aria-hidden="true" />
       </span>
@@ -46,54 +48,56 @@ export function FestivalOffers({ area, showLink = false, headingLevel = 'h2' }: 
   if (!live) return null
   const Heading = headingLevel
   return (
-    <div className="relative overflow-hidden rounded-[2rem] bg-gradient-to-br from-festive-900 to-festive-700 px-5 py-9 text-white sm:px-10 sm:py-12">
-      <div className="pointer-events-none absolute -right-14 -top-14 h-52 w-52 rounded-full bg-sun-400/25 blur-3xl" aria-hidden="true" />
-      <div className="relative flex flex-wrap items-end justify-between gap-4">
-        <div className="max-w-2xl">
-          <p className="inline-flex items-center gap-2 text-sm font-bold uppercase tracking-[0.18em] text-sun-400">
+    <div>
+      <div className="flex items-end justify-between gap-3">
+        <div className="min-w-0">
+          <p className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-[0.16em] text-festive-700 sm:text-sm">
             <Diya className="h-5 w-5" />
             Festival offers {FESTIVAL.year}
           </p>
-          <Heading className="mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl">
+          <Heading className="mt-1.5 text-2xl font-extrabold leading-tight tracking-tight text-navy-950 sm:text-4xl">
             {FESTIVAL.name} cleaning offers{area ? ` in ${area}` : ''}
           </Heading>
-          <p className="mt-3 text-lg leading-relaxed text-white/85">
-            Get the home shining before the festival. Book by {OFFER_ENDS_LABEL} and pick the offer that fits.
-          </p>
         </div>
-        {daysLeft !== null && <p className="rounded-full bg-white/10 px-4 py-2 text-sm font-bold text-sun-400 ring-1 ring-white/15">{daysLeftLabel(daysLeft, 'Diwali')}</p>}
+        {daysLeft !== null && <p className="shrink-0 rounded-full bg-festive-800 px-3 py-1.5 text-xs font-bold text-sun-400 sm:text-sm">{daysLeftLabel(daysLeft, 'Diwali')}</p>}
       </div>
+      <p className="mt-2 text-navy-700 sm:text-lg">Book by {OFFER_ENDS_LABEL} and pick the offer that fits.</p>
 
-      {/* Swiped sideways on phones, three across from tablets up. */}
-      <Swiper as="ul" label="Offer" onDark dotsClassName="relative md:hidden" className="no-scrollbar relative -mx-5 mt-7 flex snap-x snap-mandatory scroll-px-5 gap-3 overflow-x-auto px-5 md:mx-0 md:grid md:grid-cols-3 md:gap-4 md:overflow-visible md:px-0">
+      {/* Coupons: swiped sideways on phones, three across from tablets up. */}
+      <Swiper as="ul" label="Offer" dotsClassName="md:hidden" className="no-scrollbar -mx-4 mt-5 flex snap-x snap-mandatory scroll-px-4 gap-3 overflow-x-auto px-4 pb-1 md:mx-0 md:grid md:grid-cols-3 md:gap-4 md:overflow-visible md:px-0">
         {FESTIVAL.offers.map((o) => (
-          <li key={o.id} className="flex w-[84%] shrink-0 snap-start flex-col rounded-3xl bg-white p-5 text-navy-900 md:w-auto">
-            <span className="self-start rounded-full bg-sun-400 px-3.5 py-1.5 text-sm font-extrabold tracking-wide text-navy-950">{o.badge}</span>
-            <p className="mt-3 text-xl font-extrabold leading-tight text-navy-950">{o.title}</p>
-            <p className="mt-2 flex-1 leading-relaxed text-navy-700">{o.text}</p>
-            <a href={waOfferLink(o, area)} target="_blank" rel="noopener" aria-label={`Claim ${o.title} on WhatsApp`} className="btn btn-wa mt-5 w-full">
-              <WhatsAppIcon className="h-5 w-5" />
-              Claim on WhatsApp
-            </a>
+          <li key={o.id} className="flex w-[78%] shrink-0 snap-start flex-col overflow-hidden rounded-3xl bg-white shadow-lg shadow-navy-900/5 ring-1 ring-navy-900/5 md:w-auto">
+            <div className="relative overflow-hidden bg-gradient-to-br from-festive-900 to-festive-700 px-5 py-4">
+              <p className="text-3xl font-extrabold tracking-tight text-sun-400">{o.badge}</p>
+              <Diya className="pointer-events-none absolute -bottom-2 right-3 h-16 w-16" />
+            </div>
+            <div className="flex flex-1 flex-col p-5">
+              <p className="text-lg font-extrabold leading-tight text-navy-950">{o.title}</p>
+              <p className="mt-1.5 flex-1 text-sm leading-relaxed text-navy-700">{o.text}</p>
+              <a href={waOfferLink(o, area)} target="_blank" rel="noopener" aria-label={`Claim ${o.title} on WhatsApp`} className="mt-4 inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-leaf-700 px-5 text-sm font-bold text-white hover:bg-leaf-800 active:scale-[0.98]">
+                <WhatsAppIcon className="h-4 w-4" />
+                Claim on WhatsApp
+              </a>
+            </div>
           </li>
         ))}
       </Swiper>
 
-      <a href={WA_SHARE_OFFERS} target="_blank" rel="noopener" className="relative mt-5 flex items-center gap-3 rounded-2xl bg-white/10 p-3.5 ring-1 ring-white/15 hover:bg-white/15 active:scale-[0.99]">
+      <a href={WA_SHARE_OFFERS} target="_blank" rel="noopener" className="mt-4 flex items-center gap-3 rounded-2xl bg-white p-3 ring-1 ring-navy-900/5 hover:ring-leaf-600 active:scale-[0.99]">
         <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-sun-400 text-navy-950">
           <Share2 className="h-5 w-5" aria-hidden="true" />
         </span>
         <span className="min-w-0 flex-1">
-          <span className="block font-extrabold">Share in your society WhatsApp group</span>
-          <span className="block text-sm text-white/80">Three flats booking together unlock the group offer.</span>
+          <span className="block text-sm font-extrabold text-navy-950 sm:text-base">Share in your society WhatsApp group</span>
+          <span className="block text-xs text-navy-700 sm:text-sm">Three flats booking together unlock the group offer.</span>
         </span>
-        <ArrowRight className="h-5 w-5 shrink-0 text-sun-400" aria-hidden="true" />
+        <ArrowRight className="h-5 w-5 shrink-0 text-leaf-700" aria-hidden="true" />
       </a>
 
-      <div className="relative mt-5 flex flex-wrap items-center justify-between gap-3 text-sm text-white/75">
+      <div className="mt-3 flex flex-wrap items-center justify-between gap-x-4 gap-y-2 text-xs text-navy-600 sm:text-sm">
         <p>{FESTIVAL.terms.join(' ')}</p>
         {showLink && (
-          <Link to={FESTIVAL_PATH} className="inline-flex items-center gap-1.5 font-bold text-sun-400 hover:underline">
+          <Link to={FESTIVAL_PATH} className="inline-flex items-center gap-1.5 font-bold text-festive-700 hover:underline">
             Offer details &amp; Diwali cleaning checklist
             <ArrowRight className="h-4 w-4" aria-hidden="true" />
           </Link>

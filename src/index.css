@@ -2,31 +2,39 @@
 
 @theme {
   --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  /* Headings. */
+  --font-display: "Bricolage Grotesque", "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  /* The emphasised word inside a heading. */
+  --font-accent: "Fraunces", Georgia, serif;
   --font-hand: "Caveat", "Segoe Script", cursive;
 
-  --color-navy-950: #0a1d35;
-  --color-navy-900: #0f2a4a;
-  --color-navy-800: #17385f;
-  --color-navy-700: #214a7a;
-  --color-navy-600: #3d6491;
+  /* Ink: deep indigo for text and dark panels. */
+  --color-navy-950: #0b1030;
+  --color-navy-900: #131a4a;
+  --color-navy-800: #232c66;
+  --color-navy-700: #3b4578;
+  --color-navy-600: #5b668f;
 
-  --color-leaf-800: #17603a;
-  --color-leaf-700: #1f7a45;
-  --color-leaf-600: #2fa35f;
-  --color-leaf-500: #46bd75;
-  --color-leaf-100: #dcf3e4;
-  --color-leaf-50: #eff9f2;
+  /* Primary: emerald. */
+  --color-leaf-800: #065f46;
+  --color-leaf-700: #047857;
+  --color-leaf-600: #059669;
+  --color-leaf-500: #10b981;
+  --color-leaf-100: #d1fae5;
+  --color-leaf-50: #ecfdf5;
 
-  --color-sun-500: #f5b81f;
-  --color-sun-400: #ffc93c;
-  --color-sun-100: #fff3cf;
+  /* Accent: saffron. */
+  --color-sun-500: #f59e0b;
+  --color-sun-400: #fbbf24;
+  --color-sun-100: #fef3c7;
 
-  --color-cream: #fbf8f1;
+  /* Page background. */
+  --color-cream: #f6f7fc;
 
   /* Festival campaign — see lib/festival.ts */
-  --color-festive-900: #4d0f2c;
-  --color-festive-800: #6e1640;
-  --color-festive-700: #8f1d52;
+  --color-festive-900: #4a0d3a;
+  --color-festive-800: #6d1552;
+  --color-festive-700: #a21c6b;
 }
 
 html {
@@ -58,6 +66,41 @@ section[id] {
   scroll-margin-top: 5rem;
 }
 
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  letter-spacing: -0.02em;
+}
+
+/* The emphasised word of a heading: serif italic, and a gradient where it was plain green. */
+h1 em,
+h2 em {
+  font-family: var(--font-accent);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+h1 em.text-leaf-700,
+h2 em.text-leaf-700 {
+  background: linear-gradient(100deg, var(--color-leaf-600), #0d9488 55%, #2563eb);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  /* Italic serifs lean past the box; without this the last letter is cut. */
+  padding-right: 0.12em;
+}
+
+/* Soft colour wash behind the home hero. */
+.hero-mesh {
+  background:
+    radial-gradient(60% 55% at 0% 0%, rgb(16 185 129 / 0.22), transparent 70%),
+    radial-gradient(55% 50% at 100% 0%, rgb(99 102 241 / 0.18), transparent 70%),
+    radial-gradient(50% 45% at 70% 100%, rgb(251 191 36 / 0.16), transparent 70%),
+    var(--color-cream);
+}
+
 :focus-visible {
   outline: 3px solid var(--color-sun-500);
   outline-offset: 2px;
@@ -72,10 +115,10 @@ section[id] {
     @apply inline-flex min-h-12 items-center justify-center gap-2 rounded-full px-6 py-3 text-base font-bold transition duration-200 active:scale-[0.98];
   }
   .btn-wa {
-    @apply bg-leaf-700 text-white shadow-lg shadow-leaf-700/25 hover:bg-leaf-800;
+    @apply bg-gradient-to-r from-leaf-700 to-teal-600 text-white shadow-lg shadow-leaf-700/30 hover:from-leaf-800 hover:to-teal-700;
   }
   .btn-sun {
-    @apply bg-sun-400 text-navy-950 shadow-lg shadow-sun-500/30 hover:bg-sun-500;
+    @apply bg-gradient-to-r from-sun-400 to-sun-500 text-navy-950 shadow-lg shadow-sun-500/30 hover:from-sun-500 hover:to-sun-500;
   }
   .btn-outline {
     @apply border-2 border-navy-900 text-navy-900 hover:bg-navy-900 hover:text-white;

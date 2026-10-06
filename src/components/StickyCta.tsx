@@ -22,7 +22,7 @@ export function StickyCta() {
           href={waServiceLink(service.name)}
           target="_blank"
           rel="noopener"
-          className="flex h-13 flex-1 items-center justify-center gap-2 rounded-full bg-leaf-700 text-base font-bold text-white active:scale-[0.98]"
+          className="flex h-13 flex-1 items-center justify-center gap-2 rounded-full bg-gradient-to-r from-leaf-700 to-teal-600 text-base font-bold text-white active:scale-[0.98]"
         >
           <WhatsAppIcon className="h-5 w-5" />
           Book on WhatsApp
@@ -49,7 +49,7 @@ export function StickyCta() {
         target="_blank"
         rel="noopener"
         aria-label="Chat on WhatsApp"
-        className="-mt-7 flex h-16 w-16 shrink-0 items-center justify-center rounded-full bg-leaf-700 text-white shadow-xl shadow-leaf-700/40 ring-4 ring-cream active:scale-95"
+        className="-mt-7 flex h-16 w-16 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-leaf-600 to-teal-600 text-white shadow-xl shadow-leaf-700/40 ring-4 ring-cream active:scale-95"
       >
         <WhatsAppIcon className="h-7 w-7" />
       </a>

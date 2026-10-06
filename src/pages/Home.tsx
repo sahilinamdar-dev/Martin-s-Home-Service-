@@ -11,7 +11,7 @@ import { ServiceCard } from '../components/ServiceCard'
 import { Swiper } from '../components/Swiper'
 import { WhatsAppIcon } from '../components/WhatsAppIcon'
 import { AREAS, TOP_AREAS, areaPath } from '../lib/areas'
-import { FESTIVAL, FESTIVAL_FAQS, FESTIVAL_PATH, OFFER_ENDS_LABEL } from '../lib/festival'
+import { FESTIVAL, FESTIVAL_FAQS, FESTIVAL_PATH } from '../lib/festival'
 import { businessSchema, faqSchema, websiteSchema } from '../lib/schema'
 import { HOME_FAQS, SERVICES } from '../lib/services'
 import { useFestivalLive } from '../lib/useFestival'
@@ -47,39 +47,37 @@ export default function Home() {
         jsonLd={[businessSchema(), websiteSchema(), faqSchema(FAQS)]}
       />
 
-      {/* Hero — a coloured app header: title, then banners you swipe */}
-      <section className="relative overflow-hidden rounded-b-[2.5rem] bg-gradient-to-br from-navy-950 via-navy-900 to-leaf-800 text-white">
-        <div className="pointer-events-none absolute -right-20 -top-24 h-72 w-72 rounded-full bg-leaf-500/25 blur-3xl" aria-hidden="true" />
-        <div className="pointer-events-none absolute -left-24 bottom-0 h-64 w-64 rounded-full bg-sun-400/15 blur-3xl" aria-hidden="true" />
-
-        <div className="container-page relative grid gap-6 pb-7 pt-5 sm:pt-8 lg:grid-cols-[1.05fr_1fr] lg:items-center lg:gap-14 lg:pb-16 lg:pt-14">
+      {/* Hero — light and compact, so the banners and the service grid are on the first screen of a phone */}
+      <section className="hero-mesh relative overflow-hidden">
+        <div className="container-page relative grid gap-4 pb-2 pt-4 sm:pt-8 lg:grid-cols-[1.05fr_1fr] lg:items-center lg:gap-14 lg:pb-12 lg:pt-12">
           <div className="min-w-0">
-            <Link to="/service-areas" className="inline-flex items-center gap-1.5 rounded-full bg-white/10 py-1.5 pl-2 pr-3 text-sm font-bold ring-1 ring-white/15 backdrop-blur hover:bg-white/15 active:scale-95">
-              <span className="flex h-7 w-7 items-center justify-center rounded-full bg-sun-400 text-navy-950">
-                <MapPin className="h-4 w-4" aria-hidden="true" />
+            <Link to="/service-areas" className="inline-flex items-center gap-1.5 rounded-full bg-white py-1 pl-1 pr-2.5 text-[0.8rem] font-bold text-navy-900 shadow-sm ring-1 ring-navy-900/5 active:scale-95">
+              <span className="flex h-6 w-6 items-center justify-center rounded-full bg-leaf-700 text-white">
+                <MapPin className="h-3.5 w-3.5" aria-hidden="true" />
               </span>
               {SITE.base}, {SITE.city} · {SITE.radiusKm} km around
-              <ChevronRight className="h-4 w-4 text-white/70" aria-hidden="true" />
+              <ChevronRight className="h-4 w-4 text-navy-600" aria-hidden="true" />
             </Link>
 
-            <h1 className="mt-5">
-              <span className="inline-flex items-center gap-2 text-sm font-bold uppercase tracking-[0.14em] text-sun-400">
+            <h1 className="mt-3 lg:mt-5">
+              <span className="hidden items-center gap-2 text-sm font-bold uppercase tracking-[0.14em] text-leaf-700 sm:inline-flex">
                 <Sparkles className="h-4 w-4" aria-hidden="true" />
                 Home · Flat · Office cleaning{IN_CITY}
               </span>
-              <span className="mt-2 block text-[2.6rem] font-extrabold leading-[1.05] tracking-tight sm:text-6xl">
-                Making every corner <em className="font-bold text-sun-400">shine</em>
+              <span className="block text-[1.9rem] font-extrabold leading-[1.1] tracking-tight text-navy-950 sm:mt-2 sm:text-6xl sm:leading-[1.05]">
+                Making every corner <em className="font-bold text-leaf-700">shine</em>
               </span>
+              <span className="mt-1 block text-sm font-semibold text-navy-700 sm:hidden">Home · Flat · Office cleaning{IN_CITY}</span>
             </h1>
 
-            <p className="mt-4 max-w-xl text-lg leading-relaxed text-white/80">Deep cleaning for homes, flats and offices in {SITE.base} and nearby {SITE.city}. Just WhatsApp us — we reply with everything you need to know.</p>
+            <p className="mt-4 hidden max-w-xl text-lg leading-relaxed text-navy-700 sm:block">Deep cleaning for homes, flats and offices in {SITE.base} and nearby {SITE.city}. Just WhatsApp us — we reply with everything you need to know.</p>
 
             <div className="mt-6 hidden gap-3 sm:flex">
-              <a href={WA_DEFAULT} target="_blank" rel="noopener" className="btn btn-sun">
+              <a href={WA_DEFAULT} target="_blank" rel="noopener" className="btn btn-wa">
                 <WhatsAppIcon className="h-5 w-5" />
                 Book on WhatsApp
               </a>
-              <a href={TEL_LINK} className="btn btn-ghost-light">
+              <a href={TEL_LINK} className="btn btn-outline">
                 <Phone className="h-5 w-5" aria-hidden="true" />
                 Call {PHONE_DISPLAY}
               </a>
@@ -88,8 +86,8 @@ export default function Home() {
 
           {/* Banners: swiped on phones; on desktop only the photo shows, beside the text. */}
           <div className="min-w-0">
-            <Swiper label="Banner" onDark dotsClassName="lg:hidden" className="no-scrollbar -mx-4 flex snap-x snap-mandatory scroll-px-4 gap-3 overflow-x-auto px-4 sm:-mx-6 sm:scroll-px-6 sm:px-6 lg:mx-0 lg:block lg:overflow-visible lg:px-0">
-              <div className="relative h-64 w-[88%] shrink-0 snap-start overflow-hidden rounded-[2rem] shadow-xl shadow-navy-950/40 sm:h-80 lg:h-[30rem] lg:w-full">
+            <Swiper label="Banner" dotsClassName="lg:hidden" className="no-scrollbar -mx-4 flex snap-x snap-mandatory scroll-px-4 gap-3 overflow-x-auto px-4 sm:-mx-6 sm:scroll-px-6 sm:px-6 lg:mx-0 lg:block lg:overflow-visible lg:px-0">
+              <div className="relative h-48 w-[88%] shrink-0 snap-start overflow-hidden rounded-3xl sm:h-72 lg:h-[30rem] lg:w-full lg:rounded-[2rem] lg:shadow-xl lg:shadow-navy-900/15">
                 <img
                   src="/hero-living.jpg"
                   alt="A bright, freshly cleaned living room with a spotless sofa"
@@ -99,14 +97,12 @@ export default function Home() {
                   className="h-full w-full object-cover object-[50%_58%]"
                 />
                 <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-navy-950/85 via-navy-950/30 to-transparent" aria-hidden="true" />
-                <div className="absolute inset-x-4 top-4 flex items-center justify-between gap-2 sm:inset-x-6 sm:top-6">
-                  <span className="inline-flex items-center gap-1.5 rounded-full bg-white/85 px-3 py-2 text-sm font-bold text-navy-900 backdrop-blur">
-                    <BadgeCheck className="h-4 w-4 text-leaf-700" aria-hidden="true" />
-                    Trusted service
-                  </span>
-                </div>
+                <span className="absolute left-3 top-3 inline-flex items-center gap-1.5 rounded-full bg-white/90 px-2.5 py-1.5 text-xs font-bold text-navy-900 backdrop-blur sm:left-5 sm:top-5 sm:text-sm">
+                  <BadgeCheck className="h-4 w-4 text-leaf-700" aria-hidden="true" />
+                  Trusted service
+                </span>
                 <div className="absolute inset-x-4 bottom-4 flex items-end justify-between gap-3 sm:inset-x-6 sm:bottom-6">
-                  <p className="font-hand text-3xl leading-none text-white sm:text-4xl">
+                  <p className="font-hand text-[1.7rem] leading-none text-white sm:text-4xl">
                     Clean Home,
                     <br />
                     Happy You!
@@ -115,10 +111,10 @@ export default function Home() {
                     href={waServiceLink(FEATURED.name)}
                     target="_blank"
                     rel="noopener"
-                    className="inline-flex shrink-0 items-center gap-2 rounded-full bg-white py-2 pl-2 pr-5 text-sm font-bold text-navy-950 shadow-lg active:scale-95"
+                    className="inline-flex shrink-0 items-center gap-2 rounded-full bg-white py-1.5 pl-1.5 pr-4 text-sm font-bold text-navy-950 shadow-lg active:scale-95"
                   >
-                    <span className="flex h-9 w-9 items-center justify-center rounded-full bg-leaf-700 text-white">
-                      <WhatsAppIcon className="h-4.5 w-4.5" />
+                    <span className="flex h-8 w-8 items-center justify-center rounded-full bg-leaf-700 text-white">
+                      <WhatsAppIcon className="h-4 w-4" />
                     </span>
                     Book Now
                   </a>
@@ -126,31 +122,30 @@ export default function Home() {
               </div>
 
               {festivalLive && (
-                <Link to={FESTIVAL_PATH} className="relative flex h-64 w-[88%] shrink-0 snap-start flex-col justify-between overflow-hidden rounded-[2rem] bg-gradient-to-br from-festive-900 to-festive-700 p-6 shadow-xl shadow-navy-950/40 active:scale-[0.99] sm:h-80 lg:hidden">
+                <Link to={FESTIVAL_PATH} className="relative flex h-48 w-[88%] shrink-0 snap-start flex-col justify-between overflow-hidden rounded-3xl bg-gradient-to-br from-festive-900 to-festive-700 p-5 text-white active:scale-[0.99] sm:h-72 lg:hidden">
                   <div className="pointer-events-none absolute -right-10 -top-10 h-40 w-40 rounded-full bg-sun-400/30 blur-2xl" aria-hidden="true" />
                   <div className="relative">
-                    <p className="text-xs font-bold uppercase tracking-[0.16em] text-sun-400">{FESTIVAL.name} offer</p>
-                    <p className="mt-2 max-w-[75%] text-3xl font-extrabold leading-[1.05] tracking-tight">{FESTIVAL.headline}</p>
-                    <p className="mt-2 text-sm text-white/80">Book by {OFFER_ENDS_LABEL}</p>
+                    <p className="text-xs font-bold uppercase tracking-[0.14em] text-sun-400">{FESTIVAL.name} offer</p>
+                    <p className="mt-1.5 max-w-[70%] text-2xl font-extrabold leading-[1.1] tracking-tight">{FESTIVAL.headline}</p>
                   </div>
-                  <span className="relative inline-flex items-center gap-1.5 self-start rounded-full bg-sun-400 px-5 py-2.5 text-sm font-extrabold text-navy-950">
-                    See all offers
+                  <span className="relative inline-flex items-center gap-1.5 self-start rounded-full bg-sun-400 px-4 py-2 text-sm font-extrabold text-navy-950">
+                    See offers
                     <ArrowRight className="h-4 w-4" aria-hidden="true" />
                   </span>
-                  <Diya className="pointer-events-none absolute -bottom-2 right-2 h-32 w-32" />
+                  <Diya className="pointer-events-none absolute -bottom-1 right-3 h-24 w-24" />
                 </Link>
               )}
 
-              <a href={WA_DEFAULT} target="_blank" rel="noopener" className="relative flex h-64 w-[88%] shrink-0 snap-start flex-col justify-between overflow-hidden rounded-[2rem] bg-[#ffe7a8] p-6 text-navy-950 shadow-xl shadow-navy-950/40 active:scale-[0.99] sm:h-80 lg:hidden">
-                <div className="relative z-10 max-w-[68%]">
-                  <p className="font-hand text-4xl leading-none">Send photos, get the price</p>
-                  <p className="mt-3 text-sm font-semibold leading-snug text-navy-800">We tell you the charges on WhatsApp before you book. Asking is free.</p>
+              <a href={WA_DEFAULT} target="_blank" rel="noopener" className="relative flex h-48 w-[88%] shrink-0 snap-start flex-col justify-between overflow-hidden rounded-3xl bg-[#ffe7a8] p-5 text-navy-950 active:scale-[0.99] sm:h-72 lg:hidden">
+                <div className="relative z-10 max-w-[64%]">
+                  <p className="font-hand text-[1.9rem] leading-[0.95]">Send photos, get the price</p>
+                  <p className="mt-2 text-xs font-semibold leading-snug text-navy-800">Charges told on WhatsApp before you book.</p>
                 </div>
-                <span className="relative z-10 inline-flex items-center gap-2 self-start rounded-full bg-navy-950 px-5 py-2.5 text-sm font-extrabold text-white">
+                <span className="relative z-10 inline-flex items-center gap-2 self-start rounded-full bg-navy-950 px-4 py-2 text-sm font-extrabold text-white">
                   <Camera className="h-4 w-4" aria-hidden="true" />
-                  Send on WhatsApp
+                  Send photos
                 </span>
-                <Illustration slug="complete-deep-cleaning" className="pointer-events-none absolute -bottom-3 -right-4 h-40 w-40" />
+                <Illustration slug="complete-deep-cleaning" className="pointer-events-none absolute -bottom-3 -right-3 h-32 w-32" />
               </a>
             </Swiper>
           </div>
@@ -158,13 +153,13 @@ export default function Home() {
       </section>
 
       {/* Quick access, like the home screen of an app */}
-      <section className="container-page pt-7 sm:pt-10">
-        <h2 className="mb-4 text-lg font-extrabold text-navy-950">What do you need cleaned?</h2>
+      <section className="container-page pt-5 sm:pt-10">
+        <h2 className="mb-3 text-lg font-extrabold text-navy-950">What do you need cleaned?</h2>
         <QuickServices />
       </section>
 
       {/* Trust chips — one swipeable line on phones, four tiles on desktop */}
-      <section aria-label="Why customers choose us" className="container-page mt-7">
+      <section aria-label="Why customers choose us" className="container-page mt-6">
         <ul className="no-scrollbar -mx-4 flex gap-2.5 overflow-x-auto px-4 sm:mx-0 sm:px-0 lg:grid lg:grid-cols-4 lg:gap-3">
           {TRUST.map((t) => (
             <li key={t.title} className="flex shrink-0 items-center gap-2.5 rounded-full bg-white py-2 pl-2 pr-4 ring-1 ring-navy-900/5 lg:rounded-2xl lg:p-3.5">
