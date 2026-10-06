@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import { ArrowRight, BadgeCheck, CalendarCheck, Camera, Check, ChevronRight, Clock, HandCoins, MapPin, MessageCircle, Phone, ShieldCheck, Smile, Sparkles } from 'lucide-react'
 import { FaqList } from '../components/FaqList'
-import { Diya, FestivalOffers } from '../components/Festival'
+import { FestivalOffers } from '../components/Festival'
 import { Illustration } from '../components/Illustration'
 import { QuickServices } from '../components/QuickServices'
 import { QuoteForm } from '../components/QuoteForm'
@@ -33,6 +33,15 @@ const STEPS = [
 const WHY = ['Reliable & trustworthy', 'Affordable rates', 'Professional & friendly staff', 'Flexible timing', '100% satisfaction']
 
 const FEATURED = SERVICES[SERVICES.length - 1]
+
+/** Hero banner: every slide is the same rounded photo card. */
+const SLIDE = 'relative block h-48 w-[88%] shrink-0 snap-start overflow-hidden rounded-3xl sm:h-72 lg:h-[30rem] lg:w-full lg:rounded-[2rem]'
+const SLIDE_CTA = 'inline-flex shrink-0 items-center gap-2 rounded-full bg-white text-sm font-bold text-navy-950 shadow-lg'
+
+const PHOTO_SLIDES = [
+  { slug: 'kitchen-deep-cleaning', src: '/banners/kitchen.jpg', alt: 'A spotless modern kitchen with a shining stove and marble counter', title: 'Kitchen deep cleaning', text: 'Stove, chimney, cabinets and tiles' },
+  { slug: 'bathroom-deep-cleaning', src: '/banners/bathroom.jpg', alt: 'A clean, bright bathroom with a white bathtub and basin', title: 'Bathroom deep cleaning', text: 'Tiles, fittings and floor, sparkling' },
+]
 
 const FAQS = FESTIVAL.enabled ? [FESTIVAL_FAQS[0], ...HOME_FAQS] : HOME_FAQS
 
@@ -84,10 +93,10 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Banners: swiped on phones; on desktop only the photo shows, beside the text. */}
+          {/* Banners: photos that slide by themselves; swipe or tap a dot to move them. */}
           <div className="min-w-0">
-            <Swiper label="Banner" dotsClassName="lg:hidden" className="no-scrollbar -mx-4 flex snap-x snap-mandatory scroll-px-4 gap-3 overflow-x-auto px-4 sm:-mx-6 sm:scroll-px-6 sm:px-6 lg:mx-0 lg:block lg:overflow-visible lg:px-0">
-              <div className="relative h-48 w-[88%] shrink-0 snap-start overflow-hidden rounded-3xl sm:h-72 lg:h-[30rem] lg:w-full lg:rounded-[2rem] lg:shadow-xl lg:shadow-navy-900/15">
+            <Swiper label="Banner" autoPlay={4500} className="no-scrollbar -mx-4 flex snap-x snap-mandatory scroll-px-4 gap-3 overflow-x-auto px-4 sm:-mx-6 sm:scroll-px-6 sm:px-6 lg:mx-0 lg:scroll-px-0 lg:gap-4 lg:rounded-[2rem] lg:px-0">
+              <div className={SLIDE}>
                 <img
                   src="/hero-living.jpg"
                   alt="A bright, freshly cleaned living room with a spotless sofa"
@@ -107,12 +116,7 @@ export default function Home() {
                     <br />
                     Happy You!
                   </p>
-                  <a
-                    href={waServiceLink(FEATURED.name)}
-                    target="_blank"
-                    rel="noopener"
-                    className="inline-flex shrink-0 items-center gap-2 rounded-full bg-white py-1.5 pl-1.5 pr-4 text-sm font-bold text-navy-950 shadow-lg active:scale-95"
-                  >
+                  <a href={waServiceLink(FEATURED.name)} target="_blank" rel="noopener" className={`${SLIDE_CTA} py-1.5 pl-1.5 pr-4 active:scale-95`}>
                     <span className="flex h-8 w-8 items-center justify-center rounded-full bg-leaf-700 text-white">
                       <WhatsAppIcon className="h-4 w-4" />
                     </span>
@@ -122,31 +126,38 @@ export default function Home() {
               </div>
 
               {festivalLive && (
-                <Link to={FESTIVAL_PATH} className="relative flex h-48 w-[88%] shrink-0 snap-start flex-col justify-between overflow-hidden rounded-3xl bg-gradient-to-br from-festive-900 to-festive-700 p-5 text-white active:scale-[0.99] sm:h-72 lg:hidden">
-                  <div className="pointer-events-none absolute -right-10 -top-10 h-40 w-40 rounded-full bg-sun-400/30 blur-2xl" aria-hidden="true" />
-                  <div className="relative">
-                    <p className="text-xs font-bold uppercase tracking-[0.14em] text-sun-400">{FESTIVAL.name} offer</p>
-                    <p className="mt-1.5 max-w-[70%] text-2xl font-extrabold leading-[1.1] tracking-tight">{FESTIVAL.headline}</p>
+                <Link to={FESTIVAL_PATH} className={SLIDE}>
+                  <img src="/banners/diwali-diyas.jpg" alt="Lit Diwali diyas on a decorated tray with flower petals" width={1200} height={800} loading="lazy" className="h-full w-full object-cover" />
+                  <div className="absolute inset-0 bg-gradient-to-r from-festive-900/95 via-festive-900/60 to-transparent" aria-hidden="true" />
+                  <div className="absolute inset-0 flex flex-col justify-between p-5 text-white sm:p-7">
+                    <div>
+                      <p className="text-xs font-bold uppercase tracking-[0.14em] text-sun-400 sm:text-sm">{FESTIVAL.name} offer</p>
+                      <p className="mt-1.5 max-w-[70%] font-display text-2xl font-extrabold leading-[1.1] tracking-tight sm:text-4xl">{FESTIVAL.headline}</p>
+                    </div>
+                    <span className="inline-flex items-center gap-1.5 self-start rounded-full bg-sun-400 px-4 py-2 text-sm font-extrabold text-navy-950">
+                      See offers
+                      <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                    </span>
                   </div>
-                  <span className="relative inline-flex items-center gap-1.5 self-start rounded-full bg-sun-400 px-4 py-2 text-sm font-extrabold text-navy-950">
-                    See offers
-                    <ArrowRight className="h-4 w-4" aria-hidden="true" />
-                  </span>
-                  <Diya className="pointer-events-none absolute -bottom-1 right-3 h-24 w-24" />
                 </Link>
               )}
 
-              <a href={WA_DEFAULT} target="_blank" rel="noopener" className="relative flex h-48 w-[88%] shrink-0 snap-start flex-col justify-between overflow-hidden rounded-3xl bg-[#ffe7a8] p-5 text-navy-950 active:scale-[0.99] sm:h-72 lg:hidden">
-                <div className="relative z-10 max-w-[64%]">
-                  <p className="font-hand text-[1.9rem] leading-[0.95]">Send photos, get the price</p>
-                  <p className="mt-2 text-xs font-semibold leading-snug text-navy-800">Charges told on WhatsApp before you book.</p>
-                </div>
-                <span className="relative z-10 inline-flex items-center gap-2 self-start rounded-full bg-navy-950 px-4 py-2 text-sm font-extrabold text-white">
-                  <Camera className="h-4 w-4" aria-hidden="true" />
-                  Send photos
-                </span>
-                <Illustration slug="complete-deep-cleaning" className="pointer-events-none absolute -bottom-3 -right-3 h-32 w-32" />
-              </a>
+              {PHOTO_SLIDES.map((p) => (
+                <Link key={p.slug} to={`/services/${p.slug}`} className={SLIDE}>
+                  <img src={p.src} alt={p.alt} width={1200} height={800} loading="lazy" className="h-full w-full object-cover" />
+                  <div className="absolute inset-x-0 bottom-0 h-3/4 bg-gradient-to-t from-navy-950/90 via-navy-950/35 to-transparent" aria-hidden="true" />
+                  <div className="absolute inset-x-4 bottom-4 flex items-end justify-between gap-3 text-white sm:inset-x-6 sm:bottom-6">
+                    <div className="min-w-0">
+                      <p className="font-display text-xl font-extrabold leading-tight sm:text-3xl">{p.title}</p>
+                      <p className="mt-0.5 text-xs font-semibold text-white/85 sm:text-base">{p.text}</p>
+                    </div>
+                    <span className={`${SLIDE_CTA} px-4 py-2`}>
+                      View
+                      <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                    </span>
+                  </div>
+                </Link>
+              ))}
             </Swiper>
           </div>
         </div>
