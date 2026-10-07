@@ -19,7 +19,8 @@ export function businessSchema() {
     telephone: PHONE_E164,
     foundingDate: String(SITE.foundedYear),
     image: `${SITE.url}/og.png`,
-    address: { '@type': 'PostalAddress', addressLocality: SITE.city, addressRegion: SITE.state, addressCountry: 'IN' },
+    address: { '@type': 'PostalAddress', addressLocality: SITE.city, addressRegion: SITE.state, postalCode: SITE.postalCode, addressCountry: 'IN' },
+    ...(SITE.googleProfile ? { sameAs: [SITE.googleProfile] } : {}),
     areaServed: [
       {
         '@type': 'GeoCircle',
