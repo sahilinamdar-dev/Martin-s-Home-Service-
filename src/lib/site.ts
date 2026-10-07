@@ -21,7 +21,7 @@ export const SITE = {
   openingHours: '',
   /** Human version of the above, e.g. 'Every day, 8 am – 8 pm'. */
   hoursLabel: '',
-  url: ((import.meta.env.VITE_SITE_URL as string | undefined) ?? 'https://martins-home-service.vercel.app').replace(/\/$/, ''),
+  url: ((import.meta.env.VITE_SITE_URL as string | undefined) ?? 'https://martinshomeservies.in').replace(/\/$/, ''),
 }
 
 /** " in Pune" once the city is known, otherwise nothing. */
