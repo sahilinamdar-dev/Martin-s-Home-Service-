@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 import { Phone } from 'lucide-react'
 import { FESTIVAL, FESTIVAL_PATH } from '../lib/festival'
 import { SERVICES, servicePath } from '../lib/services'
-import { PHONE_DISPLAY, SITE, TEL_LINK, WA_DEFAULT } from '../lib/site'
+import { ALT_PHONE_DISPLAY, ALT_TEL_LINK, PHONE_DISPLAY, SITE, TEL_LINK, WA_DEFAULT } from '../lib/site'
 import { Logo } from './Logo'
 import { WhatsAppIcon } from './WhatsAppIcon'
 
@@ -41,6 +41,14 @@ export function SiteFooter() {
                 {PHONE_DISPLAY}
               </a>
             </li>
+            {ALT_PHONE_DISPLAY && (
+              <li>
+                <a href={ALT_TEL_LINK} className="inline-flex items-center gap-2.5 text-lg font-bold text-white hover:text-sun-400">
+                  <Phone className="h-5 w-5" aria-hidden="true" />
+                  {ALT_PHONE_DISPLAY}
+                </a>
+              </li>
+            )}
             <li>
               <a href={WA_DEFAULT} target="_blank" rel="noopener" className="inline-flex items-center gap-2.5 hover:text-white">
                 <WhatsAppIcon className="h-5 w-5" />

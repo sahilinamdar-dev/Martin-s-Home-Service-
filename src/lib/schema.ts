@@ -1,4 +1,4 @@
-import { SITE, PHONE_E164, absoluteUrl } from './site'
+import { SITE, PHONE_E164, ALT_PHONE_E164, absoluteUrl } from './site'
 import { AREAS, areaPath, type Area } from './areas'
 import { FESTIVAL, FESTIVAL_PATH } from './festival'
 import { SERVICES, servicePath, type Faq, type Service } from './services'
@@ -28,11 +28,11 @@ export function businessSchema() {
       ...AREAS.map((a) => ({ '@type': 'Place', name: `${a.name}, ${SITE.city}` })),
     ],
     ...(SITE.openingHours ? { openingHours: SITE.openingHours } : {}),
-    contactPoint: {
+    contactPoint: [PHONE_E164, ALT_PHONE_E164].filter(Boolean).map((telephone) => ({
       '@type': 'ContactPoint',
-      telephone: PHONE_E164,
+      telephone,
       contactType: 'customer service',
-    },
+    })),
     hasOfferCatalog: {
       '@type': 'OfferCatalog',
       name: 'Cleaning services',

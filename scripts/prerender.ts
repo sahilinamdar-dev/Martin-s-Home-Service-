@@ -11,7 +11,7 @@ const env = loadEnv('production', root, '')
 // all transform exactly like the real build.
 const viteServer = await createServer({ root, server: { middlewareMode: true }, appType: 'custom' })
 const { render } = (await viteServer.ssrLoadModule('/src/entry-server.tsx')) as typeof import('../src/entry-server')
-const { SITE, PHONE_DISPLAY, absoluteUrl } = (await viteServer.ssrLoadModule('/src/lib/site.ts')) as typeof import('../src/lib/site')
+const { SITE, PHONE_DISPLAY, ALT_PHONE_DISPLAY, absoluteUrl } = (await viteServer.ssrLoadModule('/src/lib/site.ts')) as typeof import('../src/lib/site')
 const { SERVICES, HOME_FAQS, servicePath } = (await viteServer.ssrLoadModule('/src/lib/services.ts')) as typeof import('../src/lib/services')
 const { FESTIVAL, FESTIVAL_PATH, FESTIVAL_FAQS, OFFER_ENDS_LABEL } = (await viteServer.ssrLoadModule('/src/lib/festival.ts')) as typeof import('../src/lib/festival')
 const { AREAS, areaPath } = (await viteServer.ssrLoadModule('/src/lib/areas.ts')) as typeof import('../src/lib/areas')
@@ -77,6 +77,7 @@ function writeSeoFiles(paths: string[]) {
     `> ${SITE.name} is a cleaning service for homes, flats and offices. ${SITE.tagline}.`,
     '',
     `- Phone (calls): ${PHONE_DISPLAY} (+${SITE.countryCode} ${SITE.phone})`,
+    ...(SITE.altPhone ? [`- Phone (calls, second number): ${ALT_PHONE_DISPLAY} (+${SITE.countryCode} ${SITE.altPhone})`] : []),
     `- WhatsApp: +${SITE.countryCode} ${SITE.whatsapp}`,
     `- ${where}`,
     '- Charges: depend on the work; told on WhatsApp or by phone before booking',

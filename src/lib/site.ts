@@ -8,6 +8,8 @@ export const SITE = {
   phone: '9604557901',
   /** 10-digit number for WhatsApp. Can be the same as `phone`. */
   whatsapp: '7875871443',
+  /** Second 10-digit number that also takes calls. Leave empty if there is none. */
+  altPhone: '7875871443',
   countryCode: '91',
   city: 'Pune',
   state: 'Maharashtra',
@@ -30,6 +32,10 @@ export const IN_CITY = SITE.city ? ` in ${SITE.city}` : ''
 export const PHONE_DISPLAY = `${SITE.phone.slice(0, 5)} ${SITE.phone.slice(5)}`
 export const PHONE_E164 = `+${SITE.countryCode}${SITE.phone}`
 export const TEL_LINK = `tel:${PHONE_E164}`
+
+export const ALT_PHONE_DISPLAY = SITE.altPhone ? `${SITE.altPhone.slice(0, 5)} ${SITE.altPhone.slice(5)}` : ''
+export const ALT_PHONE_E164 = SITE.altPhone ? `+${SITE.countryCode}${SITE.altPhone}` : ''
+export const ALT_TEL_LINK = `tel:${ALT_PHONE_E164}`
 
 /** "WhatsApp or call 96045 57901" — or both numbers, when they differ. */
 export const REACH_US = SITE.whatsapp === SITE.phone ? `WhatsApp or call ${SITE.phone}` : `WhatsApp ${SITE.whatsapp} or call ${SITE.phone}`
