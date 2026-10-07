@@ -81,6 +81,7 @@ function writeSeoFiles(paths: string[]) {
     `- WhatsApp: +${SITE.countryCode} ${SITE.whatsapp}`,
     `- ${where}`,
     '- Charges: depend on the work; told on WhatsApp or by phone before booking',
+    `- In business since ${SITE.foundedYear} (more than 15 years of cleaning experience)`,
     ...(SITE.hoursLabel ? [`- Hours: ${SITE.hoursLabel}`] : []),
     '',
     ...(FESTIVAL.enabled

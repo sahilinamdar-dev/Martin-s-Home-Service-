@@ -34,7 +34,7 @@ export default function About() {
           <p className="eyebrow">About us</p>
           <h1 className="mt-3 text-4xl font-extrabold leading-tight tracking-tight text-navy-900 sm:text-5xl">{SITE.tagline}</h1>
           <p className="mt-6 text-lg leading-relaxed text-navy-700">
-            {SITE.name} is a home cleaning service{IN_CITY}. We clean homes, flats and offices — from a single bathroom or kitchen to a complete deep cleaning of the whole place.
+            {SITE.name} is a home cleaning service{IN_CITY}. We clean homes, flats and offices — from a single bathroom or kitchen to a complete deep cleaning of the whole place. We have been doing this since {SITE.foundedYear} — more than 15 years of experience.
           </p>
           <p className="mt-4 text-lg leading-relaxed text-navy-700">
             Our belief is simple: a cleaner home means a healthier and happier you. So we do not rush, we do not skip corners, and we tell you the price before we start.

@@ -11,6 +11,8 @@ export const SITE = {
   /** Second 10-digit number that also takes calls. Leave empty if there is none. */
   altPhone: '7875871443',
   countryCode: '91',
+  /** Year the business started taking jobs. */
+  foundedYear: 2011,
   city: 'Pune',
   state: 'Maharashtra',
   /** Locality the business works out of. The served localities are in areas.ts. */

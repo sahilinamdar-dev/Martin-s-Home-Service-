@@ -17,6 +17,7 @@ export function businessSchema() {
     description: 'Home, flat and office cleaning, bathroom and kitchen deep cleaning, sofa and floor cleaning, dust removal and complete deep cleaning.',
     url: `${SITE.url}/`,
     telephone: PHONE_E164,
+    foundingDate: String(SITE.foundedYear),
     image: `${SITE.url}/og.png`,
     address: { '@type': 'PostalAddress', addressLocality: SITE.city, addressRegion: SITE.state, addressCountry: 'IN' },
     areaServed: [
