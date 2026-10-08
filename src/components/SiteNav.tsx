@@ -23,7 +23,7 @@ export function SiteNav() {
   return (
     <header className="sticky top-0 z-40 border-b border-navy-900/5 bg-cream/90 backdrop-blur">
       <div className="container-page flex h-16 items-center justify-between gap-4">
-        <Link to="/" aria-label="Martin's Home Service — home">
+        <Link to="/">
           <Logo />
         </Link>
 

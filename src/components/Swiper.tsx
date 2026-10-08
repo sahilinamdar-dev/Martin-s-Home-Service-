@@ -26,19 +26,29 @@ export function Swiper({ children, className, as: Row = 'div', dotsClassName = '
   useEffect(() => {
     const row = ref.current
     if (!row) return
-    function onScroll() {
+    let frame = 0
+    function measure() {
+      frame = 0
       if (!row) return
       const slides = Array.from(row.children) as HTMLElement[]
       const first = slides[0]?.offsetLeft ?? 0
+      const left = row.scrollLeft
       let nearest = 0
       slides.forEach((slide, i) => {
-        if (Math.abs(slide.offsetLeft - first - row.scrollLeft) < Math.abs(slides[nearest].offsetLeft - first - row.scrollLeft)) nearest = i
+        if (Math.abs(slide.offsetLeft - first - left) < Math.abs(slides[nearest].offsetLeft - first - left)) nearest = i
       })
       activeRef.current = nearest
       setActive(nearest)
     }
+    // A smooth scroll fires many events; read the layout once per frame.
+    function onScroll() {
+      if (!frame) frame = window.requestAnimationFrame(measure)
+    }
     row.addEventListener('scroll', onScroll, { passive: true })
-    return () => row.removeEventListener('scroll', onScroll)
+    return () => {
+      row.removeEventListener('scroll', onScroll)
+      window.cancelAnimationFrame(frame)
+    }
   }, [])
 
   function goTo(i: number) {
@@ -86,7 +96,7 @@ export function Swiper({ children, className, as: Row = 'div', dotsClassName = '
         {children}
       </Row>
       {count > 1 && (
-        <div className={`mt-4 flex items-center justify-center gap-1.5 ${dotsClassName}`}>
+        <div className={`mt-2 flex items-center justify-center ${dotsClassName}`}>
           {Array.from({ length: count }, (_, i) => (
             <button
               key={i}
@@ -94,8 +104,11 @@ export function Swiper({ children, className, as: Row = 'div', dotsClassName = '
               aria-label={`${label}: ${i + 1} of ${count}`}
               aria-current={i === active}
               onClick={() => goTo(i)}
-              className={`h-2 rounded-full transition-all duration-300 ${i === active ? `w-6 ${onDark ? 'bg-sun-400' : 'bg-navy-900'}` : `w-2 ${onDark ? 'bg-white/35' : 'bg-navy-900/20'}`}`}
-            />
+              className="flex h-6 w-6 items-center justify-center"
+            >
+              {/* The button is a fixed 24px slot, so the growing dot never pushes its neighbours. */}
+              <span className={`h-2 rounded-full transition-all duration-300 ${i === active ? `w-5 ${onDark ? 'bg-sun-400' : 'bg-navy-900'}` : `w-2 ${onDark ? 'bg-white/35' : 'bg-navy-900/20'}`}`} />
+            </button>
           ))}
         </div>
       )}

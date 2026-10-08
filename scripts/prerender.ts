@@ -1,4 +1,4 @@
-import { readFileSync, writeFileSync, mkdirSync } from 'node:fs'
+import { readFileSync, writeFileSync, mkdirSync, readdirSync } from 'node:fs'
 import { dirname, join } from 'node:path'
 import { createServer, loadEnv } from 'vite'
 
@@ -23,6 +23,29 @@ let template = readFileSync(join(distDir, 'index.html'), 'utf-8')
 // Google Search Console ownership tag, once the code is known.
 if (env.VITE_GSC_VERIFICATION) {
   template = template.replace('</head>', `<meta name="google-site-verification" content="${env.VITE_GSC_VERIFICATION}" />\n</head>`)
+}
+
+// Fonts. A heading font that arrives after the first paint re-wraps the
+// headline and pushes the whole page down. So the fonts used at the top of
+// every page are fetched straight away, and the two heading fonts are never
+// swapped in late: on a very slow first visit the headline stays in the
+// fallback font instead of jumping.
+const assetsDir = join(distDir, 'assets')
+const assetFiles = readdirSync(assetsDir)
+const fontPreloads = ['bricolage-grotesque-latin-wght-normal', 'fraunces-latin-wght-italic', 'plus-jakarta-sans-latin-wght-normal']
+  .map((name) => assetFiles.find((f) => f.startsWith(name) && f.endsWith('.woff2')))
+  .filter((f) => f !== undefined)
+  .map((f) => `<link rel="preload" as="font" type="font/woff2" href="/assets/${f}" crossorigin />`)
+  .join('\n')
+template = template.replace('</head>', `${fontPreloads}\n</head>`)
+
+for (const file of assetFiles.filter((f) => f.endsWith('.css'))) {
+  const path = join(assetsDir, file)
+  const css = readFileSync(path, 'utf-8')
+  writeFileSync(
+    path,
+    css.replace(/@font-face\s*\{[^}]*\}/g, (block) => (/Bricolage Grotesque Variable|Fraunces Variable/.test(block) ? block.replace(/font-display:\s*swap/, 'font-display:optional') : block)),
+  )
 }
 
 function stripStaticHead(html: string): string {

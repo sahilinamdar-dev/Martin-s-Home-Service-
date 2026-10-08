@@ -85,7 +85,11 @@ export function areaPath(a: Area): string {
 
 /** Other localities to link from an area page: its own zone first, then the ones around the base. */
 export function nearbyAreas(area: Area, limit = 8): Area[] {
-  const sameZone = AREAS.filter((a) => a.zone === area.zone && a.slug !== area.slug)
+  // Start from the area's own place in its zone and wrap round, so the last
+  // areas of a long zone are linked as often as the first.
+  const zone = AREAS.filter((a) => a.zone === area.zone)
+  const at = zone.findIndex((a) => a.slug === area.slug)
+  const sameZone = [...zone.slice(at + 1), ...zone.slice(0, at)]
   const aroundBase = AREAS.filter((a) => a.zone === 'Around Yerawada' && a.zone !== area.zone)
   return [...sameZone, ...aroundBase].slice(0, limit)
 }

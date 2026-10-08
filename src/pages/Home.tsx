@@ -42,9 +42,16 @@ const FEATURED = SERVICES[SERVICES.length - 1]
 const SLIDE = 'relative block h-48 w-[88%] shrink-0 snap-start overflow-hidden rounded-3xl sm:h-72 lg:h-[30rem] lg:w-full lg:rounded-[2rem]'
 const SLIDE_CTA = 'inline-flex shrink-0 items-center gap-2 rounded-full bg-white text-sm font-bold text-navy-950 shadow-lg'
 
+const BANNER_SIZES = '(min-width: 1024px) 50vw, 88vw'
+
+/** WebP copies of a banner at three widths; the browser picks the smallest that fits. */
+function bannerSrcSet(base: string): string {
+  return [480, 800, 1200].map((w) => `${base}-${w}.webp ${w}w`).join(', ')
+}
+
 const PHOTO_SLIDES = [
-  { slug: 'kitchen-deep-cleaning', src: '/banners/kitchen.jpg', alt: 'A spotless modern kitchen with a shining stove and marble counter', title: 'Kitchen deep cleaning', text: 'Stove, chimney, cabinets and tiles' },
-  { slug: 'bathroom-deep-cleaning', src: '/banners/bathroom.jpg', alt: 'A clean, bright bathroom with a white bathtub and basin', title: 'Bathroom deep cleaning', text: 'Tiles, fittings and floor, sparkling' },
+  { slug: 'kitchen-deep-cleaning', src: '/banners/kitchen', alt: 'A spotless modern kitchen with a shining stove and marble counter', title: 'Kitchen deep cleaning', text: 'Stove, chimney, cabinets and tiles' },
+  { slug: 'bathroom-deep-cleaning', src: '/banners/bathroom', alt: 'A clean, bright bathroom with a white bathtub and basin', title: 'Bathroom deep cleaning', text: 'Tiles, fittings and floor, sparkling' },
 ]
 
 const FAQS = FESTIVAL.enabled ? [FESTIVAL_FAQS[0], ...HOME_FAQS] : HOME_FAQS
@@ -102,7 +109,9 @@ export default function Home() {
             <Swiper label="Banner" autoPlay={4500} className="no-scrollbar -mx-4 flex snap-x snap-mandatory scroll-px-4 gap-3 overflow-x-auto px-4 sm:-mx-6 sm:scroll-px-6 sm:px-6 lg:mx-0 lg:scroll-px-0 lg:gap-4 lg:rounded-[2rem] lg:px-0">
               <div className={SLIDE}>
                 <img
-                  src="/hero-living.jpg"
+                  src="/hero-living-800.webp"
+                  srcSet="/hero-living-480.webp 480w, /hero-living-800.webp 800w"
+                  sizes="(min-width: 1024px) 50vw, 88vw"
                   alt="A bright, freshly cleaned living room with a spotless sofa"
                   width={800}
                   height={1040}
@@ -131,7 +140,7 @@ export default function Home() {
 
               {festivalLive && (
                 <Link to={FESTIVAL_PATH} className={SLIDE}>
-                  <img src="/banners/diwali-diyas.jpg" alt="Lit Diwali diyas on a decorated tray with flower petals" width={1200} height={800} loading="lazy" className="h-full w-full object-cover" />
+                  <img src="/banners/diwali-diyas-800.webp" srcSet={bannerSrcSet('/banners/diwali-diyas')} sizes={BANNER_SIZES} alt="Lit Diwali diyas on a decorated tray with flower petals" width={1200} height={800} loading="lazy" decoding="async" className="h-full w-full object-cover" />
                   <div className="absolute inset-0 bg-gradient-to-r from-festive-900/95 via-festive-900/60 to-transparent" aria-hidden="true" />
                   <div className="absolute inset-0 flex flex-col justify-between p-5 text-white sm:p-7">
                     <div>
@@ -148,7 +157,7 @@ export default function Home() {
 
               {PHOTO_SLIDES.map((p) => (
                 <Link key={p.slug} to={`/services/${p.slug}`} className={SLIDE}>
-                  <img src={p.src} alt={p.alt} width={1200} height={800} loading="lazy" className="h-full w-full object-cover" />
+                  <img src={`${p.src}-800.webp`} srcSet={bannerSrcSet(p.src)} sizes={BANNER_SIZES} alt={p.alt} width={1200} height={800} loading="lazy" decoding="async" className="h-full w-full object-cover" />
                   <div className="absolute inset-x-0 bottom-0 h-3/4 bg-gradient-to-t from-navy-950/90 via-navy-950/35 to-transparent" aria-hidden="true" />
                   <div className="absolute inset-x-4 bottom-4 flex items-end justify-between gap-3 text-white sm:inset-x-6 sm:bottom-6">
                     <div className="min-w-0">

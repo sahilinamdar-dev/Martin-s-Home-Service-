@@ -1,10 +1,21 @@
 import { Seo } from '../components/Seo'
+import { breadcrumbSchema } from '../lib/schema'
 import { PHONE_DISPLAY, SITE, TEL_LINK } from '../lib/site'
 
 export default function Privacy() {
   return (
     <section className="container-page max-w-3xl py-12 sm:py-16">
-      <Seo title={`Privacy — ${SITE.name}`} description={`How ${SITE.name} handles the details you share when asking for a cleaning quote.`} path="/privacy" />
+      <Seo
+        title={`Privacy — ${SITE.name}`}
+        description={`How ${SITE.name} handles the details you share when asking for a cleaning quote.`}
+        path="/privacy"
+        jsonLd={[
+          breadcrumbSchema([
+            { name: 'Home', path: '/' },
+            { name: 'Privacy', path: '/privacy' },
+          ]),
+        ]}
+      />
       <h1 className="text-4xl font-extrabold tracking-tight text-navy-900">Privacy</h1>
 
       <div className="mt-8 space-y-6 text-lg leading-relaxed text-navy-700">
@@ -18,7 +29,7 @@ export default function Privacy() {
         </div>
         <div>
           <h2 className="text-xl font-extrabold text-navy-900">Other services</h2>
-          <p className="mt-2">Messages are sent through WhatsApp, which has its own privacy policy. The fonts on this site are loaded from Google Fonts, and the company hosting the site may keep standard technical logs such as IP addresses.</p>
+          <p className="mt-2">Messages are sent through WhatsApp, which has its own privacy policy. The company hosting the site may keep standard technical logs such as IP addresses.</p>
         </div>
         <div>
           <h2 className="text-xl font-extrabold text-navy-900">Questions</h2>

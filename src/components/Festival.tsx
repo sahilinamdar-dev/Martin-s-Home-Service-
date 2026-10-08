@@ -74,7 +74,7 @@ export function FestivalOffers({ area, showLink = false, headingLevel = 'h2' }: 
             <div className="flex flex-1 flex-col p-5">
               <p className="text-lg font-extrabold leading-tight text-navy-950">{o.title}</p>
               <p className="mt-1.5 flex-1 text-sm leading-relaxed text-navy-700">{o.text}</p>
-              <a href={waOfferLink(o, area)} target="_blank" rel="noopener" aria-label={`Claim ${o.title} on WhatsApp`} className="mt-4 inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-leaf-700 px-5 text-sm font-bold text-white hover:bg-leaf-800 active:scale-[0.98]">
+              <a href={waOfferLink(o, area)} target="_blank" rel="noopener" aria-label={`Claim on WhatsApp: ${o.title}`} className="mt-4 inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-leaf-700 px-5 text-sm font-bold text-white hover:bg-leaf-800 active:scale-[0.98]">
                 <WhatsAppIcon className="h-4 w-4" />
                 Claim on WhatsApp
               </a>

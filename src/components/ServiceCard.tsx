@@ -31,7 +31,7 @@ export function ServiceCard({ service }: { service: Service }) {
           href={waServiceLink(service.name)}
           target="_blank"
           rel="noopener"
-          aria-label={`Book ${service.name} on WhatsApp`}
+          aria-label={`Book Now: ${service.name} on WhatsApp`}
           className="relative z-10 inline-flex items-center gap-1.5 rounded-full bg-navy-950 px-4 py-2.5 text-sm font-bold text-white hover:bg-leaf-700 active:scale-95"
         >
           <WhatsAppIcon className="h-4 w-4" />
