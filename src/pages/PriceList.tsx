@@ -80,7 +80,7 @@ export default function PriceList() {
       <section aria-label="Price list in Hindi and Marathi" className="container-page max-w-3xl space-y-12 pb-12 sm:pb-16">
         {LOCAL_PRICES.map((l) => (
           <div key={l.lang} lang={l.lang}>
-            <p className="eyebrow">{l.label}</p>
+            <p className="eyebrow !tracking-normal">{l.label}</p>
             <h2 className="h-section mt-3">{l.heading}</h2>
             <p className="mt-3 text-lg leading-relaxed text-navy-700">{l.intro}</p>
             <ul className="mt-5 divide-y divide-navy-900/10 overflow-hidden rounded-2xl bg-white ring-1 ring-navy-900/10">

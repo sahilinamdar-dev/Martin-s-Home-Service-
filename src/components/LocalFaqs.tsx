@@ -7,7 +7,7 @@ export function LocalFaqs({ blocks }: { blocks: LocalBlock[] }) {
     <div className="space-y-8">
       {blocks.map((b) => (
         <div key={b.lang} lang={b.lang}>
-          <p className="eyebrow">{b.label}</p>
+          <p className="eyebrow !tracking-normal">{b.label}</p>
           <div className="mt-3">
             <FaqList faqs={b.faqs} />
           </div>
