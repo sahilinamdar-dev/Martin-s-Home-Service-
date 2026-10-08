@@ -1,12 +1,14 @@
 import { Link } from 'react-router-dom'
 import { ArrowRight, CalendarCheck, Check, MapPin, Phone } from 'lucide-react'
 import { FaqList } from '../components/FaqList'
+import { LocalFaqs } from '../components/LocalFaqs'
 import { Diya, FestivalOffers } from '../components/Festival'
 import { QuoteForm } from '../components/QuoteForm'
 import { Seo } from '../components/Seo'
 import { WhatsAppIcon } from '../components/WhatsAppIcon'
 import { AREAS, TOP_AREAS, areaPath } from '../lib/areas'
 import { FESTIVAL, FESTIVAL_FAQS, FESTIVAL_PATH, OFFER_ENDS_LABEL, OFFER_SUMMARY, WA_FESTIVAL, formatDay } from '../lib/festival'
+import { LOCAL_FESTIVAL_FAQS, allFaqs } from '../lib/local'
 import { breadcrumbSchema, faqSchema, festivalSchema } from '../lib/schema'
 import { getService, servicePath } from '../lib/services'
 import { PHONE_DISPLAY, SITE, TEL_LINK } from '../lib/site'
@@ -46,7 +48,7 @@ export default function FestivalPage() {
         path={FESTIVAL_PATH}
         jsonLd={[
           festivalSchema(),
-          faqSchema(FESTIVAL_FAQS),
+          faqSchema([...FESTIVAL_FAQS, ...allFaqs(LOCAL_FESTIVAL_FAQS)]),
           breadcrumbSchema([
             { name: 'Home', path: '/' },
             { name: 'Diwali cleaning offers', path: FESTIVAL_PATH },
@@ -174,6 +176,9 @@ export default function FestivalPage() {
           <h2 className="h-section">Diwali cleaning — common questions</h2>
           <div className="mt-7">
             <FaqList faqs={FESTIVAL_FAQS} />
+          </div>
+          <div className="mt-10">
+            <LocalFaqs blocks={LOCAL_FESTIVAL_FAQS} />
           </div>
         </div>
       </section>

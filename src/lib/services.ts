@@ -1,4 +1,4 @@
-import { PRICE_SUMMARY } from './prices'
+import { PRICES, PRICE_SUMMARY, priceLabel } from './prices'
 import { REACH_US, SITE } from './site'
 
 export type Faq = { q: string; a: string }
@@ -216,6 +216,14 @@ export const HOME_FAQS: Faq[] = [
     a: 'Home, flat and office cleaning, bathroom deep cleaning, kitchen deep cleaning, sofa cleaning, floor cleaning, dust and dirt removal, and complete deep cleaning.',
   },
   ...COMMON_FAQS,
+  {
+    q: 'What is cleaned in a deep clean?',
+    a: 'Every room is dusted and wiped, and floors, furniture, windows and glass are cleaned. The kitchen is deep cleaned (stove, chimney, sink, cabinets, tiles), so are the bathrooms (tiles, toilet, basin, taps, mirror), and the sofa is cleaned.',
+  },
+  {
+    q: 'What is the difference between deep cleaning and move-in cleaning?',
+    a: `Move-in cleaning is a deep cleaning of an empty flat before you shift in. With no furniture in the way it costs less: an empty flat starts ${priceLabel(PRICES[0])}, against ${priceLabel(PRICES[2])} for a 1 BHK. Prices are negotiable.`,
+  },
   {
     q: 'Which areas do you serve?',
     a: `We are based in ${SITE.base}, ${SITE.city} and cover areas within about ${SITE.radiusKm} km — Kalyani Nagar, Viman Nagar, Koregaon Park, Kharadi, Wadgaon Sheri, Vishrantwadi, Dhanori, Hadapsar, Camp, Shivajinagar, Aundh and more. Not sure about your area? WhatsApp us your location.`,

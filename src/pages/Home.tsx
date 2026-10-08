@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { ArrowRight, BadgeCheck, CalendarCheck, Camera, Check, ChevronRight, Clock, HandCoins, MapPin, MessageCircle, Phone, ShieldCheck, Smile, Sparkles } from 'lucide-react'
 import { FaqList } from '../components/FaqList'
+import { LocalFaqs } from '../components/LocalFaqs'
 import { PriceTable } from '../components/PriceTable'
 import { FestivalOffers } from '../components/Festival'
 import { Illustration } from '../components/Illustration'
@@ -14,6 +15,7 @@ import { WhatsAppIcon } from '../components/WhatsAppIcon'
 import { AREAS, TOP_AREAS, areaPath } from '../lib/areas'
 import { FESTIVAL, FESTIVAL_FAQS, FESTIVAL_PATH } from '../lib/festival'
 import { businessSchema, faqSchema, websiteSchema } from '../lib/schema'
+import { LOCAL_FAQS, allFaqs } from '../lib/local'
 import { PRICE_PATH } from '../lib/prices'
 import { HOME_FAQS, SERVICES } from '../lib/services'
 import { useFestivalLive } from '../lib/useFestival'
@@ -52,10 +54,10 @@ export default function Home() {
   return (
     <>
       <Seo
-        title={`Home Cleaning Services in ${SITE.base}, ${SITE.city} — ${SITE.name}`}
+        title={`Home Deep Cleaning Services in ${SITE.city} — ${SITE.name}`}
         description={`Home, flat and office cleaning in ${SITE.base}, ${SITE.city} and ${SITE.radiusKm} km around: bathroom, kitchen, sofa and full deep cleaning.${FESTIVAL.enabled ? ' Diwali offers on now.' : ''} WhatsApp ${SITE.whatsapp}.`}
         path="/"
-        jsonLd={[businessSchema(), websiteSchema(), faqSchema(FAQS)]}
+        jsonLd={[businessSchema(), websiteSchema(), faqSchema([...FAQS, ...allFaqs(LOCAL_FAQS)])]}
       />
 
       {/* Hero — light and compact, so the banners and the service grid are on the first screen of a phone */}
@@ -376,6 +378,9 @@ export default function Home() {
           </Reveal>
           <Reveal className="mt-7">
             <FaqList faqs={FAQS} />
+          </Reveal>
+          <Reveal className="mt-10">
+            <LocalFaqs blocks={LOCAL_FAQS} />
           </Reveal>
         </div>
       </section>

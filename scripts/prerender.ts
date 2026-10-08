@@ -15,6 +15,7 @@ const { SITE, PHONE_DISPLAY, ALT_PHONE_DISPLAY, absoluteUrl } = (await viteServe
 const { SERVICES, HOME_FAQS, servicePath } = (await viteServer.ssrLoadModule('/src/lib/services.ts')) as typeof import('../src/lib/services')
 const { FESTIVAL, FESTIVAL_PATH, FESTIVAL_FAQS, OFFER_ENDS_LABEL } = (await viteServer.ssrLoadModule('/src/lib/festival.ts')) as typeof import('../src/lib/festival')
 const { AREAS, areaPath } = (await viteServer.ssrLoadModule('/src/lib/areas.ts')) as typeof import('../src/lib/areas')
+const { LOCAL_FAQS, LOCAL_FESTIVAL_FAQS } = (await viteServer.ssrLoadModule('/src/lib/local.ts')) as typeof import('../src/lib/local')
 const { PRICES, PRICE_PATH, PRICE_NOTE, LOCAL_PRICES, priceLabel, priceName } = (await viteServer.ssrLoadModule('/src/lib/prices.ts')) as typeof import('../src/lib/prices')
 
 let template = readFileSync(join(distDir, 'index.html'), 'utf-8')
@@ -116,6 +117,9 @@ function writeSeoFiles(paths: string[]) {
     '## Common questions',
     '',
     ...HOME_FAQS.flatMap((f) => [`### ${f.q}`, f.a, '']),
+    '## Questions in Hinglish, Hindi and Marathi',
+    '',
+    ...[...LOCAL_FAQS, ...LOCAL_FESTIVAL_FAQS].flatMap((b) => b.faqs.flatMap((f) => [`### ${f.q}`, f.a, ''])),
     '## Pages',
     '',
     `- [Home](${absoluteUrl('/')})`,
