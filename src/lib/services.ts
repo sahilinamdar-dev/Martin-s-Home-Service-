@@ -233,6 +233,14 @@ export const HOME_FAQS: Faq[] = [
     a: 'Yes. Our timing is flexible. Tell us the day and time you prefer and we will do our best to fit it.',
   },
   {
+    q: `Is there a cleaning service near me in ${SITE.base}, ${SITE.city}?`,
+    a: `Yes. ${SITE.name} is based in ${SITE.base} (also written Yerwada), ${SITE.city}, and has been cleaning homes, flats and offices here since ${SITE.foundedYear}. ${REACH_US}.`,
+  },
+  {
+    q: `Why choose ${SITE.name} for home cleaning in ${SITE.city}?`,
+    a: `We have been cleaning since ${SITE.foundedYear}, we work every day, and you hear the price before you book: deep cleaning starts ${priceLabel(PRICES[0])} for an empty flat and ${priceLabel(PRICES[2])} for a 1 BHK. Prices are negotiable.`,
+  },
+  {
     q: 'Do you clean offices?',
     a: 'Yes. We clean offices as well as homes and flats.',
   },

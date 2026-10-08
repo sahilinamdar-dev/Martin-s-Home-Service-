@@ -10,15 +10,25 @@ import { WhatsAppIcon } from '../components/WhatsAppIcon'
 import { areaPath, getArea, nearbyAreas, type Area } from '../lib/areas'
 import { FESTIVAL, festivalAreaFaq } from '../lib/festival'
 import { areaServiceSchema, breadcrumbSchema, faqSchema } from '../lib/schema'
-import { PRICE_PATH, PRICE_SUMMARY } from '../lib/prices'
+import { PRICES, PRICE_PATH, PRICE_SUMMARY, priceLabel } from '../lib/prices'
 import { SERVICES, type Faq } from '../lib/services'
 import { PHONE_DISPLAY, REACH_US, SITE, TEL_LINK, waLink } from '../lib/site'
 import NotFound from './NotFound'
 
+const HOURS = '9 am – 8:30 pm'
+
 function areaFaqs(area: Area): Faq[] {
   const isBase = area.name === SITE.base
   const place = `${area.name}, ${SITE.city}`
+  const spelt = area.aka ? ` (also written ${area.aka.join(' or ')})` : ''
   return [
+    {
+      // The words people type: "best cleaning service near …". The answer gives facts, not a boast.
+      q: `Looking for the best cleaning service in or near ${area.name}?`,
+      a: isBase
+        ? `${SITE.name} is a local cleaning service based in ${area.name}${spelt}, ${SITE.city}, working since ${SITE.foundedYear}. We clean homes, flats and offices near you every day, ${HOURS}. Deep cleaning starts ${priceLabel(PRICES[0])} and you hear the price before you book. ${REACH_US}.`
+        : `${SITE.name} is a local cleaning service based in ${SITE.base}, ${SITE.city}, working since ${SITE.foundedYear}, and comes to ${area.name}${spelt}. We clean homes, flats and offices every day, ${HOURS}. Deep cleaning starts ${priceLabel(PRICES[0])} and you hear the price before you book. ${REACH_US}.`,
+    },
     {
       q: `Do you provide cleaning services in ${area.name}?`,
       a: isBase
@@ -56,7 +66,7 @@ export default function AreaPage() {
     <>
       <Seo
         title={`Home Cleaning Services in ${place} | Deep Cleaning`}
-        description={`Home, flat and office cleaning in ${place}: bathroom, kitchen, sofa and full deep cleaning by ${SITE.name}. WhatsApp ${SITE.whatsapp}.`}
+        description={`Cleaning service in and near ${place}: home, flat and office, bathroom, kitchen, sofa and full deep cleaning by ${SITE.name}. WhatsApp ${SITE.whatsapp}.`}
         path={path}
         jsonLd={[
           areaServiceSchema(area),
@@ -88,7 +98,8 @@ export default function AreaPage() {
                 Cleaning services in <em className="font-bold text-leaf-800">{area.name}</em>
               </h1>
               <p className="mt-4 max-w-xl text-lg leading-relaxed text-navy-800">
-                {SITE.name} cleans homes, flats and offices in {place}. {area.note}
+                {SITE.name} cleans homes, flats and offices in {place}
+                {area.aka ? ` (also written ${area.aka.join(' or ')})` : ''}. {area.note}
               </p>
               <div className="mt-6 hidden gap-3 sm:flex">
                 <a href={wa} target="_blank" rel="noopener" className="btn btn-wa">
@@ -107,7 +118,7 @@ export default function AreaPage() {
       </section>
 
       <section className="container-page py-10 sm:py-14">
-        <h2 className="h-section">Cleaning we do in {area.name}</h2>
+        <h2 className="h-section">Cleaning services near you in {area.name}</h2>
         <p className="mt-3 max-w-2xl text-lg text-navy-700">Book one service or the whole home. Tap a card to see what is included.</p>
         <div className="mt-7 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {SERVICES.map((s) => (
