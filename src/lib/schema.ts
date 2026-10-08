@@ -68,6 +68,7 @@ export function websiteSchema() {
     '@type': 'WebSite',
     '@id': `${SITE.url}/#website`,
     name: SITE.name,
+    alternateName: ["Martin's Home Service Pune", 'Martins Home Service'],
     url: `${SITE.url}/`,
     inLanguage: 'en-IN',
     publisher: { '@id': BUSINESS_ID },
