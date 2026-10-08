@@ -66,7 +66,7 @@ export default function AreaPage() {
     <>
       <Seo
         title={`Home Cleaning Services in ${place} | Deep Cleaning`}
-        description={`Cleaning service in and near ${place}: home, flat and office, bathroom, kitchen, sofa and full deep cleaning by ${SITE.name}. WhatsApp ${SITE.whatsapp}.`}
+        description={`Cleaning service in and near ${place}: home, office, bathroom, kitchen, sofa and full deep cleaning by ${SITE.name}. WhatsApp ${SITE.whatsapp}.`}
         path={path}
         jsonLd={[
           areaServiceSchema(area),
