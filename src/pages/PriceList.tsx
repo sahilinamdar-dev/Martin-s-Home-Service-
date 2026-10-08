@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 import { Phone } from 'lucide-react'
 import { FaqList } from '../components/FaqList'
 import { FestivalOffers } from '../components/Festival'
-import { PriceTable } from '../components/PriceTable'
+import { PriceCards } from '../components/PriceCards'
 import { QuoteForm } from '../components/QuoteForm'
 import { Seo } from '../components/Seo'
 import { WhatsAppIcon } from '../components/WhatsAppIcon'
@@ -18,7 +18,7 @@ export default function PriceList() {
     <>
       <Seo
         title={`Deep Cleaning Price List in ${SITE.city} — 1 RK, 1, 2 & 3 BHK Charges`}
-        description={`Home deep cleaning charges in ${SITE.city}: ${rupees(PRICE_MIN)} to ${rupees(PRICE_MAX)} for an empty flat, 1 RK, 1 BHK, 2 BHK or 3 BHK. Negotiable — call ${SITE.phone} for your price.`}
+        description={`Home deep cleaning charges in ${SITE.city}: ${rupees(PRICE_MIN)} to ${rupees(PRICE_MAX)} for a 1 RK, 1 BHK, 2 BHK or 3 BHK, empty or furnished. Negotiable — call ${SITE.phone}.`}
         path={PRICE_PATH}
         jsonLd={[
           priceSchema(),
@@ -41,8 +41,9 @@ export default function PriceList() {
             {SITE.name} charges for home deep cleaning in {SITE.base} and {SITE.radiusKm} km around {SITE.city}: {PRICE_SUMMARY}. All prices are negotiable, and we tell you the final price on call.
           </p>
 
-          <div className="mt-8">
-            <PriceTable />
+          <h2 className="h-section mt-10">Charges by size of home</h2>
+          <div className="mt-5">
+            <PriceCards />
           </div>
 
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">

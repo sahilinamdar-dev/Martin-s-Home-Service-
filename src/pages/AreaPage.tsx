@@ -10,7 +10,7 @@ import { WhatsAppIcon } from '../components/WhatsAppIcon'
 import { areaPath, getArea, nearbyAreas, type Area } from '../lib/areas'
 import { FESTIVAL, festivalAreaFaq } from '../lib/festival'
 import { areaServiceSchema, breadcrumbSchema, faqSchema } from '../lib/schema'
-import { PRICES, PRICE_PATH, PRICE_SUMMARY, priceLabel } from '../lib/prices'
+import { PRICE_MIN, PRICE_PATH, PRICE_SUMMARY, rupees } from '../lib/prices'
 import { SERVICES, type Faq } from '../lib/services'
 import { PHONE_DISPLAY, REACH_US, SITE, TEL_LINK, waLink } from '../lib/site'
 import NotFound from './NotFound'
@@ -26,8 +26,8 @@ function areaFaqs(area: Area): Faq[] {
       // The words people type: "best cleaning service near …". The answer gives facts, not a boast.
       q: `Looking for the best cleaning service in or near ${area.name}?`,
       a: isBase
-        ? `${SITE.name} is a local cleaning service based in ${area.name}${spelt}, ${SITE.city}, working since ${SITE.foundedYear}. We clean homes, flats and offices near you every day, ${HOURS}. Deep cleaning starts ${priceLabel(PRICES[0])} and you hear the price before you book. ${REACH_US}.`
-        : `${SITE.name} is a local cleaning service based in ${SITE.base}, ${SITE.city}, working since ${SITE.foundedYear}, and comes to ${area.name}${spelt}. We clean homes, flats and offices every day, ${HOURS}. Deep cleaning starts ${priceLabel(PRICES[0])} and you hear the price before you book. ${REACH_US}.`,
+        ? `${SITE.name} is a local cleaning service based in ${area.name}${spelt}, ${SITE.city}, working since ${SITE.foundedYear}. We clean homes, flats and offices near you every day, ${HOURS}. Deep cleaning starts from ${rupees(PRICE_MIN)} and you hear the price before you book. ${REACH_US}.`
+        : `${SITE.name} is a local cleaning service based in ${SITE.base}, ${SITE.city}, working since ${SITE.foundedYear}, and comes to ${area.name}${spelt}. We clean homes, flats and offices every day, ${HOURS}. Deep cleaning starts from ${rupees(PRICE_MIN)} and you hear the price before you book. ${REACH_US}.`,
     },
     {
       q: `Do you provide cleaning services in ${area.name}?`,

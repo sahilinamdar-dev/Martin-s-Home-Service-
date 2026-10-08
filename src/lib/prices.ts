@@ -1,12 +1,13 @@
 import type { Faq } from './services'
 import { REACH_US, SITE } from './site'
 
+export type Kind = 'Empty flat' | 'Furnished'
+
 export type Price = {
   id: string
   /** Size of the home, e.g. '2 BHK'. */
   home: string
-  /** 'Empty flat', 'Furnished' or nothing when the owner gave one price for the size. */
-  kind: string
+  kind: Kind
   /** Rupees. `max` only when the owner gave a range. */
   min: number
   max?: number
@@ -14,17 +15,28 @@ export type Price = {
   from?: boolean
 }
 
-/** Deep cleaning charges, exactly as the owner gave them. They are starting
- *  points: every price is negotiable and the final one is told on call. */
+/** Deep cleaning charges, as the owner set them: every size of home has an
+ *  empty-flat price and a furnished price. They are starting points — every
+ *  price is negotiable and the final one is told on call. */
 export const PRICES: Price[] = [
-  { id: 'empty-flat', home: 'Empty flat', kind: '', min: 1500, from: true },
-  { id: '1rk', home: '1 RK', kind: '', min: 1700 },
-  { id: '1bhk', home: '1 BHK', kind: '', min: 2500, max: 3000 },
+  { id: '1rk-empty', home: '1 RK', kind: 'Empty flat', min: 1500 },
+  { id: '1rk-furnished', home: '1 RK', kind: 'Furnished', min: 1700 },
+  { id: '1bhk-empty', home: '1 BHK', kind: 'Empty flat', min: 2000 },
+  { id: '1bhk-furnished', home: '1 BHK', kind: 'Furnished', min: 2500, from: true },
   { id: '2bhk-empty', home: '2 BHK', kind: 'Empty flat', min: 2500 },
   { id: '2bhk-furnished', home: '2 BHK', kind: 'Furnished', min: 3499, from: true },
   { id: '3bhk-empty', home: '3 BHK', kind: 'Empty flat', min: 4000 },
-  { id: '3bhk-furnished', home: '3 BHK', kind: 'Fully furnished', min: 6000, max: 7000 },
+  { id: '3bhk-furnished', home: '3 BHK', kind: 'Furnished', min: 6000, max: 7000 },
 ]
+
+/** The sizes of home, in the order they are shown. */
+export const HOMES = [...new Set(PRICES.map((p) => p.home))]
+
+export function priceOf(home: string, kind: Kind): Price {
+  const price = PRICES.find((p) => p.home === home && p.kind === kind)
+  if (!price) throw new Error(`No ${kind} price for ${home}`)
+  return price
+}
 
 export const PRICE_PATH = '/price-list'
 
@@ -40,14 +52,14 @@ export function priceLabel(p: Price): string {
 
 /** '2 BHK furnished' — the row as a phrase. */
 export function priceName(p: Price): string {
-  return p.kind ? `${p.home} ${p.kind.toLowerCase()}` : p.home
+  return `${p.home} ${p.kind.toLowerCase()}`
 }
 
 export const PRICE_MIN = Math.min(...PRICES.map((p) => p.min))
 export const PRICE_MAX = Math.max(...PRICES.map((p) => p.max ?? p.min))
 
-/** "empty flat from ₹1,500; 1 RK ₹1,700; …" */
-export const PRICE_SUMMARY = PRICES.map((p) => `${priceName(p).replace(/^Empty flat$/, 'empty flat')} ${priceLabel(p)}`).join('; ')
+/** "1 RK empty flat ₹1,500, furnished ₹1,700; 1 BHK …" */
+export const PRICE_SUMMARY = HOMES.map((home) => `${home} empty flat ${priceLabel(priceOf(home, 'Empty flat'))}, furnished ${priceLabel(priceOf(home, 'Furnished'))}`).join('; ')
 
 export const PRICE_NOTE = 'Prices are negotiable. The final charge depends on the size and condition of the home and is confirmed on call or WhatsApp before you book.'
 
@@ -63,14 +75,13 @@ export type LocalPrices = {
   faqs: Faq[]
 }
 
-type Words = { empty: string; furnished: string; fully: string; from: (price: string) => string }
+type Words = { empty: string; furnished: string; from: (price: string) => string }
 
 function localRows(w: Words): { name: string; price: string }[] {
-  const kinds: Record<string, string> = { 'Empty flat': w.empty, Furnished: w.furnished, 'Fully furnished': w.fully }
+  const kinds: Record<Kind, string> = { 'Empty flat': w.empty, Furnished: w.furnished }
   return PRICES.map((p) => {
-    const home = p.home === 'Empty flat' ? w.empty : p.home
     const amount = p.max ? `${rupees(p.min)} – ${rupees(p.max)}` : rupees(p.min)
-    return { name: p.kind ? `${home} ${kinds[p.kind]}` : home, price: p.from ? w.from(amount) : amount }
+    return { name: `${p.home} ${kinds[p.kind]}`, price: p.from ? w.from(amount) : amount }
   })
 }
 
@@ -78,9 +89,9 @@ function localSummary(rows: { name: string; price: string }[]): string {
   return rows.map((r) => `${r.name} ${r.price}`).join('; ')
 }
 
-const HINGLISH_ROWS = localRows({ empty: 'khali flat', furnished: 'furnished', fully: 'fully furnished', from: (p) => `${p} se shuru` })
-const HINDI_ROWS = localRows({ empty: 'खाली फ्लैट', furnished: 'फर्निश्ड', fully: 'पूरी तरह फर्निश्ड', from: (p) => `${p} से शुरू` })
-const MARATHI_ROWS = localRows({ empty: 'रिकामा फ्लॅट', furnished: 'फर्निश्ड', fully: 'पूर्ण फर्निश्ड', from: (p) => `${p} पासून` })
+const HINGLISH_ROWS = localRows({ empty: 'khali flat', furnished: 'furnished', from: (p) => `${p} se shuru` })
+const HINDI_ROWS = localRows({ empty: 'खाली फ्लैट', furnished: 'फर्निश्ड', from: (p) => `${p} से शुरू` })
+const MARATHI_ROWS = localRows({ empty: 'रिकामा फ्लॅट', furnished: 'फर्निश्ड', from: (p) => `${p} पासून` })
 
 const HINGLISH_NOTE = 'Sabhi rate negotiable hain. Final rate ghar ke size aur condition par depend karta hai aur booking se pehle call ya WhatsApp par bataya jata hai.'
 const HINDI_NOTE = 'सभी रेट नेगोशिएबल हैं। फाइनल रेट घर के साइज़ और हालत पर निर्भर है और बुकिंग से पहले कॉल या WhatsApp पर बताया जाता है।'
@@ -137,7 +148,7 @@ export const PRICE_FAQS: Faq[] = [
   },
   {
     q: `What is the charge for 1 BHK deep cleaning in ${SITE.city}?`,
-    a: `${answerFor('1 BHK')}. A 1 RK is ${priceLabel(PRICES[1])}. ${PRICE_NOTE}`,
+    a: `${answerFor('1 BHK')}. ${answerFor('1 RK')}. ${PRICE_NOTE}`,
   },
   {
     q: `What is the charge for 2 BHK deep cleaning in ${SITE.city}?`,
@@ -149,7 +160,7 @@ export const PRICE_FAQS: Faq[] = [
   },
   {
     q: 'How much does it cost to clean an empty flat before moving in?',
-    a: `Empty flat cleaning starts ${priceLabel(PRICES[0])}. A 2 BHK empty flat is ${priceLabel(PRICES[3])} and a 3 BHK empty flat is ${priceLabel(PRICES[5])}. ${PRICE_NOTE}`,
+    a: `Empty flat deep cleaning: ${HOMES.map((home) => `${home} ${priceLabel(priceOf(home, 'Empty flat'))}`).join(', ')}. ${PRICE_NOTE}`,
   },
   {
     q: 'Are the prices fixed?',

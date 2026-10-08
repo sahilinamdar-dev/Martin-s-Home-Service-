@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 import { ArrowRight, BadgeCheck, CalendarCheck, Camera, Check, ChevronRight, Clock, HandCoins, MapPin, MessageCircle, Phone, ShieldCheck, Smile, Sparkles } from 'lucide-react'
 import { FaqList } from '../components/FaqList'
 import { LocalFaqs } from '../components/LocalFaqs'
-import { PriceTable } from '../components/PriceTable'
+import { PriceCards } from '../components/PriceCards'
 import { FestivalOffers } from '../components/Festival'
 import { Illustration } from '../components/Illustration'
 import { QuickServices } from '../components/QuickServices'
@@ -246,7 +246,7 @@ export default function Home() {
             <h2 className="h-section mt-3">Deep cleaning charges{IN_CITY}</h2>
           </Reveal>
           <Reveal className="mt-7">
-            <PriceTable />
+            <PriceCards />
             <Link to={PRICE_PATH} className="mt-4 inline-flex items-center gap-1.5 font-bold text-leaf-700 hover:underline">
               Price list in Hindi and Marathi
               <ArrowRight className="h-4 w-4" aria-hidden="true" />

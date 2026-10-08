@@ -1,4 +1,4 @@
-import { PRICES, PRICE_SUMMARY, priceLabel } from './prices'
+import { PRICE_MIN, PRICE_SUMMARY, priceLabel, priceOf, rupees } from './prices'
 import { REACH_US, SITE } from './site'
 
 export type Faq = { q: string; a: string }
@@ -222,7 +222,7 @@ export const HOME_FAQS: Faq[] = [
   },
   {
     q: 'What is the difference between deep cleaning and move-in cleaning?',
-    a: `Move-in cleaning is a deep cleaning of an empty flat before you shift in. With no furniture in the way it costs less: an empty flat starts ${priceLabel(PRICES[0])}, against ${priceLabel(PRICES[2])} for a 1 BHK. Prices are negotiable.`,
+    a: `Move-in cleaning is a deep cleaning of an empty flat before you shift in. With no furniture in the way it costs less: an empty 1 BHK is ${priceLabel(priceOf('1 BHK', 'Empty flat'))}, against ${priceLabel(priceOf('1 BHK', 'Furnished'))} when it is furnished. Prices are negotiable.`,
   },
   {
     q: 'Which areas do you serve?',
@@ -238,7 +238,7 @@ export const HOME_FAQS: Faq[] = [
   },
   {
     q: `Why choose ${SITE.name} for home cleaning in ${SITE.city}?`,
-    a: `We have been cleaning since ${SITE.foundedYear}, we work every day, and you hear the price before you book: deep cleaning starts ${priceLabel(PRICES[0])} for an empty flat and ${priceLabel(PRICES[2])} for a 1 BHK. Prices are negotiable.`,
+    a: `We have been cleaning since ${SITE.foundedYear}, we work every day, and you hear the price before you book: deep cleaning starts from ${rupees(PRICE_MIN)} for an empty 1 RK, and a furnished 1 BHK is ${priceLabel(priceOf('1 BHK', 'Furnished'))}. Prices are negotiable.`,
   },
   {
     q: 'Do you clean offices?',
