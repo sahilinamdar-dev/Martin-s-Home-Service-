@@ -27,6 +27,8 @@ export const SITE = {
   geo: { lat: 18.5529, lng: 73.8796 },
   /** e.g. 'Mo-Su 08:00-20:00' (schema.org openingHours format). */
   openingHours: 'Mo-Su 09:00-20:30',
+  /** The same hours, every day, as 24-hour times. */
+  hours: { opens: '09:00', closes: '20:30' },
   /** Human version of the above, e.g. 'Every day, 8 am – 8 pm'. */
   hoursLabel: 'Every day, 9 am – 8:30 pm',
   url: ((import.meta.env.VITE_SITE_URL as string | undefined) ?? 'https://martinshomeservies.in').replace(/\/$/, ''),

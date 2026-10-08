@@ -17,7 +17,7 @@ function toInlineJson(value: unknown): string {
  *  itself; the JSON-LD blocks stay in the body, which search engines accept. */
 export function Seo({ title, description, path, jsonLd = [], noindex = false }: Props) {
   const url = absoluteUrl(path)
-  const image = `${SITE.url}/og.png`
+  const image = `${SITE.url}/og.jpg`
   return (
     <>
       <title>{title}</title>
@@ -31,6 +31,10 @@ export function Seo({ title, description, path, jsonLd = [], noindex = false }: 
       <meta property="og:description" content={description} />
       <meta property="og:url" content={url} />
       <meta property="og:image" content={image} />
+      <meta property="og:image:type" content="image/jpeg" />
+      <meta property="og:image:width" content="1200" />
+      <meta property="og:image:height" content="686" />
+      <meta property="og:image:alt" content={`${SITE.name} — ${SITE.tagline}`} />
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={description} />

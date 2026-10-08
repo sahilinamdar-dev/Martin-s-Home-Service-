@@ -10,8 +10,8 @@ export default function ServiceAreas() {
   return (
     <>
       <Seo
-        title={`Cleaning Service Areas in ${SITE.city} — ${SITE.base} & ${SITE.radiusKm} km Around | ${SITE.name}`}
-        description={`${SITE.name} is based in ${SITE.base}, ${SITE.city} and cleans homes, flats and offices within about ${SITE.radiusKm} km: Kalyani Nagar, Viman Nagar, Koregaon Park, Kharadi, Hadapsar, Camp, Aundh and more.`}
+        title={`Cleaning Service Areas in ${SITE.city} — ${SITE.base} & ${SITE.radiusKm} km Around`}
+        description={`${SITE.name} cleans homes, flats and offices within ${SITE.radiusKm} km of ${SITE.base}, ${SITE.city}: Kalyani Nagar, Viman Nagar, Koregaon Park, Kharadi, Hadapsar and more.`}
         path="/service-areas"
         jsonLd={[
           businessSchema(),

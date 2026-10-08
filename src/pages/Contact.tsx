@@ -12,7 +12,7 @@ export default function Contact() {
   return (
     <>
       <Seo
-        title={`Contact ${SITE.name} — ${REACH_US}`}
+        title={`Contact ${SITE.name} — Call or WhatsApp`}
         description={`Book home, flat or office cleaning${IN_CITY}. ${REACH_US} for a free quote.`}
         path="/contact"
         jsonLd={[

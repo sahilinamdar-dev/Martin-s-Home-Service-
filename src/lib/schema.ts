@@ -5,6 +5,12 @@ import { SERVICES, servicePath, type Faq, type Service } from './services'
 
 const BUSINESS_ID = `${SITE.url}/#business`
 
+const ADDRESS = { '@type': 'PostalAddress', addressLocality: SITE.city, addressRegion: SITE.state, postalCode: SITE.postalCode, addressCountry: 'IN' }
+
+/** The business, named in full. Search engines read each page alone, so a bare
+ *  '@id' pointing at the home page's LocalBusiness tells them nothing here. */
+const PROVIDER = { '@type': 'LocalBusiness', '@id': BUSINESS_ID, name: SITE.name, url: `${SITE.url}/`, telephone: PHONE_E164, image: `${SITE.url}/og.jpg`, address: ADDRESS }
+
 /** schema.org LocalBusiness. Location fields appear only once they are set in
  *  site.ts — search engines treat a wrong address as worse than a missing one. */
 export function businessSchema() {
@@ -18,8 +24,10 @@ export function businessSchema() {
     url: `${SITE.url}/`,
     telephone: PHONE_E164,
     foundingDate: String(SITE.foundedYear),
-    image: `${SITE.url}/og.png`,
-    address: { '@type': 'PostalAddress', addressLocality: SITE.city, addressRegion: SITE.state, postalCode: SITE.postalCode, addressCountry: 'IN' },
+    image: `${SITE.url}/og.jpg`,
+    logo: `${SITE.url}/icons/icon-512.png`,
+    address: ADDRESS,
+    geo: { '@type': 'GeoCoordinates', latitude: SITE.geo.lat, longitude: SITE.geo.lng },
     ...(SITE.googleProfile ? { sameAs: [SITE.googleProfile] } : {}),
     areaServed: [
       {
@@ -30,6 +38,12 @@ export function businessSchema() {
       ...AREAS.map((a) => ({ '@type': 'Place', name: `${a.name}, ${SITE.city}` })),
     ],
     ...(SITE.openingHours ? { openingHours: SITE.openingHours } : {}),
+    openingHoursSpecification: {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+      opens: SITE.hours.opens,
+      closes: SITE.hours.closes,
+    },
     contactPoint: [PHONE_E164, ALT_PHONE_E164].filter(Boolean).map((telephone) => ({
       '@type': 'ContactPoint',
       telephone,
@@ -68,7 +82,7 @@ export function festivalSchema() {
     serviceType: 'House cleaning',
     description: `Diwali and Dussehra deep cleaning for homes, flats and offices in ${SITE.base} and within about ${SITE.radiusKm} km, ${SITE.city}.`,
     url,
-    provider: { '@id': BUSINESS_ID },
+    provider: PROVIDER,
     areaServed: { '@type': 'City', name: SITE.city },
     ...(FESTIVAL.enabled
       ? {
@@ -80,7 +94,7 @@ export function festivalSchema() {
             validFrom: FESTIVAL.startsOn,
             validThrough: FESTIVAL.endsOn,
             url: `${url}#offers`,
-            seller: { '@id': BUSINESS_ID },
+            seller: PROVIDER,
           })),
         }
       : {}),
@@ -107,7 +121,7 @@ export function serviceSchema(s: Service) {
     serviceType: s.name,
     description: s.intro,
     url: absoluteUrl(servicePath(s)),
-    provider: { '@id': BUSINESS_ID },
+    provider: PROVIDER,
     areaServed: { '@type': 'City', name: SITE.city },
   }
 }
@@ -134,7 +148,7 @@ export function areaServiceSchema(area: Area) {
     serviceType: 'House cleaning',
     description: `Home, flat and office cleaning in ${area.name}, ${SITE.city}. ${area.note}`,
     url: absoluteUrl(areaPath(area)),
-    provider: { '@id': BUSINESS_ID },
+    provider: PROVIDER,
     areaServed: { '@type': 'Place', name: `${area.name}, ${SITE.city}, ${SITE.state}` },
   }
 }

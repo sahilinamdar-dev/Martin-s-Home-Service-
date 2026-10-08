@@ -51,7 +51,7 @@ export default function Home() {
     <>
       <Seo
         title={`Home Cleaning Services in ${SITE.base}, ${SITE.city} — ${SITE.name}`}
-        description={`Home, flat and office cleaning in ${SITE.base}, ${SITE.city} and ${SITE.radiusKm} km around: bathroom, kitchen, sofa, floor and complete deep cleaning.${FESTIVAL.enabled ? ` ${FESTIVAL.name} offers on now.` : ''} Book on WhatsApp — ${SITE.whatsapp}.`}
+        description={`Home, flat and office cleaning in ${SITE.base}, ${SITE.city} and ${SITE.radiusKm} km around: bathroom, kitchen, sofa and full deep cleaning.${FESTIVAL.enabled ? ' Diwali offers on now.' : ''} WhatsApp ${SITE.whatsapp}.`}
         path="/"
         jsonLd={[businessSchema(), websiteSchema(), faqSchema(FAQS)]}
       />
