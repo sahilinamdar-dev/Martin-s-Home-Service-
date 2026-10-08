@@ -1,6 +1,7 @@
 import { SITE, PHONE_E164, ALT_PHONE_E164, absoluteUrl } from './site'
 import { AREAS, areaPath, type Area } from './areas'
 import { FESTIVAL, FESTIVAL_PATH } from './festival'
+import { PRICES, PRICE_MAX, PRICE_MIN, PRICE_PATH, priceName, rupees } from './prices'
 import { SERVICES, servicePath, type Faq, type Service } from './services'
 
 const BUSINESS_ID = `${SITE.url}/#business`
@@ -26,6 +27,7 @@ export function businessSchema() {
     foundingDate: String(SITE.foundedYear),
     image: `${SITE.url}/og.jpg`,
     logo: `${SITE.url}/icons/icon-512.png`,
+    priceRange: `${rupees(PRICE_MIN)} – ${rupees(PRICE_MAX)}`,
     address: ADDRESS,
     geo: { '@type': 'GeoCoordinates', latitude: SITE.geo.lat, longitude: SITE.geo.lng },
     ...(SITE.googleProfile ? { sameAs: [SITE.googleProfile] } : {}),
@@ -98,6 +100,29 @@ export function festivalSchema() {
           })),
         }
       : {}),
+  }
+}
+
+/** The price list as one Service with an Offer for each size of home. */
+export function priceSchema() {
+  const url = absoluteUrl(PRICE_PATH)
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: `Home deep cleaning in ${SITE.city}`,
+    serviceType: 'House cleaning',
+    url,
+    provider: PROVIDER,
+    areaServed: { '@type': 'City', name: SITE.city },
+    offers: PRICES.map((p) => ({
+      '@type': 'Offer',
+      name: `${priceName(p)} deep cleaning`,
+      url,
+      priceCurrency: 'INR',
+      price: p.min,
+      priceSpecification: { '@type': 'PriceSpecification', priceCurrency: 'INR', minPrice: p.min, ...(p.max ? { maxPrice: p.max } : {}) },
+      seller: PROVIDER,
+    })),
   }
 }
 

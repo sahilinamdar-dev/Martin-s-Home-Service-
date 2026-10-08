@@ -15,6 +15,7 @@ const { SITE, PHONE_DISPLAY, ALT_PHONE_DISPLAY, absoluteUrl } = (await viteServe
 const { SERVICES, HOME_FAQS, servicePath } = (await viteServer.ssrLoadModule('/src/lib/services.ts')) as typeof import('../src/lib/services')
 const { FESTIVAL, FESTIVAL_PATH, FESTIVAL_FAQS, OFFER_ENDS_LABEL } = (await viteServer.ssrLoadModule('/src/lib/festival.ts')) as typeof import('../src/lib/festival')
 const { AREAS, areaPath } = (await viteServer.ssrLoadModule('/src/lib/areas.ts')) as typeof import('../src/lib/areas')
+const { PRICES, PRICE_PATH, PRICE_NOTE, LOCAL_PRICES, priceLabel, priceName } = (await viteServer.ssrLoadModule('/src/lib/prices.ts')) as typeof import('../src/lib/prices')
 
 let template = readFileSync(join(distDir, 'index.html'), 'utf-8')
 
@@ -80,7 +81,7 @@ function writeSeoFiles(paths: string[]) {
     ...(SITE.altPhone ? [`- Phone (calls, second number): ${ALT_PHONE_DISPLAY} (+${SITE.countryCode} ${SITE.altPhone})`] : []),
     `- WhatsApp: +${SITE.countryCode} ${SITE.whatsapp}`,
     `- ${where}`,
-    '- Charges: depend on the work; told on WhatsApp or by phone before booking',
+    `- Charges: see the price list below. ${PRICE_NOTE}`,
     `- In business since ${SITE.foundedYear} (more than 15 years of cleaning experience)`,
     ...(SITE.hoursLabel ? [`- Hours: ${SITE.hoursLabel}`] : []),
     '',
@@ -96,6 +97,14 @@ function writeSeoFiles(paths: string[]) {
           ...FESTIVAL_FAQS.flatMap((f) => [`### ${f.q}`, f.a, '']),
         ]
       : []),
+    '## Price list (home deep cleaning)',
+    '',
+    `Details: ${absoluteUrl(PRICE_PATH)}`,
+    '',
+    ...PRICES.map((p) => `- ${priceName(p)}: ${priceLabel(p)}`),
+    `- ${PRICE_NOTE}`,
+    '',
+    ...LOCAL_PRICES.flatMap((l) => [`### ${l.heading} (${l.label})`, '', ...l.rows.map((r) => `- ${r.name}: ${r.price}`), `- ${l.note}`, '']),
     '## Services',
     '',
     ...SERVICES.map((s) => `- [${s.name}](${absoluteUrl(servicePath(s))}): ${s.short}`),
@@ -111,6 +120,7 @@ function writeSeoFiles(paths: string[]) {
     '',
     `- [Home](${absoluteUrl('/')})`,
     `- [Diwali cleaning offers](${absoluteUrl(FESTIVAL_PATH)})`,
+    `- [Price list](${absoluteUrl(PRICE_PATH)})`,
     `- [Service areas](${absoluteUrl('/service-areas')})`,
     `- [About](${absoluteUrl('/about')})`,
     `- [Contact](${absoluteUrl('/contact')})`,
@@ -120,7 +130,7 @@ function writeSeoFiles(paths: string[]) {
 }
 
 function main() {
-  const paths = ['/', FESTIVAL_PATH, ...SERVICES.map(servicePath), '/service-areas', ...AREAS.map(areaPath), '/about', '/contact', '/privacy']
+  const paths = ['/', FESTIVAL_PATH, PRICE_PATH, ...SERVICES.map(servicePath), '/service-areas', ...AREAS.map(areaPath), '/about', '/contact', '/privacy']
   for (const path of paths) writeRoute(path)
 
   // Served by the host for any address that has no page.

@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Menu, Phone, X } from 'lucide-react'
 import { FESTIVAL, FESTIVAL_PATH } from '../lib/festival'
+import { PRICE_PATH } from '../lib/prices'
 import { PHONE_DISPLAY, TEL_LINK, WA_DEFAULT } from '../lib/site'
 import { Logo } from './Logo'
 import { WhatsAppIcon } from './WhatsAppIcon'
@@ -9,6 +10,7 @@ import { WhatsAppIcon } from './WhatsAppIcon'
 const LINKS = [
   ...(FESTIVAL.enabled ? [{ to: FESTIVAL_PATH, label: 'Diwali offers' }] : []),
   { to: '/#services', label: 'Services' },
+  { to: PRICE_PATH, label: 'Prices' },
   { to: '/#how-it-works', label: 'How it works' },
   { to: '/service-areas', label: 'Areas' },
   { to: '/#faq', label: 'FAQ' },
@@ -25,20 +27,20 @@ export function SiteNav() {
           <Logo />
         </Link>
 
-        <nav className="hidden items-center gap-7 lg:flex" aria-label="Main">
+        <nav className="hidden items-center gap-5 lg:flex xl:gap-7" aria-label="Main">
           {LINKS.map((l) => (
-            <Link key={l.to} to={l.to} className="text-sm font-semibold text-navy-800 hover:text-leaf-700">
+            <Link key={l.to} to={l.to} className="whitespace-nowrap text-sm font-semibold text-navy-800 hover:text-leaf-700">
               {l.label}
             </Link>
           ))}
         </nav>
 
         <div className="flex items-center gap-2">
-          <a href={TEL_LINK} className="hidden items-center gap-2 rounded-full px-4 py-2 text-sm font-bold text-navy-900 hover:bg-navy-900/5 sm:inline-flex">
+          <a href={TEL_LINK} className="hidden items-center gap-2 whitespace-nowrap rounded-full px-4 py-2 text-sm font-bold text-navy-900 hover:bg-navy-900/5 sm:inline-flex lg:hidden xl:inline-flex">
             <Phone className="h-4 w-4" aria-hidden="true" />
             {PHONE_DISPLAY}
           </a>
-          <a href={WA_DEFAULT} target="_blank" rel="noopener" className="hidden items-center gap-2 rounded-full bg-leaf-700 px-5 py-2.5 text-sm font-bold text-white hover:bg-leaf-800 md:inline-flex">
+          <a href={WA_DEFAULT} target="_blank" rel="noopener" className="hidden items-center gap-2 whitespace-nowrap rounded-full bg-leaf-700 px-5 py-2.5 text-sm font-bold text-white hover:bg-leaf-800 md:inline-flex">
             <WhatsAppIcon className="h-4 w-4" />
             Book on WhatsApp
           </a>

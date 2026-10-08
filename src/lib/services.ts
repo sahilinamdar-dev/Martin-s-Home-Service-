@@ -1,3 +1,4 @@
+import { PRICE_SUMMARY } from './prices'
 import { REACH_US, SITE } from './site'
 
 export type Faq = { q: string; a: string }
@@ -201,7 +202,7 @@ export function servicePath(s: Service): string {
 export const COMMON_FAQS: Faq[] = [
   {
     q: 'What are the charges?',
-    a: 'Charges depend on the work — the size of the place, its condition and which services you need. Send us the details or a few photos on WhatsApp and we will tell you there. Asking is free.',
+    a: `Deep cleaning charges: ${PRICE_SUMMARY}. Prices are negotiable — the final charge depends on the size of the place, its condition and which services you need, and we tell you on call or WhatsApp before you book. Asking is free.`,
   },
   {
     q: 'How do I book?',

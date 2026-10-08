@@ -8,6 +8,7 @@ import { Seo } from '../components/Seo'
 import { ServiceCard } from '../components/ServiceCard'
 import { WhatsAppIcon } from '../components/WhatsAppIcon'
 import { breadcrumbSchema, faqSchema, serviceSchema } from '../lib/schema'
+import { PRICE_PATH } from '../lib/prices'
 import { COMMON_FAQS, SERVICES, getService, servicePath } from '../lib/services'
 import { IN_CITY, PHONE_DISPLAY, REACH_US, SITE, TEL_LINK, waServiceLink } from '../lib/site'
 import NotFound from './NotFound'
@@ -100,7 +101,11 @@ export default function ServicePage() {
 
           <div className="mt-10 rounded-3xl bg-navy-900 p-6 text-white">
             <h2 className="text-xl font-extrabold">What are the charges?</h2>
-            <p className="mt-2 leading-relaxed text-white/80">Charges depend on the work — the size of the place and its condition. Send us the details or a few photos on WhatsApp and we will tell you there, before you book.</p>
+            <p className="mt-2 leading-relaxed text-white/80">Charges depend on the work — the size of the place and its condition. Send us the details or a few photos on WhatsApp and we will tell you there, before you book.{' '}
+              <Link to={PRICE_PATH} className="font-bold text-sun-400 underline">
+                See the price list
+              </Link>
+            </p>
             <a href={waServiceLink(service.name)} target="_blank" rel="noopener" className="btn btn-sun mt-5">
               <WhatsAppIcon className="h-5 w-5" />
               Ask on WhatsApp

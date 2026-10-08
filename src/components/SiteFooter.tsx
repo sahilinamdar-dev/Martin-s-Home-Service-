@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { Phone } from 'lucide-react'
 import { FESTIVAL, FESTIVAL_PATH } from '../lib/festival'
+import { PRICE_PATH } from '../lib/prices'
 import { SERVICES, servicePath } from '../lib/services'
 import { ALT_PHONE_DISPLAY, ALT_TEL_LINK, PHONE_DISPLAY, SITE, TEL_LINK, WA_DEFAULT } from '../lib/site'
 import { Logo } from './Logo'
@@ -65,6 +66,11 @@ export function SiteFooter() {
                 </Link>
               </li>
             )}
+            <li>
+              <Link to={PRICE_PATH} className="hover:text-white">
+                Price list
+              </Link>
+            </li>
             <li>
               <Link to="/service-areas" className="hover:text-white">
                 Service areas

@@ -5,12 +5,14 @@ import { SiteFooter } from './components/SiteFooter'
 import { SiteNav } from './components/SiteNav'
 import { StickyCta } from './components/StickyCta'
 import { FESTIVAL_PATH } from './lib/festival'
+import { PRICE_PATH } from './lib/prices'
 import About from './pages/About'
 import AreaPage from './pages/AreaPage'
 import Contact from './pages/Contact'
 import FestivalPage from './pages/FestivalPage'
 import Home from './pages/Home'
 import NotFound from './pages/NotFound'
+import PriceList from './pages/PriceList'
 import Privacy from './pages/Privacy'
 import ServiceAreas from './pages/ServiceAreas'
 import ServicePage from './pages/ServicePage'
@@ -47,6 +49,7 @@ export default function App() {
           <Route path="/services/:slug" element={<ServicePage />} />
           <Route path="/cleaning-services/:slug" element={<AreaPage />} />
           <Route path={FESTIVAL_PATH} element={<FestivalPage />} />
+          <Route path={PRICE_PATH} element={<PriceList />} />
           <Route path="/service-areas" element={<ServiceAreas />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />

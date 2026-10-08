@@ -1,4 +1,5 @@
 import type { Faq } from './services'
+import { PRICE_SUMMARY } from './prices'
 import { REACH_US, SITE, absoluteUrl, waLink } from './site'
 
 export type FestivalOffer = {
@@ -135,7 +136,7 @@ export const FESTIVAL_FAQS: Faq[] = [
   },
   {
     q: 'How much does Diwali cleaning cost?',
-    a: 'Charges depend on the size of your home (1 BHK, 2 BHK, 3 BHK…), its condition and the services you pick. Send the details or a few photos on WhatsApp and we tell you the charges there, with the festival discount applied. Asking is free.',
+    a: `Deep cleaning charges before the festival discount: ${PRICE_SUMMARY}. The final charge depends on the size and condition of your home and the services you pick. Send the details or a few photos on WhatsApp and we tell you the charges there, with the festival discount applied. Asking is free.`,
   },
   {
     q: 'How does the society group offer work?',

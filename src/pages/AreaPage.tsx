@@ -10,6 +10,7 @@ import { WhatsAppIcon } from '../components/WhatsAppIcon'
 import { areaPath, getArea, nearbyAreas, type Area } from '../lib/areas'
 import { FESTIVAL, festivalAreaFaq } from '../lib/festival'
 import { areaServiceSchema, breadcrumbSchema, faqSchema } from '../lib/schema'
+import { PRICE_PATH, PRICE_SUMMARY } from '../lib/prices'
 import { SERVICES, type Faq } from '../lib/services'
 import { PHONE_DISPLAY, REACH_US, SITE, TEL_LINK, waLink } from '../lib/site'
 import NotFound from './NotFound'
@@ -30,7 +31,7 @@ function areaFaqs(area: Area): Faq[] {
     },
     {
       q: `What are the charges for home cleaning in ${area.name}?`,
-      a: `Charges depend on the work — the size of your place in ${place}, its condition and the services you need. Send the details or a few photos on WhatsApp and we will tell you there. Asking is free.`,
+      a: `Deep cleaning charges in ${place}: ${PRICE_SUMMARY}. Prices are negotiable — the final charge depends on the size and condition of your place and we tell you on call or WhatsApp before you book.`,
     },
     {
       q: `How do I book a cleaning in ${area.name}?`,
@@ -132,7 +133,12 @@ export default function AreaPage() {
               </li>
               <li className="flex gap-4">
                 <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-navy-900 font-extrabold text-white">2</span>
-                <span>Send a few photos. We tell you the charges on WhatsApp itself.</span>
+                <span>
+                  Send a few photos. We tell you the charges on WhatsApp itself.{' '}
+                  <Link to={PRICE_PATH} className="font-bold text-leaf-700 underline">
+                    See the price list
+                  </Link>
+                </span>
               </li>
               <li className="flex gap-4">
                 <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-navy-900 font-extrabold text-white">3</span>

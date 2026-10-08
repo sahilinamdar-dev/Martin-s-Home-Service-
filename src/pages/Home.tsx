@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { ArrowRight, BadgeCheck, CalendarCheck, Camera, Check, ChevronRight, Clock, HandCoins, MapPin, MessageCircle, Phone, ShieldCheck, Smile, Sparkles } from 'lucide-react'
 import { FaqList } from '../components/FaqList'
+import { PriceTable } from '../components/PriceTable'
 import { FestivalOffers } from '../components/Festival'
 import { Illustration } from '../components/Illustration'
 import { QuickServices } from '../components/QuickServices'
@@ -13,6 +14,7 @@ import { WhatsAppIcon } from '../components/WhatsAppIcon'
 import { AREAS, TOP_AREAS, areaPath } from '../lib/areas'
 import { FESTIVAL, FESTIVAL_FAQS, FESTIVAL_PATH } from '../lib/festival'
 import { businessSchema, faqSchema, websiteSchema } from '../lib/schema'
+import { PRICE_PATH } from '../lib/prices'
 import { HOME_FAQS, SERVICES } from '../lib/services'
 import { useFestivalLive } from '../lib/useFestival'
 import { IN_CITY, PHONE_DISPLAY, SITE, TEL_LINK, WA_DEFAULT, waServiceLink } from '../lib/site'
@@ -222,6 +224,23 @@ export default function Home() {
               </div>
             </div>
           </Swiper>
+        </div>
+      </section>
+
+      {/* Prices */}
+      <section id="prices" className="pb-14 sm:pb-20">
+        <div className="container-page max-w-3xl">
+          <Reveal>
+            <p className="eyebrow">Price list</p>
+            <h2 className="h-section mt-3">Deep cleaning charges{IN_CITY}</h2>
+          </Reveal>
+          <Reveal className="mt-7">
+            <PriceTable />
+            <Link to={PRICE_PATH} className="mt-4 inline-flex items-center gap-1.5 font-bold text-leaf-700 hover:underline">
+              Price list in Hindi and Marathi
+              <ArrowRight className="h-4 w-4" aria-hidden="true" />
+            </Link>
+          </Reveal>
         </div>
       </section>
 
