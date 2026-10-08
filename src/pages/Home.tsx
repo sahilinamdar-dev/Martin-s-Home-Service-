@@ -90,7 +90,7 @@ export default function Home() {
               <span className="mt-1 block text-sm font-semibold text-navy-700 sm:hidden">Home · Flat · Office cleaning{IN_CITY}</span>
             </h1>
 
-            <p className="mt-4 hidden max-w-xl text-lg leading-relaxed text-navy-700 sm:block">Deep cleaning for homes, flats and offices in {SITE.base} and nearby {SITE.city}. Just WhatsApp us — we reply with everything you need to know.</p>
+            <p className="mt-4 hidden max-w-xl text-lg leading-relaxed text-navy-700 sm:block">{SITE.name} does deep cleaning for homes, flats and offices in {SITE.base} and {SITE.radiusKm} km around, {SITE.city}. Just WhatsApp us — we reply with everything you need to know.</p>
 
             <div className="mt-6 hidden gap-3 sm:flex">
               <a href={WA_DEFAULT} target="_blank" rel="noopener" className="btn btn-wa">

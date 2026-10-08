@@ -55,7 +55,10 @@ export default function ServicePage() {
                 {service.name}
                 {IN_CITY}
               </h1>
-              <p className="mt-4 max-w-xl text-lg leading-relaxed text-navy-800">{service.intro}</p>
+              {/* Who, what and where in one sentence, for search snippets and AI assistants. */}
+              <p className="mt-4 max-w-xl text-lg leading-relaxed text-navy-800">
+                {SITE.name} does {service.name.toLowerCase()} in {SITE.base} and {SITE.radiusKm} km around, {SITE.city}. {service.intro}
+              </p>
               <div className="mt-6 hidden gap-3 sm:flex">
                 <a href={waServiceLink(service.name)} target="_blank" rel="noopener" className="btn btn-wa">
                   <WhatsAppIcon className="h-5 w-5" />

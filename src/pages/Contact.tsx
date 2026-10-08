@@ -29,7 +29,7 @@ export default function Contact() {
           <div>
             <p className="eyebrow">Contact us</p>
             <h1 className="mt-3 text-4xl font-extrabold leading-tight tracking-tight text-navy-900 sm:text-5xl">Book your cleaning today</h1>
-            <p className="mt-5 text-lg leading-relaxed text-navy-700">Call or message us. Tell us which service you need, your area and a day that suits you — we will reply with a free quote.</p>
+            <p className="mt-5 text-lg leading-relaxed text-navy-700">To book {SITE.name}, call {SITE.phone} or WhatsApp {SITE.whatsapp}{SITE.hoursLabel ? ` — ${SITE.hoursLabel.charAt(0).toLowerCase()}${SITE.hoursLabel.slice(1)}` : ''}. Tell us which service you need, your area and a day that suits you — we will reply with a free quote.</p>
 
             <div className="mt-8 space-y-4">
               <div className="flex items-center gap-4 rounded-2xl bg-white p-5 ring-1 ring-navy-900/10">
