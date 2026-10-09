@@ -1,8 +1,8 @@
-/** Localities within roughly 15 km of the Yerawada base. Each one gets its own
+/** Localities within roughly 15 km of the Koregaon Park base. Each one gets its own
  *  landing page, so every entry needs a note that is true of that place — pages
  *  that differ only by the name are treated as spam by search engines. */
 
-export const ZONES = ['Around Yerawada', 'East Pune', 'North Pune', 'Central Pune', 'South Pune', 'West Pune', 'Pimpri-Chinchwad side'] as const
+export const ZONES = ['Around Koregaon Park', 'East Pune', 'North Pune', 'Central Pune', 'South Pune', 'West Pune', 'Pimpri-Chinchwad side'] as const
 
 export type Zone = (typeof ZONES)[number]
 
@@ -16,16 +16,16 @@ export type Area = {
 }
 
 export const AREAS: Area[] = [
-  // Around Yerawada
-  { slug: 'yerawada', name: 'Yerawada', aka: ['Yerwada', 'Yeravda'], zone: 'Around Yerawada', note: 'Yerawada is our home base, so societies, flats and offices here are the quickest for us to reach.' },
-  { slug: 'kalyani-nagar', name: 'Kalyani Nagar', zone: 'Around Yerawada', note: 'Right next to Yerawada — apartments, row houses and offices are all a short ride from us.' },
-  { slug: 'viman-nagar', name: 'Viman Nagar', zone: 'Around Yerawada', note: 'We clean flats in housing societies and offices across Viman Nagar, near the airport.' },
-  { slug: 'koregaon-park', name: 'Koregaon Park', zone: 'Around Yerawada', note: 'Bungalows, apartments and offices in the lanes of Koregaon Park, just across the river from Yerawada.' },
-  { slug: 'shastri-nagar', name: 'Shastri Nagar', zone: 'Around Yerawada', note: 'Shastri Nagar is a neighbour of Yerawada, so we can usually fit in a visit at a time that suits you.' },
-  { slug: 'tingre-nagar', name: 'Tingre Nagar', zone: 'Around Yerawada', note: 'Flats and independent houses in Tingre Nagar, a few minutes north of our base.' },
-  { slug: 'vishrantwadi', name: 'Vishrantwadi', zone: 'Around Yerawada', note: 'Housing societies and family homes in Vishrantwadi, along Alandi Road.' },
-  { slug: 'sangamwadi', name: 'Sangamwadi', zone: 'Around Yerawada', note: 'Homes and offices in Sangamwadi, between Yerawada and Shivajinagar.' },
-  { slug: 'bund-garden', name: 'Bund Garden', zone: 'Around Yerawada', note: 'Apartments and offices on and around Bund Garden Road, just over the bridge from Yerawada.' },
+  // Around Koregaon Park
+  { slug: 'koregaon-park', name: 'Koregaon Park', zone: 'Around Koregaon Park', note: 'Koregaon Park is our home base, so the bungalows, apartments and offices in its lanes are the quickest for us to reach.' },
+  { slug: 'yerawada', name: 'Yerawada', aka: ['Yerwada', 'Yeravda'], zone: 'Around Koregaon Park', note: 'Societies, flats and offices across Yerawada, just across the river from our base in Koregaon Park.' },
+  { slug: 'kalyani-nagar', name: 'Kalyani Nagar', zone: 'Around Koregaon Park', note: 'Right next to Koregaon Park — apartments, row houses and offices are all a short ride from us.' },
+  { slug: 'viman-nagar', name: 'Viman Nagar', zone: 'Around Koregaon Park', note: 'We clean flats in housing societies and offices across Viman Nagar, near the airport.' },
+  { slug: 'shastri-nagar', name: 'Shastri Nagar', zone: 'Around Koregaon Park', note: 'Shastri Nagar is a short ride from our base, so we can usually fit in a visit at a time that suits you.' },
+  { slug: 'tingre-nagar', name: 'Tingre Nagar', zone: 'Around Koregaon Park', note: 'Flats and independent houses in Tingre Nagar, north of Yerawada and a short ride from our base.' },
+  { slug: 'vishrantwadi', name: 'Vishrantwadi', zone: 'Around Koregaon Park', note: 'Housing societies and family homes in Vishrantwadi, along Alandi Road.' },
+  { slug: 'sangamwadi', name: 'Sangamwadi', zone: 'Around Koregaon Park', note: 'Homes and offices in Sangamwadi, between Yerawada and Shivajinagar.' },
+  { slug: 'bund-garden', name: 'Bund Garden', zone: 'Around Koregaon Park', note: 'Apartments and offices on and around Bund Garden Road, right next to Koregaon Park.' },
 
   // East Pune
   { slug: 'kharadi', name: 'Kharadi', zone: 'East Pune', note: 'High-rise societies and IT offices in Kharadi — popular for move-in and full deep cleaning.' },
@@ -92,9 +92,9 @@ export function nearbyAreas(area: Area, limit = 8): Area[] {
   const zone = AREAS.filter((a) => a.zone === area.zone)
   const at = zone.findIndex((a) => a.slug === area.slug)
   const sameZone = [...zone.slice(at + 1), ...zone.slice(0, at)]
-  const aroundBase = AREAS.filter((a) => a.zone === 'Around Yerawada' && a.zone !== area.zone)
+  const aroundBase = AREAS.filter((a) => a.zone === 'Around Koregaon Park' && a.zone !== area.zone)
   return [...sameZone, ...aroundBase].slice(0, limit)
 }
 
 /** The localities shown on the home page. */
-export const TOP_AREAS = AREAS.filter((a) => a.zone === 'Around Yerawada' || ['kharadi', 'wadgaon-sheri', 'hadapsar', 'camp', 'dhanori', 'aundh'].includes(a.slug))
+export const TOP_AREAS = AREAS.filter((a) => a.zone === 'Around Koregaon Park' || ['kharadi', 'wadgaon-sheri', 'hadapsar', 'camp', 'dhanori', 'aundh'].includes(a.slug))

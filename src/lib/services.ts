@@ -226,7 +226,7 @@ export const HOME_FAQS: Faq[] = [
   },
   {
     q: 'Which areas do you serve?',
-    a: `We are based in ${SITE.base}, ${SITE.city} and cover areas within about ${SITE.radiusKm} km — Kalyani Nagar, Viman Nagar, Koregaon Park, Kharadi, Wadgaon Sheri, Vishrantwadi, Dhanori, Hadapsar, Camp, Shivajinagar, Aundh and more. Not sure about your area? WhatsApp us your location.`,
+    a: `We are based in ${SITE.base}, ${SITE.city} and cover areas within about ${SITE.radiusKm} km — Kalyani Nagar, Viman Nagar, Yerawada, Kharadi, Wadgaon Sheri, Vishrantwadi, Dhanori, Hadapsar, Camp, Shivajinagar, Aundh and more. Not sure about your area? WhatsApp us your location.`,
   },
   {
     q: 'Can I choose the day and time?',
@@ -234,7 +234,7 @@ export const HOME_FAQS: Faq[] = [
   },
   {
     q: `Is there a cleaning service near me in ${SITE.base}, ${SITE.city}?`,
-    a: `Yes. ${SITE.name} is based in ${SITE.base} (also written Yerwada), ${SITE.city}, and has been cleaning homes, flats and offices here since ${SITE.foundedYear}. ${REACH_US}.`,
+    a: `Yes. ${SITE.name} is based in ${SITE.base}, ${SITE.city}, and has been cleaning homes, flats and offices here since ${SITE.foundedYear}. ${REACH_US}.`,
   },
   {
     q: `Why choose ${SITE.name} for home cleaning in ${SITE.city}?`,

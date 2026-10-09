@@ -114,7 +114,7 @@ export const LOCAL_PRICES: LocalPrices[] = [
     lang: 'hi',
     label: 'हिंदी',
     heading: 'पुणे में घर की सफाई सर्विस — रेट लिस्ट',
-    intro: `${SITE.name} येरवडा, पुणे और आसपास ${SITE.radiusKm} किमी में घर की सफाई और डीप क्लीनिंग सर्विस देती है — घर, फ्लैट और ऑफिस।`,
+    intro: `${SITE.name} कोरेगांव पार्क, पुणे और आसपास ${SITE.radiusKm} किमी में घर की सफाई और डीप क्लीनिंग सर्विस देती है — घर, फ्लैट और ऑफिस।`,
     rows: HINDI_ROWS,
     note: HINDI_NOTE,
     faqs: [
@@ -126,7 +126,7 @@ export const LOCAL_PRICES: LocalPrices[] = [
     lang: 'mr',
     label: 'मराठी',
     heading: 'पुण्यात घर साफसफाई सेवा — किंमत यादी',
-    intro: `${SITE.name} येरवडा, पुणे आणि आसपासच्या ${SITE.radiusKm} किमी परिसरात घर, फ्लॅट आणि ऑफिससाठी साफसफाई व स्वच्छता सेवा (डीप क्लीनिंग) देते.`,
+    intro: `${SITE.name} कोरेगाव पार्क, पुणे आणि आसपासच्या ${SITE.radiusKm} किमी परिसरात घर, फ्लॅट आणि ऑफिससाठी साफसफाई व स्वच्छता सेवा (डीप क्लीनिंग) देते.`,
     rows: MARATHI_ROWS,
     note: MARATHI_NOTE,
     faqs: [

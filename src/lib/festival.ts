@@ -144,7 +144,7 @@ export const FESTIVAL_FAQS: Faq[] = [
   },
   {
     q: 'Which areas do you cover for Diwali cleaning?',
-    a: `${SITE.base} and areas within about ${SITE.radiusKm} km in ${SITE.city} — Kalyani Nagar, Viman Nagar, Koregaon Park, Kharadi, Wadgaon Sheri, Vishrantwadi, Dhanori, Hadapsar, Camp, Shivajinagar, Aundh and more.`,
+    a: `${SITE.base} and areas within about ${SITE.radiusKm} km in ${SITE.city} — Kalyani Nagar, Viman Nagar, Yerawada, Kharadi, Wadgaon Sheri, Vishrantwadi, Dhanori, Hadapsar, Camp, Shivajinagar, Aundh and more.`,
   },
 ]
 

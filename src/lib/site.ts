@@ -16,7 +16,7 @@ export const SITE = {
   city: 'Pune',
   state: 'Maharashtra',
   /** Locality the business works out of. The served localities are in areas.ts. */
-  base: 'Yerawada',
+  base: 'Koregaon Park',
   /** Street address, as the owner gave it. Leave empty if there is none. */
   street: 'Building No. 50 A, Raag Vilas Society, Lane C, Koregaon Park',
   /** PIN code of the street address. */
@@ -26,7 +26,7 @@ export const SITE = {
   /** How far from the base we travel. */
   radiusKm: 15,
   /** Approximate centre of the base locality, for the service-area circle in the schema. */
-  geo: { lat: 18.5529, lng: 73.8796 },
+  geo: { lat: 18.5362, lng: 73.8939 },
   /** e.g. 'Mo-Su 08:00-20:00' (schema.org openingHours format). */
   openingHours: 'Mo-Su 09:00-20:30',
   /** The same hours, every day, as 24-hour times. */

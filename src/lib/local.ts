@@ -30,7 +30,7 @@ export const LOCAL_FAQS: LocalBlock[] = [
       },
       {
         q: 'Safai wala near me — kya aap mere area mein ghar ki safai karte hain?',
-        a: `Haan. ${SITE.name} ${SITE.base}, ${SITE.city} mein hai aur ${SITE.radiusKm} km ke andar ghar ki safai service deti hai — Kalyani Nagar, Viman Nagar, Koregaon Park, Kharadi, Wadgaon Sheri, Vishrantwadi, Dhanori, Hadapsar aur aas-paas. Apna area WhatsApp par bhejein, hum turant bata dete hain.`,
+        a: `Haan. ${SITE.name} ${SITE.base}, ${SITE.city} mein hai aur ${SITE.radiusKm} km ke andar ghar ki safai service deti hai — Kalyani Nagar, Viman Nagar, Yerawada, Kharadi, Wadgaon Sheri, Vishrantwadi, Dhanori, Hadapsar aur aas-paas. Apna area WhatsApp par bhejein, hum turant bata dete hain.`,
       },
       {
         q: 'Ghar ki safai karne wale ka number kya hai?',
@@ -52,7 +52,7 @@ export const LOCAL_FAQS: LocalBlock[] = [
       },
       {
         q: 'पुणे में घर की सफाई करने वाले का नंबर क्या है?',
-        a: `${SITE.name} — कॉल करें ${SITE.phone} पर या WhatsApp करें ${SITE.whatsapp} पर। हर दिन, ${HOURS}। हम येरवडा, पुणे और आसपास ${SITE.radiusKm} किमी में घर की सफाई सर्विस देते हैं।`,
+        a: `${SITE.name} — कॉल करें ${SITE.phone} पर या WhatsApp करें ${SITE.whatsapp} पर। हर दिन, ${HOURS}। हम कोरेगांव पार्क, पुणे और आसपास ${SITE.radiusKm} किमी में घर की सफाई सर्विस देते हैं।`,
       },
       {
         q: 'घर की सफाई करने वाले कितना चार्ज लेते हैं?',
@@ -66,11 +66,11 @@ export const LOCAL_FAQS: LocalBlock[] = [
     faqs: [
       {
         q: 'पुण्यात घर साफसफाई सेवा कोण देते?',
-        a: `${SITE.name} येरवडा, पुणे येथून घर, फ्लॅट आणि ऑफिससाठी साफसफाई व स्वच्छता सेवा देते — बाथरूम, किचन, सोफा, फरशी आणि संपूर्ण घराची डीप क्लीनिंग. कॉल करा ${SITE.phone} किंवा WhatsApp करा ${SITE.whatsapp}. दररोज, ${HOURS}.`,
+        a: `${SITE.name} कोरेगाव पार्क, पुणे येथून घर, फ्लॅट आणि ऑफिससाठी साफसफाई व स्वच्छता सेवा देते — बाथरूम, किचन, सोफा, फरशी आणि संपूर्ण घराची डीप क्लीनिंग. कॉल करा ${SITE.phone} किंवा WhatsApp करा ${SITE.whatsapp}. दररोज, ${HOURS}.`,
       },
       {
         q: 'माझ्या जवळ घर साफसफाईची सेवा मिळेल का?',
-        a: `हो. आम्ही येरवड्यापासून ${SITE.radiusKm} किमी परिसरात सेवा देतो — कल्याणी नगर, विमान नगर, कोरेगाव पार्क, खराडी, वडगाव शेरी, विश्रांतवाडी, धानोरी, हडपसर आणि आसपास. तुमचा परिसर WhatsApp वर पाठवा, आम्ही लगेच सांगतो.`,
+        a: `हो. आम्ही कोरेगाव पार्कपासून ${SITE.radiusKm} किमी परिसरात सेवा देतो — कल्याणी नगर, विमान नगर, येरवडा, खराडी, वडगाव शेरी, विश्रांतवाडी, धानोरी, हडपसर आणि आसपास. तुमचा परिसर WhatsApp वर पाठवा, आम्ही लगेच सांगतो.`,
       },
       {
         q: 'घर स्वच्छता सेवेची किंमत यादी काय आहे?',
@@ -107,7 +107,7 @@ export const LOCAL_FESTIVAL_FAQS: LocalBlock[] = FESTIVAL.enabled
         faqs: [
           {
             q: 'पुणे में दिवाली की सफाई सर्विस कौन देता है?',
-            a: `${SITE.name} दिवाली और दशहरे से पहले पूरे घर की सफाई और डीप क्लीनिंग करती है — येरवडा, पुणे और आसपास ${SITE.radiusKm} किमी में। ${OFFER_ENDS_LABEL} तक की बुकिंग पर ${MAX_OFF}% तक की छूट। कॉल ${SITE.phone} या WhatsApp ${SITE.whatsapp}।`,
+            a: `${SITE.name} दिवाली और दशहरे से पहले पूरे घर की सफाई और डीप क्लीनिंग करती है — कोरेगांव पार्क, पुणे और आसपास ${SITE.radiusKm} किमी में। ${OFFER_ENDS_LABEL} तक की बुकिंग पर ${MAX_OFF}% तक की छूट। कॉल ${SITE.phone} या WhatsApp ${SITE.whatsapp}।`,
           },
           {
             q: 'दिवाली की सफाई कब बुक करनी चाहिए?',
@@ -121,7 +121,7 @@ export const LOCAL_FESTIVAL_FAQS: LocalBlock[] = FESTIVAL.enabled
         faqs: [
           {
             q: 'पुण्यात दिवाळी साफसफाई सेवा कोण देते?',
-            a: `${SITE.name} दिवाळी आणि दसऱ्यापूर्वी संपूर्ण घराची साफसफाई आणि डीप क्लीनिंग करते — येरवडा, पुणे आणि आसपासच्या ${SITE.radiusKm} किमी परिसरात. ${OFFER_ENDS_LABEL} पर्यंतच्या बुकिंगवर ${MAX_OFF}% पर्यंत सूट. कॉल ${SITE.phone} किंवा WhatsApp ${SITE.whatsapp}.`,
+            a: `${SITE.name} दिवाळी आणि दसऱ्यापूर्वी संपूर्ण घराची साफसफाई आणि डीप क्लीनिंग करते — कोरेगाव पार्क, पुणे आणि आसपासच्या ${SITE.radiusKm} किमी परिसरात. ${OFFER_ENDS_LABEL} पर्यंतच्या बुकिंगवर ${MAX_OFF}% पर्यंत सूट. कॉल ${SITE.phone} किंवा WhatsApp ${SITE.whatsapp}.`,
           },
           {
             q: 'दिवाळी साफसफाई कधी बुक करावी?',
