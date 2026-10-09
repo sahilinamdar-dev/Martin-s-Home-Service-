@@ -1,10 +1,10 @@
 import { Link } from 'react-router-dom'
-import { Clock, MapPin, Phone } from 'lucide-react'
+import { Clock, House, MapPin, Phone } from 'lucide-react'
 import { QuoteForm } from '../components/QuoteForm'
 import { Seo } from '../components/Seo'
 import { WhatsAppIcon } from '../components/WhatsAppIcon'
 import { breadcrumbSchema, businessSchema } from '../lib/schema'
-import { ALT_PHONE_DISPLAY, ALT_TEL_LINK, IN_CITY, PHONE_DISPLAY, REACH_US, SITE, TEL_LINK, WA_DEFAULT } from '../lib/site'
+import { ADDRESS_DISPLAY, ALT_PHONE_DISPLAY, ALT_TEL_LINK, IN_CITY, PHONE_DISPLAY, REACH_US, SITE, TEL_LINK, WA_DEFAULT } from '../lib/site'
 
 export default function Contact() {
   const serviceArea = `${SITE.base}, ${SITE.city} and areas within about ${SITE.radiusKm} km`
@@ -58,6 +58,18 @@ export default function Contact() {
                   <span className="block text-xl font-extrabold text-navy-900">Chat with us — send photos for a quote</span>
                 </span>
               </a>
+
+              {ADDRESS_DISPLAY && (
+                <div className="flex items-center gap-4 rounded-2xl bg-white p-5 ring-1 ring-navy-900/10">
+                  <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-leaf-100 text-leaf-700">
+                    <House className="h-5 w-5" aria-hidden="true" />
+                  </span>
+                  <span>
+                    <span className="block text-sm font-semibold text-navy-600">Address</span>
+                    <address className="block font-bold not-italic text-navy-900">{ADDRESS_DISPLAY}</address>
+                  </span>
+                </div>
+              )}
 
               <div className="flex items-center gap-4 rounded-2xl bg-white p-5 ring-1 ring-navy-900/10">
                 <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-leaf-100 text-leaf-700">

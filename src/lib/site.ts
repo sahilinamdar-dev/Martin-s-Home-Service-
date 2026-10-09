@@ -17,8 +17,10 @@ export const SITE = {
   state: 'Maharashtra',
   /** Locality the business works out of. The served localities are in areas.ts. */
   base: 'Yerawada',
-  /** PIN code of the base locality. */
-  postalCode: '411006',
+  /** Street address, as the owner gave it. Leave empty if there is none. */
+  street: 'Building No. 50 A, Raag Vilas Society, Lane C, Koregaon Park',
+  /** PIN code of the street address. */
+  postalCode: '411001',
   /** Google Business Profile link. Leave empty if there is none. */
   googleProfile: 'https://share.google/DRZlBeUSUwHXWYrQq',
   /** How far from the base we travel. */
@@ -36,6 +38,9 @@ export const SITE = {
 
 /** " in Pune" once the city is known, otherwise nothing. */
 export const IN_CITY = SITE.city ? ` in ${SITE.city}` : ''
+
+/** "Building No. 50 A, …, Koregaon Park, Pune 411001" — or nothing, until the street is known. */
+export const ADDRESS_DISPLAY = SITE.street ? `${SITE.street}, ${SITE.city} ${SITE.postalCode}` : ''
 
 export const PHONE_DISPLAY = `${SITE.phone.slice(0, 5)} ${SITE.phone.slice(5)}`
 export const PHONE_E164 = `+${SITE.countryCode}${SITE.phone}`

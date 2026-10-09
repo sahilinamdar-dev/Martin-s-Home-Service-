@@ -3,7 +3,7 @@ import { Phone } from 'lucide-react'
 import { FESTIVAL, FESTIVAL_PATH } from '../lib/festival'
 import { PRICE_PATH } from '../lib/prices'
 import { SERVICES, servicePath } from '../lib/services'
-import { ALT_PHONE_DISPLAY, ALT_TEL_LINK, PHONE_DISPLAY, SITE, TEL_LINK, WA_DEFAULT } from '../lib/site'
+import { ADDRESS_DISPLAY, ALT_PHONE_DISPLAY, ALT_TEL_LINK, PHONE_DISPLAY, SITE, TEL_LINK, WA_DEFAULT } from '../lib/site'
 import { Logo } from './Logo'
 import { WhatsAppIcon } from './WhatsAppIcon'
 
@@ -57,6 +57,11 @@ export function SiteFooter() {
               </a>
             </li>
             {SITE.hoursLabel && <li>{SITE.hoursLabel}</li>}
+            {ADDRESS_DISPLAY && (
+              <li>
+                <address className="not-italic">{ADDRESS_DISPLAY}</address>
+              </li>
+            )}
           </ul>
           <ul className="mt-6 flex flex-wrap gap-x-5 gap-y-2 text-sm">
             {FESTIVAL.enabled && (

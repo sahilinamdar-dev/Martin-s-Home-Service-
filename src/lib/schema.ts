@@ -6,7 +6,7 @@ import { SERVICES, servicePath, type Faq, type Service } from './services'
 
 const BUSINESS_ID = `${SITE.url}/#business`
 
-const ADDRESS = { '@type': 'PostalAddress', addressLocality: SITE.city, addressRegion: SITE.state, postalCode: SITE.postalCode, addressCountry: 'IN' }
+const ADDRESS = { '@type': 'PostalAddress', ...(SITE.street ? { streetAddress: SITE.street } : {}), addressLocality: SITE.city, addressRegion: SITE.state, postalCode: SITE.postalCode, addressCountry: 'IN' }
 
 /** The business, named in full. Search engines read each page alone, so a bare
  *  '@id' pointing at the home page's LocalBusiness tells them nothing here. */
