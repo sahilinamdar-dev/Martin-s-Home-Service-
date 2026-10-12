@@ -21,8 +21,8 @@ export type Price = {
 export const PRICES: Price[] = [
   { id: '1rk-empty', home: '1 RK', kind: 'Empty flat', min: 1500 },
   { id: '1rk-furnished', home: '1 RK', kind: 'Furnished', min: 1700 },
-  { id: '1bhk-empty', home: '1 BHK', kind: 'Empty flat', min: 2000 },
-  { id: '1bhk-furnished', home: '1 BHK', kind: 'Furnished', min: 2500, from: true },
+  { id: '1bhk-empty', home: '1 BHK', kind: 'Empty flat', min: 1999 },
+  { id: '1bhk-furnished', home: '1 BHK', kind: 'Furnished', min: 2799, from: true },
   { id: '2bhk-empty', home: '2 BHK', kind: 'Empty flat', min: 2500 },
   { id: '2bhk-furnished', home: '2 BHK', kind: 'Furnished', min: 3499, from: true },
   { id: '3bhk-empty', home: '3 BHK', kind: 'Empty flat', min: 4000 },
