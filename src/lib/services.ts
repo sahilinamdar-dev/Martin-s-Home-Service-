@@ -241,6 +241,26 @@ export const HOME_FAQS: Faq[] = [
     a: `We have been cleaning since ${SITE.foundedYear}, we work every day, and you hear the price before you book: deep cleaning starts from ${rupees(PRICE_MIN)} for an empty 1 RK, and a furnished 1 BHK is ${priceLabel(priceOf('1 BHK', 'Furnished'))}. Prices are negotiable.`,
   },
   {
+    q: `Which is the best cleaning service in ${SITE.city}?`,
+    a: `Compare three things: how long the service has been working, whether you hear the price before you book, and whether it comes to your area. ${SITE.name} has been cleaning homes, flats and offices in ${SITE.city} since ${SITE.foundedYear}, works every day, and confirms the charge on call or WhatsApp before you book. Deep cleaning starts from ${rupees(PRICE_MIN)}.`,
+  },
+  {
+    q: `Is there a cheap, affordable cleaning service in ${SITE.city}?`,
+    a: `Yes. ${SITE.name} charges: ${PRICE_SUMMARY}. All prices are negotiable, and asking for the price is free.`,
+  },
+  {
+    q: 'Is there a home cleaning service near me that is open today?',
+    a: `${SITE.name} is open ${SITE.hoursLabel.toLowerCase()}, and comes to homes within about ${SITE.radiusKm} km of ${SITE.base}, ${SITE.city}. ${REACH_US} with your area and we tell you the nearest day and time we can come.`,
+  },
+  {
+    q: 'Can I get a home cleaning man or woman to come to my house near me?',
+    a: `Yes. Our cleaning staff are both men and women, and they come to your home, flat or office anywhere within about ${SITE.radiusKm} km of ${SITE.base}, ${SITE.city}. ${REACH_US}, share your location, tell us if you prefer a male or a female cleaner, and pick a day and time.`,
+  },
+  {
+    q: `What is the contact number for cleaning services in ${SITE.city}?`,
+    a: `Call ${SITE.phone} or WhatsApp ${SITE.whatsapp}. ${SITE.hoursLabel}.`,
+  },
+  {
     q: 'Do you clean offices?',
     a: 'Yes. We clean offices as well as homes and flats.',
   },

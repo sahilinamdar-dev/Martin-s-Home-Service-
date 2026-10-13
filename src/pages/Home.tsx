@@ -16,7 +16,7 @@ import { AREAS, TOP_AREAS, areaPath } from '../lib/areas'
 import { FESTIVAL, FESTIVAL_FAQS, FESTIVAL_PATH } from '../lib/festival'
 import { businessSchema, faqSchema, websiteSchema } from '../lib/schema'
 import { LOCAL_FAQS, allFaqs } from '../lib/local'
-import { PRICE_PATH } from '../lib/prices'
+import { PRICE_MIN, PRICE_PATH, rupees } from '../lib/prices'
 import { HOME_FAQS, SERVICES } from '../lib/services'
 import { useFestivalLive } from '../lib/useFestival'
 import { IN_CITY, PHONE_DISPLAY, SITE, TEL_LINK, WA_DEFAULT, waServiceLink } from '../lib/site'
@@ -61,8 +61,8 @@ export default function Home() {
   return (
     <>
       <Seo
-        title={`Home Deep Cleaning Services in ${SITE.city} — ${SITE.name}`}
-        description={`Home, flat and office cleaning in ${SITE.base}, ${SITE.city} and ${SITE.radiusKm} km around: bathroom, kitchen, sofa and full deep cleaning.${FESTIVAL.enabled ? ' Diwali offers on now.' : ''} WhatsApp ${SITE.whatsapp}.`}
+        title={`Best Cleaning Services in ${SITE.city}, from ${rupees(PRICE_MIN)} — ${SITE.name}`}
+        description={`Affordable home, flat and office cleaning services in ${SITE.city}, near ${SITE.base} and ${SITE.radiusKm} km around. Deep cleaning from ${rupees(PRICE_MIN)}.${FESTIVAL.enabled ? ' Diwali offers on now.' : ''} WhatsApp ${SITE.whatsapp}.`}
         path="/"
         jsonLd={[businessSchema(), websiteSchema(), faqSchema([...FAQS, ...allFaqs(LOCAL_FAQS)])]}
       />
@@ -82,15 +82,15 @@ export default function Home() {
             <h1 className="mt-3 lg:mt-5">
               <span className="hidden items-center gap-2 text-sm font-bold uppercase tracking-[0.14em] text-leaf-700 sm:inline-flex">
                 <Sparkles className="h-4 w-4" aria-hidden="true" />
-                Home · Flat · Office cleaning{IN_CITY}
+                Home · Flat · Office cleaning services{IN_CITY}
               </span>
               <span className="block text-[1.9rem] font-extrabold leading-[1.1] tracking-tight text-navy-950 sm:mt-2 sm:text-6xl sm:leading-[1.05]">
                 Making every corner <em className="font-bold text-leaf-700">shine</em>
               </span>
-              <span className="mt-1 block text-sm font-semibold text-navy-700 sm:hidden">Home · Flat · Office cleaning{IN_CITY}</span>
+              <span className="mt-1 block text-sm font-semibold text-navy-700 sm:hidden">Home · Flat · Office cleaning services{IN_CITY}</span>
             </h1>
 
-            <p className="mt-4 hidden max-w-xl text-lg leading-relaxed text-navy-700 sm:block">{SITE.name} does deep cleaning for homes, flats and offices in {SITE.base} and {SITE.radiusKm} km around, {SITE.city}. Just WhatsApp us — we reply with everything you need to know.</p>
+            <p className="mt-4 hidden max-w-xl text-lg leading-relaxed text-navy-700 sm:block">{SITE.name} is an affordable home cleaning service in {SITE.city}: deep cleaning for homes, flats and offices in {SITE.base} and {SITE.radiusKm} km around, from {rupees(PRICE_MIN)}. Just WhatsApp us — we reply with everything you need to know.</p>
 
             <div className="mt-6 hidden gap-3 sm:flex">
               <a href={WA_DEFAULT} target="_blank" rel="noopener" className="btn btn-wa">
