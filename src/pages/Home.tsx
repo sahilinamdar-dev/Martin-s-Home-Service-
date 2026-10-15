@@ -42,11 +42,12 @@ const FEATURED = SERVICES[SERVICES.length - 1]
 const SLIDE = 'relative block h-48 w-[88%] shrink-0 snap-start overflow-hidden rounded-3xl sm:h-72 lg:h-[30rem] lg:w-full lg:rounded-[2rem]'
 const SLIDE_CTA = 'inline-flex shrink-0 items-center gap-2 rounded-full bg-white text-sm font-bold text-navy-950 shadow-lg'
 
-const BANNER_SIZES = '(min-width: 1024px) 50vw, 88vw'
+/** A slide is 88% of the row, and the row loses 2rem to its side padding below lg. */
+const BANNER_SIZES = '(min-width: 1024px) 50vw, calc(88vw - 28px)'
 
-/** WebP copies of a banner at three widths; the browser picks the smallest that fits. */
+/** WebP copies of a banner at four widths; the browser picks the smallest that fits. */
 function bannerSrcSet(base: string): string {
-  return [480, 800, 1200].map((w) => `${base}-${w}.webp ${w}w`).join(', ')
+  return [480, 640, 800, 1200].map((w) => `${base}-${w}.webp ${w}w`).join(', ')
 }
 
 const PHOTO_SLIDES = [
@@ -110,8 +111,8 @@ export default function Home() {
               <div className={SLIDE}>
                 <img
                   src="/hero-living-800.webp"
-                  srcSet="/hero-living-480.webp 480w, /hero-living-800.webp 800w"
-                  sizes="(min-width: 1024px) 50vw, 88vw"
+                  srcSet="/hero-living-480.webp 480w, /hero-living-640.webp 640w, /hero-living-800.webp 800w"
+                  sizes={BANNER_SIZES}
                   alt="A bright, freshly cleaned living room with a spotless sofa"
                   width={800}
                   height={1040}
@@ -202,7 +203,7 @@ export default function Home() {
       </section>
 
       {/* Services */}
-      <section id="services" className="py-14 sm:py-20">
+      <section id="services" className="below-fold py-14 sm:py-20">
         <div className="container-page">
           <Reveal className="max-w-2xl">
             <p className="eyebrow">Our cleaning services</p>
@@ -239,7 +240,7 @@ export default function Home() {
       </section>
 
       {/* Prices */}
-      <section id="prices" className="pb-14 sm:pb-20">
+      <section id="prices" className="below-fold pb-14 sm:pb-20">
         <div className="container-page max-w-3xl">
           <Reveal>
             <p className="eyebrow">Price list</p>
@@ -256,7 +257,7 @@ export default function Home() {
       </section>
 
       {/* How it works */}
-      <section id="how-it-works" className="container-page">
+      <section id="how-it-works" className="below-fold container-page">
         <div className="rounded-[2rem] bg-navy-900 px-5 py-10 text-white sm:px-10 sm:py-14">
           <Reveal className="max-w-2xl">
             <p className="text-sm font-bold uppercase tracking-[0.18em] text-sun-400">How it works</p>
@@ -287,7 +288,7 @@ export default function Home() {
       </section>
 
       {/* Why choose us */}
-      <section className="py-14 sm:py-20">
+      <section className="below-fold py-14 sm:py-20">
         <div className="container-page grid items-center gap-8 lg:grid-cols-2 lg:gap-12">
           <Reveal>
             <p className="eyebrow">Why choose us</p>
@@ -322,7 +323,7 @@ export default function Home() {
       </section>
 
       {/* Areas */}
-      <section id="areas" className="pb-14 sm:pb-20">
+      <section id="areas" className="below-fold pb-14 sm:pb-20">
         <div className="container-page">
           <Reveal>
             <div className="rounded-[2rem] bg-[#cfeedd] p-6 sm:p-10">
@@ -357,7 +358,7 @@ export default function Home() {
       </section>
 
       {/* Booking form */}
-      <section id="quote" className="bg-white py-14 sm:py-20">
+      <section id="quote" className="below-fold bg-white py-14 sm:py-20">
         <div className="container-page grid gap-8 lg:grid-cols-[1fr_1.1fr] lg:items-center lg:gap-14">
           <Reveal>
             <p className="eyebrow">Book your cleaning</p>
@@ -379,7 +380,7 @@ export default function Home() {
       </section>
 
       {/* FAQ */}
-      <section id="faq" className="py-14 sm:py-20">
+      <section id="faq" className="below-fold py-14 sm:py-20">
         <div className="container-page max-w-3xl">
           <Reveal>
             <p className="eyebrow">Questions</p>
@@ -395,7 +396,7 @@ export default function Home() {
       </section>
 
       {/* Closing call to action */}
-      <section className="pb-14 sm:pb-20">
+      <section className="below-fold pb-14 sm:pb-20">
         <div className="container-page">
           <Reveal>
             <div className="relative overflow-hidden rounded-[2rem] bg-leaf-700 px-6 py-12 text-center text-white sm:px-12 sm:py-16">

@@ -65,6 +65,14 @@ body {
   @apply bg-cream font-sans text-navy-900 antialiased;
 }
 
+/* Below-the-fold blocks skip layout and paint until they near the screen,
+   so a phone draws the first screen sooner. The size is a guess that the
+   browser replaces with the real one once the block has been shown. */
+.below-fold {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 640px;
+}
+
 /* Anchored sections must clear the sticky header. */
 section[id] {
   scroll-margin-top: 5rem;
