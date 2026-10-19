@@ -85,8 +85,10 @@ function writeRoute(urlPath: string, outFile?: string) {
 }
 
 function writeSeoFiles(paths: string[]) {
-  const today = new Date().toISOString().slice(0, 10)
-  const urls = paths.map((p) => `  <url><loc>${absoluteUrl(p)}</loc><lastmod>${today}</lastmod></url>`).join('\n')
+  // No <lastmod>: stamping every URL with the build date tells Google every page
+  // changed on every deploy, and it then ignores the field. Leave it out until a
+  // real per-page date is available.
+  const urls = paths.map((p) => `  <url><loc>${absoluteUrl(p)}</loc></url>`).join('\n')
   writeFileSync(join(distDir, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls}\n</urlset>\n`)
 
   // Everyone is welcome, AI search and answer engines included — named so there is no doubt.
