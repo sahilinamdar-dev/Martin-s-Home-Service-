@@ -18,7 +18,7 @@ export const SITE = {
   /** Locality the business works out of. The served localities are in areas.ts. */
   base: 'Koregaon Park',
   /** Street address, as the owner gave it. Leave empty if there is none. */
-  street: 'Building No. 50 A, Raag Vilas Society, Lane C, Koregaon Park',
+  street: '50/A, Ragvilas Society, Road No. E/C, Koregaon Park',
   /** PIN code of the street address. */
   postalCode: '411001',
   /** Google Business Profile link. Leave empty if there is none. */
@@ -39,7 +39,7 @@ export const SITE = {
 /** " in Pune" once the city is known, otherwise nothing. */
 export const IN_CITY = SITE.city ? ` in ${SITE.city}` : ''
 
-/** "Building No. 50 A, …, Koregaon Park, Pune 411001" — or nothing, until the street is known. */
+/** "50/A, Ragvilas Society, …, Koregaon Park, Pune 411001" — or nothing, until the street is known. */
 export const ADDRESS_DISPLAY = SITE.street ? `${SITE.street}, ${SITE.city} ${SITE.postalCode}` : ''
 
 export const PHONE_DISPLAY = `${SITE.phone.slice(0, 5)} ${SITE.phone.slice(5)}`
