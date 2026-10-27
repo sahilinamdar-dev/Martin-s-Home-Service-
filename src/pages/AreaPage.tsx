@@ -7,7 +7,7 @@ import { QuoteForm } from '../components/QuoteForm'
 import { Seo } from '../components/Seo'
 import { ServiceCard } from '../components/ServiceCard'
 import { WhatsAppIcon } from '../components/WhatsAppIcon'
-import { areaPath, getArea, nearbyAreas, type Area } from '../lib/areas'
+import { areaPath, getArea, isIndexedArea, nearbyAreas, type Area } from '../lib/areas'
 import { FESTIVAL, festivalAreaFaq } from '../lib/festival'
 import { areaServiceSchema, breadcrumbSchema, faqSchema } from '../lib/schema'
 import { PRICE_MIN, PRICE_PATH, PRICE_SUMMARY, rupees } from '../lib/prices'
@@ -68,6 +68,7 @@ export default function AreaPage() {
         title={`Home Cleaning Services in ${place} | Deep Cleaning`}
         description={`Cleaning service in and near ${place}: home, office, bathroom, kitchen, sofa and full deep cleaning by ${SITE.name}. WhatsApp ${SITE.whatsapp}.`}
         path={path}
+        noindex={!isIndexedArea(area)}
         jsonLd={[
           areaServiceSchema(area),
           faqSchema(faqs),

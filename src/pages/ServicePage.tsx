@@ -7,6 +7,7 @@ import { QuoteForm } from '../components/QuoteForm'
 import { Seo } from '../components/Seo'
 import { ServiceCard } from '../components/ServiceCard'
 import { WhatsAppIcon } from '../components/WhatsAppIcon'
+import { TOP_AREAS, areaPath } from '../lib/areas'
 import { breadcrumbSchema, faqSchema, serviceSchema } from '../lib/schema'
 import { PRICE_PATH } from '../lib/prices'
 import { COMMON_FAQS, SERVICES, getService, servicePath } from '../lib/services'
@@ -128,6 +129,26 @@ export default function ServicePage() {
             <FaqList faqs={faqs} />
           </div>
         </div>
+      </section>
+
+      <section className="container-page pt-12 sm:pt-16">
+        <h2 className="text-2xl font-extrabold text-navy-900">
+          {service.name} near you{IN_CITY}
+        </h2>
+        <ul className="mt-5 flex flex-wrap gap-2.5">
+          {TOP_AREAS.map((a) => (
+            <li key={a.slug}>
+              <Link to={areaPath(a)} className="inline-flex items-center rounded-full bg-white px-4 py-2.5 text-sm font-bold text-navy-900 ring-1 ring-navy-900/10 hover:ring-leaf-600 active:scale-95">
+                {a.name}
+              </Link>
+            </li>
+          ))}
+          <li>
+            <Link to="/service-areas" className="inline-flex items-center rounded-full bg-navy-950 px-4 py-2.5 text-sm font-bold text-white active:scale-95">
+              All areas
+            </Link>
+          </li>
+        </ul>
       </section>
 
       <section className="py-12 sm:py-16">

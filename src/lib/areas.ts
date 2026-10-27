@@ -96,5 +96,13 @@ export function nearbyAreas(area: Area, limit = 8): Area[] {
   return [...sameZone, ...aroundBase].slice(0, limit)
 }
 
-/** The localities shown on the home page. */
+/** The localities shown on the home page and linked from every service page. */
 export const TOP_AREAS = AREAS.filter((a) => a.zone === 'Around Koregaon Park' || ['kharadi', 'wadgaon-sheri', 'hadapsar', 'camp', 'dhanori', 'aundh'].includes(a.slug))
+
+/** Only the top areas are offered to search engines for now. The rest share
+ *  most of their text with each other, which kept Google from indexing any of
+ *  them (audit of 16 Oct 2026). They stay live and linked but carry noindex
+ *  and stay out of the sitemap until they get facts of their own. */
+export function isIndexedArea(a: Area): boolean {
+  return TOP_AREAS.includes(a)
+}

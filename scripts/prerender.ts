@@ -14,7 +14,7 @@ const { render } = (await viteServer.ssrLoadModule('/src/entry-server.tsx')) as 
 const { SITE, PHONE_DISPLAY, ALT_PHONE_DISPLAY, absoluteUrl } = (await viteServer.ssrLoadModule('/src/lib/site.ts')) as typeof import('../src/lib/site')
 const { SERVICES, HOME_FAQS, servicePath } = (await viteServer.ssrLoadModule('/src/lib/services.ts')) as typeof import('../src/lib/services')
 const { FESTIVAL, FESTIVAL_PATH, FESTIVAL_FAQS, OFFER_ENDS_LABEL } = (await viteServer.ssrLoadModule('/src/lib/festival.ts')) as typeof import('../src/lib/festival')
-const { AREAS, areaPath } = (await viteServer.ssrLoadModule('/src/lib/areas.ts')) as typeof import('../src/lib/areas')
+const { AREAS, areaPath, isIndexedArea } = (await viteServer.ssrLoadModule('/src/lib/areas.ts')) as typeof import('../src/lib/areas')
 const { LOCAL_FAQS, LOCAL_FESTIVAL_FAQS } = (await viteServer.ssrLoadModule('/src/lib/local.ts')) as typeof import('../src/lib/local')
 const { PRICES, PRICE_PATH, PRICE_NOTE, LOCAL_PRICES, priceLabel, priceName } = (await viteServer.ssrLoadModule('/src/lib/prices.ts')) as typeof import('../src/lib/prices')
 
@@ -176,7 +176,9 @@ function main() {
   // Served by the host for any address that has no page.
   writeRoute('/404', '404.html')
 
-  writeSeoFiles(paths)
+  // Areas marked noindex stay live but are not offered in the sitemap.
+  const hidden = new Set(AREAS.filter((a) => !isIndexedArea(a)).map(areaPath))
+  writeSeoFiles(paths.filter((p) => !hidden.has(p)))
   console.log(`Prerendered ${paths.length} routes + 404, sitemap.xml, robots.txt, llms.txt.`)
 }
 
