@@ -140,6 +140,20 @@ export default function Home() {
                 </div>
               </div>
 
+              <Link to={BEAUTY_PATH} className={`${SLIDE} salon-mesh`}>
+                <div className="absolute inset-0 flex flex-col justify-between p-5 text-white sm:p-7">
+                  <div>
+                    <p className="text-xs font-bold uppercase tracking-[0.14em] text-gold-300 sm:text-sm">New · Women only</p>
+                    <p className="mt-1.5 max-w-[80%] font-display text-2xl font-extrabold leading-[1.1] tracking-tight sm:text-4xl">Salon at home, from {rupees(BEAUTY_MIN)}</p>
+                    <p className="mt-1 text-xs font-semibold text-white/75 sm:text-base">Waxing · Facials · Mani-Pedi</p>
+                  </div>
+                  <span className="inline-flex items-center gap-1.5 self-start rounded-full bg-gold-400 px-4 py-2 text-sm font-extrabold text-plum-950">
+                    See price list
+                    <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                  </span>
+                </div>
+              </Link>
+
               {festivalLive && (
                 <Link to={FESTIVAL_PATH} className={SLIDE}>
                   <img src="/banners/diwali-diyas-800.webp" srcSet={bannerSrcSet('/banners/diwali-diyas')} sizes={BANNER_SIZES} alt="Lit Diwali diyas on a decorated tray with flower petals" width={1200} height={800} loading="lazy" decoding="async" className="h-full w-full object-cover" />
@@ -156,20 +170,6 @@ export default function Home() {
                   </div>
                 </Link>
               )}
-
-              <Link to={BEAUTY_PATH} className={`${SLIDE} salon-mesh`}>
-                <div className="absolute inset-0 flex flex-col justify-between p-5 text-white sm:p-7">
-                  <div>
-                    <p className="text-xs font-bold uppercase tracking-[0.14em] text-gold-300 sm:text-sm">New · Women only</p>
-                    <p className="mt-1.5 max-w-[80%] font-display text-2xl font-extrabold leading-[1.1] tracking-tight sm:text-4xl">Salon at home, from {rupees(BEAUTY_MIN)}</p>
-                    <p className="mt-1 text-xs font-semibold text-white/75 sm:text-base">Waxing · Facials · Mani-Pedi</p>
-                  </div>
-                  <span className="inline-flex items-center gap-1.5 self-start rounded-full bg-gold-400 px-4 py-2 text-sm font-extrabold text-plum-950">
-                    See price list
-                    <ArrowRight className="h-4 w-4" aria-hidden="true" />
-                  </span>
-                </div>
-              </Link>
 
               {PHOTO_SLIDES.map((p) => (
                 <Link key={p.slug} to={`/services/${p.slug}`} className={SLIDE}>
@@ -192,8 +192,19 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Salon at home on the first screen of a phone: one slim line, one tap */}
+      <div className="container-page pt-4 sm:pt-6">
+        <Link to={BEAUTY_PATH} className="salon-mesh flex items-center gap-3 rounded-full py-1.5 pl-1.5 pr-3 text-white shadow-lg shadow-plum-900/20 active:scale-[0.99]">
+          <span className="shrink-0 rounded-full bg-gold-400 px-2.5 py-1 text-[0.7rem] font-extrabold uppercase tracking-wider text-plum-950">New</span>
+          <span className="min-w-0 flex-1 truncate text-sm font-bold">
+            Salon at home for ladies <span className="font-semibold text-gold-300">· from {rupees(BEAUTY_MIN)}</span>
+          </span>
+          <ArrowRight className="h-4 w-4 shrink-0 text-gold-300" aria-hidden="true" />
+        </Link>
+      </div>
+
       {/* Quick access, like the home screen of an app */}
-      <section className="container-page pt-5 sm:pt-10">
+      <section className="container-page pt-5 sm:pt-8">
         <h2 className="mb-3 text-lg font-extrabold text-navy-950">What do you need cleaned?</h2>
         <QuickServices />
       </section>
