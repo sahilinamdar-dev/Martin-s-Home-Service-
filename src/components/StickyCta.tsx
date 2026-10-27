@@ -1,5 +1,6 @@
 import { Link, useLocation } from 'react-router-dom'
 import { ClipboardList, House, LayoutGrid, Phone } from 'lucide-react'
+import { BEAUTY_PATH } from '../lib/beauty'
 import { getService } from '../lib/services'
 import { TEL_LINK, WA_DEFAULT, waServiceLink } from '../lib/site'
 import { WhatsAppIcon } from './WhatsAppIcon'
@@ -10,6 +11,8 @@ const SHELL = 'fixed inset-x-3 bottom-[max(0.75rem,env(safe-area-inset-bottom))]
  *  service; everywhere else it is app-style tabs with WhatsApp in the middle. */
 export function StickyCta() {
   const { pathname } = useLocation()
+  // The salon page has its own booking bar, to the beautician's number.
+  if (pathname === BEAUTY_PATH) return null
   const service = pathname.startsWith('/services/') ? getService(pathname.split('/')[2]) : undefined
 
   if (service) {

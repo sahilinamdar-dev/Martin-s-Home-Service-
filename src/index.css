@@ -39,6 +39,20 @@
   --color-festive-900: #4a0d3a;
   --color-festive-800: #6d1552;
   --color-festive-700: #a21c6b;
+
+  /* Salon at home — see lib/beauty.ts */
+  --color-plum-950: #1c0718;
+  --color-plum-900: #2e0b28;
+  --color-plum-800: #4a1240;
+  --color-plum-700: #6e1a5c;
+  --color-blush-600: #c2416f;
+  --color-blush-500: #db5a86;
+  --color-blush-200: #f8cfdc;
+  --color-blush-100: #fde4ec;
+  --color-blush-50: #fff5f8;
+  --color-gold-500: #d9a441;
+  --color-gold-400: #e8bf68;
+  --color-gold-300: #f3d792;
 }
 
 html {
@@ -102,6 +116,34 @@ h2 em.text-leaf-700 {
   box-decoration-break: clone;
   /* Italic serifs lean past the box; without this the last letter is cut. */
   padding-right: 0.12em;
+}
+
+/* The emphasised word on the salon pages: a gold sheen. */
+h1 em.text-gold,
+h2 em.text-gold {
+  background: linear-gradient(100deg, var(--color-gold-300), var(--color-gold-400) 45%, #f7a8c4);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  padding-right: 0.12em;
+}
+h2 em.text-blush {
+  background: linear-gradient(100deg, var(--color-plum-700), var(--color-blush-600));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  padding-right: 0.12em;
+}
+
+/* Deep plum wash with rose and gold glows behind the salon hero. */
+.salon-mesh {
+  background:
+    radial-gradient(70% 50% at 100% 0%, rgb(219 90 134 / 0.45), transparent 70%),
+    radial-gradient(60% 45% at 0% 100%, rgb(232 191 104 / 0.22), transparent 70%),
+    radial-gradient(50% 40% at 0% 0%, rgb(110 26 92 / 0.9), transparent 70%),
+    var(--color-plum-950);
 }
 
 /* Soft colour wash behind the home hero. */

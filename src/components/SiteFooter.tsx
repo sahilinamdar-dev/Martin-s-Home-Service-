@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { Phone } from 'lucide-react'
+import { BEAUTY_PATH } from '../lib/beauty'
 import { FESTIVAL, FESTIVAL_PATH } from '../lib/festival'
 import { PRICE_PATH } from '../lib/prices'
 import { SERVICES, servicePath } from '../lib/services'
@@ -30,6 +31,11 @@ export function SiteFooter() {
                 </Link>
               </li>
             ))}
+            <li>
+              <Link to={BEAUTY_PATH} className="font-bold text-gold-300 hover:text-white">
+                Salon at home for ladies
+              </Link>
+            </li>
           </ul>
         </div>
 

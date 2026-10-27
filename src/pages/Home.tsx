@@ -13,6 +13,7 @@ import { ServiceCard } from '../components/ServiceCard'
 import { Swiper } from '../components/Swiper'
 import { WhatsAppIcon } from '../components/WhatsAppIcon'
 import { AREAS, TOP_AREAS, areaPath } from '../lib/areas'
+import { BEAUTY_FROM, BEAUTY_MENU, BEAUTY_MIN, BEAUTY_PATH } from '../lib/beauty'
 import { FESTIVAL, FESTIVAL_FAQS, FESTIVAL_PATH } from '../lib/festival'
 import { businessSchema, faqSchema, websiteSchema } from '../lib/schema'
 import { LOCAL_FAQS, allFaqs } from '../lib/local'
@@ -156,6 +157,20 @@ export default function Home() {
                 </Link>
               )}
 
+              <Link to={BEAUTY_PATH} className={`${SLIDE} salon-mesh`}>
+                <div className="absolute inset-0 flex flex-col justify-between p-5 text-white sm:p-7">
+                  <div>
+                    <p className="text-xs font-bold uppercase tracking-[0.14em] text-gold-300 sm:text-sm">New · Women only</p>
+                    <p className="mt-1.5 max-w-[80%] font-display text-2xl font-extrabold leading-[1.1] tracking-tight sm:text-4xl">Salon at home, from {rupees(BEAUTY_MIN)}</p>
+                    <p className="mt-1 text-xs font-semibold text-white/75 sm:text-base">Waxing · Facials · Mani-Pedi</p>
+                  </div>
+                  <span className="inline-flex items-center gap-1.5 self-start rounded-full bg-gold-400 px-4 py-2 text-sm font-extrabold text-plum-950">
+                    See price list
+                    <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                  </span>
+                </div>
+              </Link>
+
               {PHOTO_SLIDES.map((p) => (
                 <Link key={p.slug} to={`/services/${p.slug}`} className={SLIDE}>
                   <img src={`${p.src}-800.webp`} srcSet={bannerSrcSet(p.src)} sizes={BANNER_SIZES} alt={p.alt} width={1200} height={800} loading="lazy" decoding="async" className="h-full w-full object-cover" />
@@ -195,6 +210,35 @@ export default function Home() {
             </li>
           ))}
         </ul>
+      </section>
+
+      {/* Salon at home — the second line of business, one tap from the first screen */}
+      <section aria-label="Salon at home for ladies" className="container-page mt-6">
+        <Link to={BEAUTY_PATH} className="salon-mesh group relative block overflow-hidden rounded-[1.75rem] p-5 text-white active:scale-[0.99] sm:p-7">
+          <div className="flex items-start justify-between gap-3">
+            <div>
+              <p className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-[0.14em] text-gold-300">
+                <Sparkles className="h-3.5 w-3.5" aria-hidden="true" />
+                New · Women only
+              </p>
+              <h2 className="mt-1.5 text-2xl font-extrabold leading-tight tracking-tight sm:text-3xl">
+                Salon at home <em className="text-gold">for ladies</em>
+              </h2>
+              <p className="mt-1 text-sm text-white/75">A lady beautician at your door{IN_CITY}.</p>
+            </div>
+            <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gold-400 text-plum-950 transition group-hover:translate-x-0.5">
+              <ArrowRight className="h-5 w-5" aria-hidden="true" />
+            </span>
+          </div>
+          <ul className="mt-4 grid grid-cols-4 gap-2">
+            {BEAUTY_MENU.map((c) => (
+              <li key={c.id} className="rounded-2xl bg-white/[0.08] px-2 py-2.5 text-center ring-1 ring-white/10">
+                <span className="block text-[0.7rem] font-semibold text-white/70 sm:text-xs">{c.chip}</span>
+                <span className="block font-display text-sm font-extrabold text-gold-300 sm:text-lg">{rupees(BEAUTY_FROM[c.id])}</span>
+              </li>
+            ))}
+          </ul>
+        </Link>
       </section>
 
       {/* Festival offers — renders nothing outside the season */}

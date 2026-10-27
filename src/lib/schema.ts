@@ -1,5 +1,6 @@
 import { SITE, PHONE_E164, ALT_PHONE_E164, absoluteUrl } from './site'
 import { AREAS, areaPath, type Area } from './areas'
+import { BEAUTY, BEAUTY_MENU, BEAUTY_PATH, BEAUTY_PHONE_E164 } from './beauty'
 import { FESTIVAL, FESTIVAL_PATH } from './festival'
 import { PRICES, PRICE_MAX, PRICE_MIN, PRICE_PATH, priceName, rupees } from './prices'
 import { SERVICES, servicePath, type Faq, type Service } from './services'
@@ -21,7 +22,7 @@ export function businessSchema() {
     '@id': BUSINESS_ID,
     name: SITE.name,
     slogan: SITE.tagline,
-    description: 'Home, flat and office cleaning, bathroom and kitchen deep cleaning, sofa and floor cleaning, dust removal and complete deep cleaning.',
+    description: 'Home, flat and office cleaning, bathroom and kitchen deep cleaning, sofa and floor cleaning, dust removal and complete deep cleaning. Also salon at home for ladies: waxing, facials, clean-up, manicure and pedicure.',
     url: `${SITE.url}/`,
     telephone: PHONE_E164,
     foundingDate: String(SITE.foundedYear),
@@ -57,7 +58,7 @@ export function businessSchema() {
       itemListElement: SERVICES.map((s) => ({
         '@type': 'Offer',
         itemOffered: { '@type': 'Service', name: s.name, url: absoluteUrl(servicePath(s)) },
-      })),
+      })).concat({ '@type': 'Offer', itemOffered: { '@type': 'Service', name: BEAUTY.name, url: absoluteUrl(BEAUTY_PATH) } }),
     },
   }
 }
@@ -176,5 +177,46 @@ export function areaServiceSchema(area: Area) {
     url: absoluteUrl(areaPath(area)),
     provider: PROVIDER,
     areaServed: { '@type': 'Place', name: `${area.name}, ${SITE.city}, ${SITE.state}` },
+  }
+}
+
+/** Salon at home: one Service with a priced Offer for every item on the menu.
+ *  Bookings go to the beautician's own number, given as the service channel. */
+export function beautySchema() {
+  const url = absoluteUrl(BEAUTY_PATH)
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    '@id': `${url}#service`,
+    name: `${BEAUTY.name} in ${SITE.city}`,
+    alternateName: [`Parlour at home ${SITE.city}`, `Beauty parlour services at home in ${SITE.city}`, 'Ladies salon at home'],
+    serviceType: 'Beauty salon services at home',
+    description: `Women-only salon at home in ${SITE.base} and about ${SITE.radiusKm} km around, ${SITE.city}: waxing, facials, clean-up, manicure and pedicure by a lady beautician.`,
+    url,
+    provider: PROVIDER,
+    audience: { '@type': 'PeopleAudience', suggestedGender: 'female' },
+    areaServed: [{ '@type': 'City', name: SITE.city }, ...AREAS.map((a) => ({ '@type': 'Place', name: `${a.name}, ${SITE.city}` }))],
+    availableChannel: {
+      '@type': 'ServiceChannel',
+      serviceUrl: url,
+      servicePhone: { '@type': 'ContactPoint', telephone: BEAUTY_PHONE_E164, contactType: 'reservations', availableLanguage: ['en', 'hi', 'mr'] },
+    },
+    hasOfferCatalog: {
+      '@type': 'OfferCatalog',
+      name: 'Salon at home price list',
+      itemListElement: BEAUTY_MENU.map((c) => ({
+        '@type': 'OfferCatalog',
+        name: c.title,
+        itemListElement: c.items.map((i) => ({
+          '@type': 'Offer',
+          name: i.name,
+          description: i.detail,
+          price: i.price,
+          priceCurrency: 'INR',
+          url: `${url}#${c.id}`,
+          itemOffered: { '@type': 'Service', name: `${i.name} at home`, serviceType: c.title },
+        })),
+      })),
+    },
   }
 }

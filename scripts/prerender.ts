@@ -18,6 +18,8 @@ const { AREAS, areaPath } = (await viteServer.ssrLoadModule('/src/lib/areas.ts')
 const { LOCAL_FAQS, LOCAL_FESTIVAL_FAQS } = (await viteServer.ssrLoadModule('/src/lib/local.ts')) as typeof import('../src/lib/local')
 const { PRICES, PRICE_PATH, PRICE_NOTE, LOCAL_PRICES, priceLabel, priceName } = (await viteServer.ssrLoadModule('/src/lib/prices.ts')) as typeof import('../src/lib/prices')
 
+const { BEAUTY_PATH, BEAUTY_MENU, BEAUTY_NOTE, BEAUTY_PHONE_DISPLAY, BEAUTY, BEAUTY_FAQS } = (await viteServer.ssrLoadModule('/src/lib/beauty.ts')) as typeof import('../src/lib/beauty')
+
 let template = readFileSync(join(distDir, 'index.html'), 'utf-8')
 
 // Google Search Console ownership tag, once the code is known.
@@ -101,7 +103,7 @@ function writeSeoFiles(paths: string[]) {
   const llms = [
     `# ${SITE.name}`,
     '',
-    `> ${SITE.name} is a cleaning service for homes, flats and offices. ${SITE.tagline}.`,
+    `> ${SITE.name} is a cleaning service for homes, flats and offices, and a salon at home for ladies. ${SITE.tagline}.`,
     '',
     `- Phone (calls): ${PHONE_DISPLAY} (+${SITE.countryCode} ${SITE.phone})`,
     ...(SITE.altPhone ? [`- Phone (calls, second number): ${ALT_PHONE_DISPLAY} (+${SITE.countryCode} ${SITE.altPhone})`] : []),
@@ -131,6 +133,14 @@ function writeSeoFiles(paths: string[]) {
     `- ${PRICE_NOTE}`,
     '',
     ...LOCAL_PRICES.flatMap((l) => [`### ${l.heading} (${l.label})`, '', ...l.rows.map((r) => `- ${r.name}: ${r.price}`), `- ${l.note}`, '']),
+    '## Salon at home for ladies (beauty parlour at home)',
+    '',
+    `Women-only, by a lady beautician at the customer's home. Book: WhatsApp or call ${BEAUTY_PHONE_DISPLAY} (+${SITE.countryCode} ${BEAUTY.phone}). Details: ${absoluteUrl(BEAUTY_PATH)}`,
+    '',
+    ...BEAUTY_MENU.flatMap((c) => [`### ${c.title}`, '', ...c.items.map((i) => `- ${i.name} (${i.detail}): ₹${i.price.toLocaleString('en-IN')}`), '']),
+    `- ${BEAUTY_NOTE}`,
+    '',
+    ...BEAUTY_FAQS.flatMap((f) => [`### ${f.q}`, f.a, '']),
     '## Services',
     '',
     ...SERVICES.map((s) => `- [${s.name}](${absoluteUrl(servicePath(s))}): ${s.short}`),
@@ -150,6 +160,7 @@ function writeSeoFiles(paths: string[]) {
     `- [Home](${absoluteUrl('/')})`,
     `- [Diwali cleaning offers](${absoluteUrl(FESTIVAL_PATH)})`,
     `- [Price list](${absoluteUrl(PRICE_PATH)})`,
+    `- [Salon at home for ladies](${absoluteUrl(BEAUTY_PATH)})`,
     `- [Service areas](${absoluteUrl('/service-areas')})`,
     `- [About](${absoluteUrl('/about')})`,
     `- [Contact](${absoluteUrl('/contact')})`,
@@ -159,7 +170,7 @@ function writeSeoFiles(paths: string[]) {
 }
 
 function main() {
-  const paths = ['/', FESTIVAL_PATH, PRICE_PATH, ...SERVICES.map(servicePath), '/service-areas', ...AREAS.map(areaPath), '/about', '/contact', '/privacy']
+  const paths = ['/', FESTIVAL_PATH, PRICE_PATH, BEAUTY_PATH, ...SERVICES.map(servicePath), '/service-areas', ...AREAS.map(areaPath), '/about', '/contact', '/privacy']
   for (const path of paths) writeRoute(path)
 
   // Served by the host for any address that has no page.

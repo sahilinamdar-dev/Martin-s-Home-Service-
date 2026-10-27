@@ -4,6 +4,7 @@ import { FestivalBar, FestivalScrollOffer } from './components/Festival'
 import { SiteFooter } from './components/SiteFooter'
 import { SiteNav } from './components/SiteNav'
 import { StickyCta } from './components/StickyCta'
+import { BEAUTY_PATH } from './lib/beauty'
 import { FESTIVAL_PATH } from './lib/festival'
 import { PRICE_PATH } from './lib/prices'
 import About from './pages/About'
@@ -14,6 +15,7 @@ import Home from './pages/Home'
 import NotFound from './pages/NotFound'
 import PriceList from './pages/PriceList'
 import Privacy from './pages/Privacy'
+import SalonAtHome from './pages/SalonAtHome'
 import ServiceAreas from './pages/ServiceAreas'
 import ServicePage from './pages/ServicePage'
 
@@ -50,6 +52,7 @@ export default function App() {
           <Route path="/cleaning-services/:slug" element={<AreaPage />} />
           <Route path={FESTIVAL_PATH} element={<FestivalPage />} />
           <Route path={PRICE_PATH} element={<PriceList />} />
+          <Route path={BEAUTY_PATH} element={<SalonAtHome />} />
           <Route path="/service-areas" element={<ServiceAreas />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />

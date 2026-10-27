@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { ArrowRight, Share2, X } from 'lucide-react'
+import { BEAUTY_PATH } from '../lib/beauty'
 import { FESTIVAL, FESTIVAL_PATH, OFFER_ENDS_LABEL, WA_SHARE_OFFERS, offersForService, waOfferLink } from '../lib/festival'
 import { daysLeftLabel, useDaysLeft, useFestivalLive } from '../lib/useFestival'
 import { Swiper } from './Swiper'
@@ -25,7 +26,8 @@ export function Diya({ className }: { className?: string }) {
 export function FestivalBar() {
   const live = useFestivalLive()
   const { pathname } = useLocation()
-  if (!live || pathname === FESTIVAL_PATH) return null
+  // The cleaning offer is noise on the salon page.
+  if (!live || pathname === FESTIVAL_PATH || pathname === BEAUTY_PATH) return null
   return (
     <Link to={FESTIVAL_PATH} className="block bg-festive-800 text-white hover:bg-festive-900">
       <span className="container-page flex items-center justify-center gap-2 py-2 text-center text-[0.8rem] font-bold sm:text-sm">
@@ -168,7 +170,7 @@ export function FestivalScrollOffer() {
     }
   }
 
-  if (!live || !offer || !shown || dismissed || pathname === FESTIVAL_PATH) return null
+  if (!live || !offer || !shown || dismissed || pathname === FESTIVAL_PATH || pathname === BEAUTY_PATH) return null
 
   return (
     // Sits above the phone bottom bar; bottom-right corner on larger screens.

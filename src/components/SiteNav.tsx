@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Menu, Phone, X } from 'lucide-react'
+import { BEAUTY_PATH } from '../lib/beauty'
 import { FESTIVAL, FESTIVAL_PATH } from '../lib/festival'
 import { PRICE_PATH } from '../lib/prices'
 import { PHONE_DISPLAY, TEL_LINK, WA_DEFAULT } from '../lib/site'
@@ -11,6 +12,7 @@ const LINKS = [
   ...(FESTIVAL.enabled ? [{ to: FESTIVAL_PATH, label: 'Diwali offers' }] : []),
   { to: '/#services', label: 'Services' },
   { to: PRICE_PATH, label: 'Prices' },
+  { to: BEAUTY_PATH, label: 'Salon at home' },
   { to: '/#how-it-works', label: 'How it works' },
   { to: '/service-areas', label: 'Areas' },
   { to: '/#faq', label: 'FAQ' },
